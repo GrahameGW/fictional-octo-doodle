@@ -8,12 +8,14 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] float patrolSpeed;
         [SerializeField] float chaseSpeed;
         [SerializeField] float aggroRadius;
+        [SerializeField] int damage;
+        [SerializeField] float idleTimeOnHit;
         [SerializeField] SpriteRenderer sprite;
 
         private Transform player;
         private IAIBehavior activeBehavior;
+        private float elapsed = 0f;
 
-        // Start is called before the first frame update
         void Start()
         {
             var patrol = new AIPatrol();
@@ -25,27 +27,52 @@ namespace FictionalOctoDoodle.Core
             player = FindObjectOfType<PlayerCombat>().transform;
         }
 
-        // Update is called once per frame
         void Update()
         {
-            var pos = transform.position;
-            activeBehavior.Update();
-            sprite.flipX = pos.x < transform.position.x;
+            if (activeBehavior as AIIdle != null)
+            {
+                elapsed += Time.deltaTime;
+                if (elapsed < idleTimeOnHit) 
+                {
+                    return;
+                }
+            }
 
             if (Vector2.Distance(player.position, transform.position) <= aggroRadius)
             {
                 ChasePlayer();
             }
+
+            var pos = transform.position;
+            activeBehavior.Update();
+            sprite.flipX = pos.x < transform.position.x;
         }
 
         private void ChasePlayer()
         {
+            if (activeBehavior as AIChase != null) return;
+
             var chase = new AIChase();
             chase.chaseSpeed = chaseSpeed;
             chase.player = player;
             chase.Initialize(transform);
             activeBehavior = chase;
             Debug.Log("Chasing the player!");
+        }
+
+        private void Idle()
+        {
+            elapsed = 0f;
+            activeBehavior = new AIIdle();
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.TryGetComponent(out PlayerCombat player))
+            {
+                player.Damage(damage);
+                Idle();
+            }
         }
 
         private void OnDrawGizmosSelected()
