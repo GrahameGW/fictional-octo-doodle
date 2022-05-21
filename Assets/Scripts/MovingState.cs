@@ -14,9 +14,10 @@ namespace FictionalOctoDoodle.Core
         {
             Debug.Log("Moving");
             this.player = player;
+
             movement = player.Input.Player.Move;
-            movement.Enable();
         }
+
         public override void Update()
         {
             var value = movement.ReadValue<Vector2>();
@@ -26,10 +27,6 @@ namespace FictionalOctoDoodle.Core
             {
                 player.SetNewState(new IdleState());
             }
-        }
-        public override void ExitState()
-        {
-            movement.Disable();
         }
     }
 }

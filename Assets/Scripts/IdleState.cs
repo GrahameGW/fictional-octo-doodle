@@ -16,7 +16,6 @@ namespace FictionalOctoDoodle.Core
             Debug.Log("Standing");
             this.player = player;
             movement = player.Input.Player.Move;
-            movement.Enable();
         }
         public override void Update()
         {
@@ -35,10 +34,6 @@ namespace FictionalOctoDoodle.Core
             }
 
 
-        }
-        public override void ExitState()
-        {
-            movement.Disable();
         }
     }
 }

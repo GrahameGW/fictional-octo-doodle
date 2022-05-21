@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  jumpHeight: 10
   animator: {fileID: 53571231}
 --- !u!4 &4014426
 Transform:
