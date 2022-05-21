@@ -7,23 +7,34 @@ namespace FictionalOctoDoodle.Core
     {
         public override PlayerStateID ID => PlayerStateID.Idle;
 
-        public InputAction movement;
+        private InputAction movement;
+        private Player player;
 
-        public override void EnterState(PlayerInputMap inputMap)
+
+        public override void EnterState(Player player)
         {
             Debug.Log("Standing");
-            movement = inputMap.Player.Move;
+            this.player = player;
+            movement = player.Input.Player.Move;
             movement.Enable();
         }
-        public override void Update(Player player)
+        public override void Update()
         {
+            if (!player.IsGrounded())
+            {
+                player.SetNewState(new AirborneState());
+                return;
+            }
+
             var value = movement.ReadValue<Vector2>();
 
             if (value != Vector2.zero)
             {
-                player.Move(value);
+                player.Move(value.x);
                 player.SetNewState(new MovingState());
             }
+
+
         }
         public override void ExitState()
         {
