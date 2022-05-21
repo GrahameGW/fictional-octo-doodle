@@ -4,7 +4,7 @@
     {
         public abstract PlayerStateID ID { get; }
         
-        public virtual void EnterState(Player player) { }
+        public virtual void EnterState(PlayerMovement player) { }
         public virtual void Update() { }
         public virtual void ExitState() { }
     }

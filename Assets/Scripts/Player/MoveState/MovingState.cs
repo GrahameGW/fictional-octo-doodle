@@ -7,10 +7,10 @@ namespace FictionalOctoDoodle.Core
     {
         public override PlayerStateID ID => PlayerStateID.Moving;
 
-        private Player player;
+        private PlayerMovement player;
         private InputAction movement;
 
-        public override void EnterState(Player player)
+        public override void EnterState(PlayerMovement player)
         {
             Debug.Log("Moving");
             this.player = player;

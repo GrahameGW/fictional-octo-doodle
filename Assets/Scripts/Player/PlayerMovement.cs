@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace FictionalOctoDoodle.Core
 {
-    public class Player : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         public PlayerInputMap Input { get; private set; }
 

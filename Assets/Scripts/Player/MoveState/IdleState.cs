@@ -8,10 +8,10 @@ namespace FictionalOctoDoodle.Core
         public override PlayerStateID ID => PlayerStateID.Idle;
 
         private InputAction movement;
-        private Player player;
+        private PlayerMovement player;
 
 
-        public override void EnterState(Player player)
+        public override void EnterState(PlayerMovement player)
         {
             Debug.Log("Standing");
             this.player = player;
