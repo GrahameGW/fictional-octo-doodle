@@ -10,7 +10,7 @@ namespace FictionalOctoDoodle.Core
 #endif
 
         [SerializeField] PlayerData data;
-
+        [SerializeField] Animator animator;
 
 
         private void Awake()
@@ -25,6 +25,7 @@ namespace FictionalOctoDoodle.Core
         public void Damage(int damage)
         {
             data.HP -= damage;
+            animator.SetTrigger("damaged");
             if (data.HP <= 0)
             {
                 data.HP = 0;
