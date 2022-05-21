@@ -6,14 +6,17 @@ namespace FictionalOctoDoodle.Core
     public class PlayerMovement : MonoBehaviour
     {
         public PlayerInputMap Input { get; private set; }
+        public bool canClimb;
 
         [SerializeField] float moveSpeed;
+        [SerializeField] float climbingSpeed;
         [SerializeField] float jumpHeight;
         [SerializeField] Animator animator;
 
         private Rigidbody2D rb;
         private PlayerState activeState; // states enable & disable actions, and handle updating actions (may want to return that to the player)
         private float distanceToGround;
+
 
 
         private void OnEnable()
@@ -37,11 +40,6 @@ namespace FictionalOctoDoodle.Core
         private void FixedUpdate()
         {
             activeState.Update();
-
-            if (!IsGrounded() && activeState as AirborneState == null)
-            {
-                SetNewState(new AirborneState());
-            }
         }
 
         public void SetNewState(PlayerState newState)
@@ -52,15 +50,31 @@ namespace FictionalOctoDoodle.Core
             ChangeAnimation(newState);
         }
 
-        public void Move(float xAxis)
+        public void Move(Vector2 value)
         {
-            transform.Translate(moveSpeed * Time.fixedDeltaTime * xAxis * Vector3.right);
+            var vec = value * new Vector2(moveSpeed, climbingSpeed);
+            transform.Translate(vec * Time.fixedDeltaTime);
         }
 
         public void Jump(InputAction.CallbackContext ctx)
         {
             rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
             animator.SetTrigger("jump");
+        }
+
+        public bool IsGrounded()
+        {
+            // 1 << 3 gets the "Ground" layer
+            return Physics2D.Raycast(transform.position, Vector2.down, distanceToGround + 0.1f, 1 << 3).collider != null;
+        }
+
+        public void ToggleGravity(bool onOff)
+        {
+            rb.gravityScale = onOff ? 1f : 0f;
+            if (!onOff)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0f);
+            }
         }
 
         private void ChangeAnimation(PlayerState state)
@@ -70,7 +84,7 @@ namespace FictionalOctoDoodle.Core
 
             switch (state.ID)
             {
-                case PlayerStateID.Moving:
+                case PlayerStateID.Running:
                     animator.SetBool("moving", true);
                     return;
                 case PlayerStateID.Airborne:
@@ -79,10 +93,23 @@ namespace FictionalOctoDoodle.Core
             }
         }
 
-        public bool IsGrounded()
+        private void OnTriggerStay2D(Collider2D other)
         {
-            // 1 << 3 gets the "Ground" layer
-            return Physics2D.Raycast(transform.position, Vector2.down, distanceToGround + 0.1f, 1 << 3).collider != null;
+            if (!canClimb)
+            {
+                canClimb = LayerMask.NameToLayer("Climb") == other.gameObject.layer;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (canClimb)
+            {
+                var filter = new ContactFilter2D();
+                var mask = LayerMask.NameToLayer("Climb");
+                filter.SetLayerMask(mask);
+                canClimb = rb.IsTouching(filter);
+            }
         }
     }
 }

@@ -12,8 +12,9 @@
     public enum PlayerStateID
     {
         Idle,
-        Moving,
-        Airborne
+        Running,
+        Airborne,
+        Climbing
     }
 }
 

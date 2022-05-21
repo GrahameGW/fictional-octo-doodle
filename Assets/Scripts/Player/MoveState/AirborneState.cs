@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace FictionalOctoDoodle.Core
 {
@@ -7,16 +8,16 @@ namespace FictionalOctoDoodle.Core
         public override PlayerStateID ID => PlayerStateID.Airborne;
 
         private PlayerMovement player;
-        private float lastMovement;
+        private InputAction movement;
+        private Vector2 lastMovement;
 
         public override void EnterState(PlayerMovement player)
         {
             Debug.Log("Airborne");
             this.player = player;
-            lastMovement = player.Input.Player.Move.ReadValue<Vector2>().x;
-            player.Input.Player.Move.Disable();
+            movement = player.Input.Player.Move;
+            lastMovement = movement.ReadValue<Vector2>();
             player.Input.Player.Jump.Disable();
-            Debug.Log($"Last Movement: {lastMovement}");
         }
 
         public override void Update()
@@ -24,7 +25,13 @@ namespace FictionalOctoDoodle.Core
             if (player.IsGrounded())
             {
                 Debug.Log("Landed");
-                player.SetNewState(lastMovement == 0 ? new IdleState() : new MovingState());
+                player.SetNewState(lastMovement == Vector2.zero ? new IdleState() : new RunningState());
+                return;
+            }
+
+            if (player.canClimb && movement.ReadValue<Vector2>().y != 0)
+            {
+                player.SetNewState(new ClimbingState());
                 return;
             }
 

@@ -27,13 +27,17 @@ namespace FictionalOctoDoodle.Core
 
             var value = movement.ReadValue<Vector2>();
 
-            if (value != Vector2.zero)
+            if (value.y != 0 && player.canClimb)
             {
-                player.Move(value.x);
-                player.SetNewState(new MovingState());
+                player.SetNewState(new ClimbingState());
+                return;
             }
 
-
+            if (value.x != 0)
+            {
+                player.Move(value);
+                player.SetNewState(new RunningState());
+            }
         }
     }
 }
