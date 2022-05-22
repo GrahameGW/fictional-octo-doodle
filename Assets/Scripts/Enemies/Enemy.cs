@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FictionalOctoDoodle.Core
 {
-    public class EvilEye : MonoBehaviour
+    public class Enemy : MonoBehaviour
     {
         [SerializeField] Vector3[] patrolPath = default;
         [SerializeField] float patrolSpeed;
