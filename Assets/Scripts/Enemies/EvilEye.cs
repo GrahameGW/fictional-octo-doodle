@@ -38,10 +38,12 @@ namespace FictionalOctoDoodle.Core
                 }
             }
 
+            /*
             if (Vector2.Distance(player.position, transform.position) <= aggroRadius)
             {
                 ChasePlayer();
             }
+            */
 
             var pos = transform.position;
             activeBehavior.Update();

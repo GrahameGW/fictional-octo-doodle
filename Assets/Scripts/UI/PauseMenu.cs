@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace FictionalOctoDoodle.Core
 {
@@ -18,6 +17,11 @@ namespace FictionalOctoDoodle.Core
             EventSystem.current.SetSelectedGameObject(null); // because unity is buggy and doesn't deselect the button...
         }
 
+        public void GoToMainMenu()
+        {
+            // TODO: Quit to main menu
+        }
+        
         public void QuitProgram()
         {
             Application.Quit();

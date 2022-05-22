@@ -17,6 +17,7 @@ namespace FictionalOctoDoodle.Core
             this.player = player;
             movement = player.Input.Player.Move;
         }
+
         public override void Update()
         {
             if (!player.IsGrounded())

@@ -18,7 +18,6 @@ namespace FictionalOctoDoodle.Core
         private float distanceToGround;
 
 
-
         private void OnEnable()
         {
             Input = new PlayerInputMap();
@@ -110,6 +109,12 @@ namespace FictionalOctoDoodle.Core
                 filter.SetLayerMask(mask);
                 canClimb = rb.IsTouching(filter);
             }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, (Vector2)transform.position + Vector2.down * (distanceToGround + 0.1f));
         }
     }
 }
