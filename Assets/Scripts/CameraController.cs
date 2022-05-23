@@ -5,7 +5,7 @@ namespace FictionalOctoDoodle.Core
 {
     public class CameraController : MonoBehaviour
     {
-        [SerializeField] Transform player;
+
         [SerializeField] float panSpeed;
         [Range(0f, 1f)]
         [SerializeField] float startPanX;
@@ -17,10 +17,12 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] float stopPanY;
 
         private bool isPanningX, isPanningY;
-        
 
+        private Player player;
         private Camera _camera;
+
         private readonly Vector2 CENTER = new Vector2(0.5f, 0.5f);
+
 
         private void Awake()
         {
@@ -29,7 +31,13 @@ namespace FictionalOctoDoodle.Core
 
         private void Update()
         {
-            Vector2 pos = _camera.WorldToViewportPoint(player.position);
+            if (player == null)
+            {
+                player = FindObjectOfType<Player>(); // dear god this is an awful way to do this
+                return;
+            }
+
+            Vector2 pos = _camera.WorldToViewportPoint(player.transform.position);
 
             if (!isPanningX && (pos.x < startPanX || pos.x > 1f - startPanX))
             {

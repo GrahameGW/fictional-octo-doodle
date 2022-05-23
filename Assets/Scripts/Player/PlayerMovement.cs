@@ -11,6 +11,8 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] float moveSpeed;
         [SerializeField] float climbingSpeed;
         [SerializeField] float jumpHeight;
+
+        [SerializeField] GameObject weapon;
         [SerializeField] Animator animator;
 
         private Rigidbody2D rb;
@@ -22,18 +24,27 @@ namespace FictionalOctoDoodle.Core
         {
             Input = new PlayerInputMap();
             Input.Player.Jump.performed += Jump;
+            Input.Player.Fire.performed += Attack;
 
             Input.Player.Move.Enable(); // enabling all actions at startup; states will disable where necessary
             Input.Player.Jump.Enable();
+            Input.Player.Fire.Enable();
 
             SetNewState(new IdleState());
 
             rb = GetComponent<Rigidbody2D>();
             distanceToGround = GetComponentInChildren<Collider2D>().bounds.extents.y;
+
+            weapon.SetActive(false);
         }
         private void OnDisable()
         {
             Input.Player.Jump.performed -= Jump;
+            Input.Player.Fire.performed -= Attack;
+
+            Input.Player.Move.Disable(); 
+            Input.Player.Jump.Disable();
+            Input.Player.Fire.Disable();
         }
 
         private void FixedUpdate()
@@ -59,6 +70,11 @@ namespace FictionalOctoDoodle.Core
         {
             rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
             animator.SetTrigger("jump");
+        }
+
+        public void Attack(InputAction.CallbackContext ctx)
+        {
+            weapon.SetActive(true);
         }
 
         public bool IsGrounded()

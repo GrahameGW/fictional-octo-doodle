@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace FictionalOctoDoodle.Core
 {
-    public class PlayerCombat : MonoBehaviour
+    public class Player : MonoBehaviour, IDamageable
     {
 #if UNITY_EDITOR
         // just to make debug easier
+        [DisplayOnly]
         [SerializeField] int HP;
 #endif
 
@@ -30,12 +32,15 @@ namespace FictionalOctoDoodle.Core
             {
                 data.HP = 0;
                 Debug.Log("Died!");
-                Time.timeScale = 0;
+                OnPlayerDeath?.Invoke();
+                Destroy(gameObject);
             }
 #if UNITY_EDITOR
             HP = data.HP;
 #endif
         }
+
+        public Action OnPlayerDeath;
     }
 }
 

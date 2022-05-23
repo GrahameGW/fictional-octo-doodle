@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8369662862923334973}
   - component: {fileID: 8369662862923334914}
+  - component: {fileID: 2127099920197404727}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -54,6 +55,27 @@ MonoBehaviour:
   damage: 1
   idleTimeOnHit: 0
   sprite: {fileID: 8369662863538798617}
+--- !u!50 &2127099920197404727
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8369662862923334915}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8369662863538798622
 GameObject:
   m_ObjectHideFlags: 0

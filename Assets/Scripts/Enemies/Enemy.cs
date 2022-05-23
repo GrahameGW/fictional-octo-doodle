@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace FictionalOctoDoodle.Core
 {
-    public class Enemy : MonoBehaviour
+    public class Enemy : MonoBehaviour, IDamageable
     {
         [SerializeField] Vector3[] patrolPath = default;
         [SerializeField] float patrolSpeed;
@@ -24,7 +24,7 @@ namespace FictionalOctoDoodle.Core
             patrol.Initialize(transform);
             activeBehavior = patrol;
 
-            player = FindObjectOfType<PlayerCombat>().transform;
+            player = FindObjectOfType<Player>().transform;
         }
 
         void Update()
@@ -68,9 +68,15 @@ namespace FictionalOctoDoodle.Core
             activeBehavior = new AIIdle();
         }
 
+        public void Damage(int dmg)
+        {
+            Debug.Log($"Killed {name}!");
+            Destroy(gameObject);
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out PlayerCombat player))
+            if (collision.gameObject.TryGetComponent(out Player player))
             {
                 player.Damage(damage);
                 Idle();
