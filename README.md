@@ -2,7 +2,7 @@
 A weirdly appropriate auto-generated name for a game jam made by a team of 8...
 
 ## Getting set up
-- Download Unity Editor 2021.3.2f1 (current LTS version). Unity Hub will install if it hasn't already.
+- Download Unity Editor 2021.3.3f1 (current LTS version). Unity Hub will install if it hasn't already.
 - Clone this repo
 - Install `git-lfs`: Open the console, change to the repo folder, and run `git-lfs install`
 - Open Unity Hub and click "Add Project From Disk" from the "Open" dropdown menu. Add the cloned repo.
