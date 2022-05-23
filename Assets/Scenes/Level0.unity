@@ -200,8 +200,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 320, y: 90}
+  m_AnchoredPosition: {x: 0, y: -68}
+  m_SizeDelta: {x: 420, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &325814109
 MonoBehaviour:
@@ -242,11 +242,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 325814110}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 366558052}
+        m_TargetAssemblyTypeName: FictionalOctoDoodle.Core.GameMenus, Assembly-CSharp
+        m_MethodName: GoToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &325814110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0461af2075dae24181b125a33bd84b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSceneName: Level0
+  menuSceneName: MainMenu
 --- !u!1 &621650649
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,6 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 366558050}
+  hud: {fileID: 863105770}
 --- !u!1 &702773572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,8 +1413,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1596,8 +1611,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 320, y: 90}
+  m_AnchoredPosition: {x: 0, y: -248}
+  m_SizeDelta: {x: 420, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1710444558
 MonoBehaviour:
@@ -2000,8 +2015,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2196,7 +2211,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 195}
+  m_AnchoredPosition: {x: 0, y: 310}
   m_SizeDelta: {x: 347.9053, y: 89.351}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2042338730
@@ -2246,8 +2261,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 72
+  m_fontSize: 96
+  m_fontSizeBase: 96
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2474,6 +2489,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 908434588}
     m_Modifications:
+    - target: {fileID: 4899755535369624237, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
+      propertyPath: m_fontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899755535369624237, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 4899755535914493378, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
       propertyPath: m_Name
       value: Resume
@@ -2508,11 +2531,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4899755535914493379, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 320
+      value: 420
       objectReference: {fileID: 0}
     - target: {fileID: 4899755535914493379, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 90
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 4899755535914493379, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2548,7 +2571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4899755535914493379, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 50
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 4899755535914493379, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2568,23 +2591,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4899755535914493404, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4899755535914493404, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 366558050}
+      objectReference: {fileID: 621650654}
     - target: {fileID: 4899755535914493404, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4899755535914493404, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: TogglePause
       objectReference: {fileID: 0}
     - target: {fileID: 4899755535914493404, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: FictionalOctoDoodle.Core.UIManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4899755535914493404, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
