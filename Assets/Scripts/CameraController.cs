@@ -1,11 +1,9 @@
 using UnityEngine;
 
-
 namespace FictionalOctoDoodle.Core
 {
     public class CameraController : MonoBehaviour
     {
-
         [SerializeField] float panSpeed;
         [Range(0f, 1f)]
         [SerializeField] float startPanX;
@@ -87,7 +85,6 @@ namespace FictionalOctoDoodle.Core
             Gizmos.DrawLine(new Vector2(worldPanMin.x, worldPanMax.y), new Vector2(worldPanMax.x, worldPanMax.y));
             Gizmos.DrawLine(new Vector2(worldPanMin.x, worldPanMin.y), new Vector2(worldPanMax.x, worldPanMin.y));
         }
-
     }
 }
 

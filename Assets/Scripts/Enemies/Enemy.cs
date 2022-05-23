@@ -24,7 +24,7 @@ namespace FictionalOctoDoodle.Core
             patrol.Initialize(transform);
             activeBehavior = patrol;
 
-            player = FindObjectOfType<Player>().transform;
+            //player = FindObjectOfType<Player>().transform;
         }
 
         void Update()

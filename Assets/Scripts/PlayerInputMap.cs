@@ -64,6 +64,15 @@ namespace FictionalOctoDoodle.Core
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""69e26463-6cb9-4174-b341-fa1e6f97b869"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -295,6 +304,17 @@ namespace FictionalOctoDoodle.Core
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56613d3a-22ce-4591-8cde-d6ee8f24a3f0"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -886,6 +906,7 @@ namespace FictionalOctoDoodle.Core
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+            m_Player_Submit = m_Player.FindAction("Submit", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -961,6 +982,7 @@ namespace FictionalOctoDoodle.Core
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Fire;
         private readonly InputAction m_Player_Jump;
+        private readonly InputAction m_Player_Submit;
         public struct PlayerActions
         {
             private @PlayerInputMap m_Wrapper;
@@ -969,6 +991,7 @@ namespace FictionalOctoDoodle.Core
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Fire => m_Wrapper.m_Player_Fire;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
+            public InputAction @Submit => m_Wrapper.m_Player_Submit;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -990,6 +1013,9 @@ namespace FictionalOctoDoodle.Core
                     @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    @Submit.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSubmit;
+                    @Submit.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSubmit;
+                    @Submit.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSubmit;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -1006,6 +1032,9 @@ namespace FictionalOctoDoodle.Core
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
+                    @Submit.started += instance.OnSubmit;
+                    @Submit.performed += instance.OnSubmit;
+                    @Submit.canceled += instance.OnSubmit;
                 }
             }
         }
@@ -1166,6 +1195,7 @@ namespace FictionalOctoDoodle.Core
             void OnLook(InputAction.CallbackContext context);
             void OnFire(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnSubmit(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {
