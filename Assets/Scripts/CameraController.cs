@@ -39,22 +39,22 @@ namespace FictionalOctoDoodle.Core
 
             Vector2 pos = _camera.WorldToViewportPoint(player.transform.position);
 
-            if (!isPanningX && (pos.x < startPanX || pos.x > 1f - startPanX))
+            if (!isPanningX)
             {
-                isPanningX = true;
+                isPanningX = pos.x < startPanX || pos.x > 1f - startPanX;
             }
-            else if (pos.x > stopPanX || pos.x < 1f - stopPanX)
+            else 
             {
-                isPanningX = false;
+                isPanningX = pos.x < stopPanX || pos.x > 1f - stopPanX;
             }
 
-            if (!isPanningY && (pos.y < startPanY || pos.y > 1f - startPanY))
+            if (!isPanningY)
             {
-                isPanningY = true;
+                isPanningY = pos.y < startPanY || pos.y > 1f - startPanY;
             }
-            else if (pos.y > stopPanY || pos.y < 1f - stopPanY)
+            else
             {
-                isPanningY = false;
+                isPanningY = pos.y < stopPanY || pos.y > 1f - stopPanY;
             }
 
             var panVec = new Vector2(
@@ -77,7 +77,7 @@ namespace FictionalOctoDoodle.Core
             Gizmos.DrawLine(new Vector2(worldPanMin.x, worldPanMax.y), new Vector2(worldPanMax.x, worldPanMax.y));
             Gizmos.DrawLine(new Vector2(worldPanMin.x, worldPanMin.y), new Vector2(worldPanMax.x, worldPanMin.y));
 
-            Gizmos.color = Color.cyan;
+            Gizmos.color = Color.gray;
 
             worldPanMin = _camera.ViewportToWorldPoint(new Vector2(stopPanX, stopPanY));
             worldPanMax = _camera.ViewportToWorldPoint(new Vector2(1f - stopPanX, 1f - stopPanY));
