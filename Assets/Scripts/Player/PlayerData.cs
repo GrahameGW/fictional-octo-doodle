@@ -7,6 +7,7 @@ namespace FictionalOctoDoodle.Core
     {
         public int HP;
         public int MaxHP;
+        public Player activePlayerObject;
     }
 }
 
