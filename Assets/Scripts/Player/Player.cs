@@ -34,6 +34,44 @@ namespace FictionalOctoDoodle.Core
 #endif
         }
 
+        public void AddLimb(LimbData limb)
+        {
+            for (int i = 0; i < limb.Slots.Length; i++)
+            {
+                var slot = limb.Slots[i];
+
+                if (slot == LimbSlot.RightArm && limbs.rightArm == null)
+                {
+                    limbs.rightArm = limb;
+                    return;
+                } 
+
+                if (slot == LimbSlot.LeftArm && limbs.leftArm == null)
+                {
+                    limbs.leftArm = limb;
+                    return;
+                }
+
+                if (slot == LimbSlot.Torso && limbs.torso == null)
+                {
+                    limbs.torso = limb;
+                    return;
+                }
+                
+                if (slot == LimbSlot.RightLeg && limbs.rightLeg == null)
+                {
+                    limbs.rightLeg = limb;
+                    return;
+                }
+
+                if (slot == LimbSlot.LeftLeg && limbs.leftLeg == null)
+                {
+                    limbs.leftLeg = limb;
+                    return;
+                }
+            }
+        }
+
         public void Damage(int damage)
         {
             data.HP -= damage;
@@ -51,6 +89,7 @@ namespace FictionalOctoDoodle.Core
         }
 
         public Action OnPlayerDeath;
+
     }
 }
 
