@@ -8,13 +8,5 @@
         public virtual void Update() { }
         public virtual void ExitState() { }
     }
-
-    public enum PlayerStateID
-    {
-        Idle,
-        Running,
-        Airborne,
-        Climbing
-    }
 }
 

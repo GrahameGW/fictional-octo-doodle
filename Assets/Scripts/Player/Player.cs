@@ -10,7 +10,6 @@ namespace FictionalOctoDoodle.Core
         [DisplayOnly]
         [SerializeField] int HP;
 #endif
-
         [SerializeField] PlayerData data;
         [SerializeField] Animator animator;
 

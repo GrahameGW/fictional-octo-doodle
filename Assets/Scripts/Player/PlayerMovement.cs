@@ -6,10 +6,12 @@ namespace FictionalOctoDoodle.Core
     public class PlayerMovement : MonoBehaviour
     {
         public PlayerInputMap Input { get; private set; }
-        public bool canClimb;
+        public bool InWater { get; private set; }
+        public bool CanClimb { get; private set; }
 
         [SerializeField] float moveSpeed;
         [SerializeField] float climbingSpeed;
+        [SerializeField] float swimSpeed;
         [SerializeField] float jumpHeight;
 
         [SerializeField] GameObject weapon;
@@ -62,7 +64,7 @@ namespace FictionalOctoDoodle.Core
 
         public void Move(Vector2 value)
         {
-            var vec = value * new Vector2(moveSpeed, climbingSpeed);
+            var vec = InWater ? value * swimSpeed * Vector2.one : value * new Vector2(moveSpeed, climbingSpeed);
             transform.Translate(vec * Time.fixedDeltaTime);
         }
 
@@ -83,10 +85,10 @@ namespace FictionalOctoDoodle.Core
             return Physics2D.Raycast(transform.position, Vector2.down, distanceToGround + 0.1f, 1 << 3).collider != null;
         }
 
-        public void ToggleGravity(bool onOff)
+        public void ToggleGravity(float scale)
         {
-            rb.gravityScale = onOff ? 1f : 0f;
-            if (!onOff)
+            rb.gravityScale = scale;
+            if (scale == 0f)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
             }
@@ -110,20 +112,29 @@ namespace FictionalOctoDoodle.Core
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            if (!canClimb)
+            if (!CanClimb)
             {
-                canClimb = LayerMask.NameToLayer("Climb") == other.gameObject.layer;
+                CanClimb = LayerMask.NameToLayer("Climb") == other.gameObject.layer;
+            }
+            if (!InWater)
+            {
+                InWater = LayerMask.NameToLayer("Water") == other.gameObject.layer;
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (canClimb)
+            if (CanClimb)
             {
                 var filter = new ContactFilter2D();
                 var mask = LayerMask.NameToLayer("Climb");
                 filter.SetLayerMask(mask);
-                canClimb = rb.IsTouching(filter);
+                CanClimb = rb.IsTouching(filter);
+            }
+
+            if (InWater && LayerMask.NameToLayer("Water") == other.gameObject.layer)
+            {
+                InWater = false;
             }
         }
 

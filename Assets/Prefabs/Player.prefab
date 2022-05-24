@@ -324,9 +324,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930739ee4460ee945b251298d5273090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canClimb: 0
   moveSpeed: 5
   climbingSpeed: 3
+  swimSpeed: 2
   jumpHeight: 10
   weapon: {fileID: 4226271864081886128}
   animator: {fileID: 4226271864193814449}

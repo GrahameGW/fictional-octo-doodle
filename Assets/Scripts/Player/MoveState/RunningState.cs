@@ -10,6 +10,7 @@ namespace FictionalOctoDoodle.Core
         private PlayerMovement player;
         private InputAction movement;
 
+
         public override void EnterState(PlayerMovement player)
         {
             Debug.Log("Running");
@@ -21,8 +22,10 @@ namespace FictionalOctoDoodle.Core
         public override void Update()
         {
             var value = movement.ReadValue<Vector2>();
+            player.Move(new Vector2(value.x, 0f));
 
-            if (value.y != 0 && player.canClimb)
+
+            if (value.y != 0 && player.CanClimb)
             {
                 player.SetNewState(new ClimbingState());
                 return;
@@ -31,9 +34,19 @@ namespace FictionalOctoDoodle.Core
             if (value.x == 0)
             {
                 player.SetNewState(new IdleState());
+                return;
             }
 
-            player.Move(new Vector2(value.x, 0f));
+            if (!player.IsGrounded())
+            {
+                player.SetNewState(new AirborneState());
+                return;
+            }
+
+            if (player.InWater)
+            {
+                player.SetNewState(new SwimmingState());
+            }
         }
     }
 }

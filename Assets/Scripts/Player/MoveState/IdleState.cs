@@ -28,7 +28,7 @@ namespace FictionalOctoDoodle.Core
 
             var value = movement.ReadValue<Vector2>();
 
-            if (value.y != 0 && player.canClimb)
+            if (value.y != 0 && player.CanClimb)
             {
                 player.SetNewState(new ClimbingState());
                 return;
@@ -38,6 +38,12 @@ namespace FictionalOctoDoodle.Core
             {
                 player.Move(value);
                 player.SetNewState(new RunningState());
+                return;
+            }
+
+            if (player.InWater)
+            {
+                player.SetNewState(new SwimmingState());
             }
         }
     }

@@ -15,14 +15,14 @@ namespace FictionalOctoDoodle.Core
             Debug.Log("Climbing");
             this.player = player;
             movement = player.Input.Player.Move;
-            player.ToggleGravity(false);
+            player.ToggleGravity(0f);
         }
 
         public override void Update()
         {
             var value = movement.ReadValue<Vector2>();
 
-            if (player.canClimb)
+            if (player.CanClimb)
             {
                 player.Move(value);
                 return;
@@ -40,12 +40,13 @@ namespace FictionalOctoDoodle.Core
                     new IdleState() :
                     new RunningState()
                     );
+                return;
             }
         }
 
         public override void ExitState()
         {
-            player.ToggleGravity(true);
+            player.ToggleGravity(1f);
         }
     }
 }
