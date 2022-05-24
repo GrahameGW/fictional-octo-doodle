@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef44a00d2f876d4aa6e81dc676283cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 4226271864211382389, guid: 7ed4a2bbac5e2564184b869d66d07415, type: 3}
+  playerPrefab: {fileID: 1677843800852646441, guid: df41f8f5da6ef354d803c917ade54d66, type: 3}
   timeToSpawn: 2
 --- !u!1 &705507993
 GameObject:

@@ -15,6 +15,7 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] float jumpHeight;
 
         [SerializeField] GameObject weapon;
+        [SerializeField] Transform model;
         [SerializeField] Animator animator;
 
         private Rigidbody2D rb;
@@ -35,6 +36,7 @@ namespace FictionalOctoDoodle.Core
             SetNewState(new IdleState());
 
             rb = GetComponent<Rigidbody2D>();
+
             distanceToGround = GetComponentInChildren<Collider2D>().bounds.extents.y;
 
             weapon.SetActive(false);
@@ -66,6 +68,15 @@ namespace FictionalOctoDoodle.Core
         {
             var vec = InWater ? value * swimSpeed * Vector2.one : value * new Vector2(moveSpeed, climbingSpeed);
             transform.Translate(vec * Time.fixedDeltaTime);
+
+            if (model.eulerAngles.y == 180f && value.x > 0f)
+            {
+                model.eulerAngles = new Vector3(model.eulerAngles.x, 0f, model.eulerAngles.z);
+            }
+            else if (transform.eulerAngles.y == 0f & value.x < 0f)
+            {
+                model.eulerAngles = new Vector3(model.eulerAngles.x, 180f, model.eulerAngles.z);
+            }
         }
 
         public void Jump(InputAction.CallbackContext ctx)
