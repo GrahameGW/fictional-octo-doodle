@@ -46,6 +46,7 @@ namespace FictionalOctoDoodle.Core
             if (player.InWater)
             {
                 player.SetNewState(new SwimmingState());
+                return;
             }
         }
     }
