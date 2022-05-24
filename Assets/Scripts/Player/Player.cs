@@ -13,6 +13,17 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] PlayerData data;
         [SerializeField] Animator animator;
 
+        [Serializable]
+        public class PlayerLimbs
+        {
+            public LimbData torso;
+            public LimbData rightArm;
+            public LimbData leftArm;
+            public LimbData rightLeg;
+            public LimbData leftLeg;
+        }
+
+        [SerializeField] PlayerLimbs limbs;
 
         private void Awake()
         {
