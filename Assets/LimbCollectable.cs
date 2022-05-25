@@ -1,0 +1,23 @@
+using UnityEngine;
+
+
+namespace FictionalOctoDoodle.Core
+{
+    public class LimbCollectable : MonoBehaviour
+    {
+        [SerializeField] LimbData limbData;
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            var player = collision.gameObject.GetComponentInParent<Player>();
+            if (player != null)
+            {
+                Debug.Log($"Player collected {name}!");
+                player.AddLimb(limbData);
+                Destroy(gameObject);
+            }
+        }
+    }
+}
+
+

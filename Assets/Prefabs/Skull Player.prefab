@@ -72,7 +72,7 @@ MonoBehaviour:
   moveSpeed: 10
   climbingSpeed: 1
   swimSpeed: 1
-  jumpHeight: 2
+  jumpHeight: 4
   weapon: {fileID: 0}
   model: {fileID: 3007728909467596507}
   animator: {fileID: 1677843800852646442}
