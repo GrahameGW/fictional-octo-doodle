@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930739ee4460ee945b251298d5273090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 10
   climbingSpeed: 1
   swimSpeed: 1
   jumpHeight: 2
@@ -191,7 +191,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 31c8d4ec6c991fa4d863a466b66e9afb, type: 3}
+  m_Sprite: {fileID: -2610952240586445379, guid: 817b25aeebbc4cb4d9d9960cc811d95b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -217,7 +217,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.07
+  m_Radius: 0.72
 --- !u!1 &1950031759225512368
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Test Limb
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 0}
-  <Slots>k__BackingField: 
+  <Slots>k__BackingField: 00000000
   <HudSprite>k__BackingField: {fileID: 0}
