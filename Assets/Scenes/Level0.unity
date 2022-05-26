@@ -1645,6 +1645,14 @@ PrefabInstance:
       propertyPath: torso.controller
       value: 
       objectReference: {fileID: 9100000, guid: 3d625015a14d90b4889a8d44ff429720, type: 2}
+    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
+      propertyPath: torso.slotId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
+      propertyPath: torso.controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3d625015a14d90b4889a8d44ff429720, type: 2}
     - target: {fileID: 8347252708069158426, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
       propertyPath: m_BodyType
       value: 0
