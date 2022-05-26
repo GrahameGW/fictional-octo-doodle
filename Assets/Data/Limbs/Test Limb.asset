@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28370f0f20091bb45b3f64218dc193cc, type: 3}
   m_Name: Test Limb
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 0}
-  <Slots>k__BackingField: 00000000
+  <Prefab>k__BackingField: {fileID: 924131356080056878, guid: c7aeb360383e10f47ba8844d3561705b, type: 3}
+  <Slots>k__BackingField: 02000000
   <HudSprite>k__BackingField: {fileID: 0}

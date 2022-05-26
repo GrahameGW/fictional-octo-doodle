@@ -21,6 +21,7 @@ namespace FictionalOctoDoodle.Core
         private Rigidbody2D rb;
         private Animator animator;
         private PlayerState activeState; // states enable & disable actions, and handle updating actions (may want to return that to the player)
+        private LimbAssembly limbAssembly;
         private float distanceToGround;
 
 
@@ -29,6 +30,7 @@ namespace FictionalOctoDoodle.Core
         {
             rb = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
+            limbAssembly = GetComponent<LimbAssembly>();
             //distanceToGround = GetComponentInChildren<Collider2D>().bounds.extents.y;
             distanceToGround = 100f;
 
@@ -44,6 +46,7 @@ namespace FictionalOctoDoodle.Core
             Input = new PlayerInputMap();
             Input.Player.Jump.performed += Jump;
             Input.Player.Fire.performed += Attack;
+            limbAssembly.OnLimbConfigChanged += ReloadState;
 
             Input.Player.Move.Enable(); // enabling all actions at startup; states will disable where necessary
             Input.Player.Jump.Enable();
@@ -57,6 +60,7 @@ namespace FictionalOctoDoodle.Core
         {
             Input.Player.Jump.performed -= Jump;
             Input.Player.Fire.performed -= Attack;
+            limbAssembly.OnLimbConfigChanged -= ReloadState;
 
             Input.Player.Move.Disable(); 
             Input.Player.Jump.Disable();
@@ -76,6 +80,12 @@ namespace FictionalOctoDoodle.Core
             ChangeAnimation(newState);
         }
 
+        private void ReloadState()
+        {
+            var state = activeState;
+            SetNewState(state);
+        }
+
         public void Move(Vector2 value)
         {
             var vec = InWater ? value * swimSpeed * Vector2.one : value * new Vector2(moveSpeed, climbingSpeed);
@@ -84,25 +94,15 @@ namespace FictionalOctoDoodle.Core
             var y = Mathf.Abs(models[0].eulerAngles.y);
             if (y == 180f && value.x > 0f)
             {
-                FlipPlayerModels(0f);
+                limbAssembly.FlipModels(0f);
             }
             else if (y == 0f & value.x < 0f)
             {
-                FlipPlayerModels(180f);
+                limbAssembly.FlipModels(180f);
             }
         }
 
-        private void FlipPlayerModels(float degrees)
-        {
-            for (int i = 0; i < models.Count; i++)
-            {
-                models[i].eulerAngles = new Vector3(
-                    models[i].eulerAngles.x, 
-                    degrees, 
-                    models[i].eulerAngles.z
-                    );
-            }
-        }
+
 
         public void Jump(InputAction.CallbackContext ctx)
         {
