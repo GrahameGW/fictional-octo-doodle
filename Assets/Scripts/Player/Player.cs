@@ -11,29 +11,20 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] int HP;
 #endif
         [SerializeField] PlayerData data;
-        [SerializeField] Animator animator;
+        
+        private Animator animator;
 
-        [Serializable]
-        public class PlayerLimbs
-        {
-            public LimbData torso;
-            public LimbData rightArm;
-            public LimbData leftArm;
-            public LimbData rightLeg;
-            public LimbData leftLeg;
-        }
-
-        [SerializeField] PlayerLimbs limbs;
 
         private void Awake()
         {
+            animator = GetComponent<Animator>();
             data.HP = data.MaxHP;
             Debug.Log($"Loaded combat module. Player HP set to Max HP ({data})");
 #if UNITY_EDITOR
             HP = data.HP;
 #endif
         }
-
+        /*
         public void AddLimb(LimbData limb)
         {
             for (int i = 0; i < limb.Slots.Length; i++)
@@ -71,7 +62,7 @@ namespace FictionalOctoDoodle.Core
                 }
             }
         }
-
+        */
         public void Damage(int damage)
         {
             data.HP -= damage;

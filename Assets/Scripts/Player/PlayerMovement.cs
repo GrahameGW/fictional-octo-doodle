@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,13 +16,28 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] float jumpHeight;
 
         [SerializeField] GameObject weapon;
-        [SerializeField] Transform model;
-        [SerializeField] Animator animator;
+        [SerializeField] List<Transform> models;
 
         private Rigidbody2D rb;
+        private Animator animator;
         private PlayerState activeState; // states enable & disable actions, and handle updating actions (may want to return that to the player)
         private float distanceToGround;
 
+
+
+        private void Awake()
+        {
+            rb = GetComponent<Rigidbody2D>();
+            animator = GetComponent<Animator>();
+            //distanceToGround = GetComponentInChildren<Collider2D>().bounds.extents.y;
+            distanceToGround = 100f;
+
+            if (models == null)
+            {
+                models = new List<Transform>();
+                models.Add(transform.GetChild(0));
+            }
+        }
 
         private void OnEnable()
         {
@@ -35,11 +51,7 @@ namespace FictionalOctoDoodle.Core
 
             SetNewState(new IdleState());
 
-            rb = GetComponent<Rigidbody2D>();
-
-            distanceToGround = GetComponentInChildren<Collider2D>().bounds.extents.y;
-
-            weapon.SetActive(false);
+            //weapon.SetActive(false);
         }
         private void OnDisable()
         {
@@ -69,13 +81,26 @@ namespace FictionalOctoDoodle.Core
             var vec = InWater ? value * swimSpeed * Vector2.one : value * new Vector2(moveSpeed, climbingSpeed);
             transform.Translate(vec * Time.fixedDeltaTime);
 
-            if (model.eulerAngles.y == 180f && value.x > 0f)
+            var y = Mathf.Abs(models[0].eulerAngles.y);
+            if (y == 180f && value.x > 0f)
             {
-                model.eulerAngles = new Vector3(model.eulerAngles.x, 0f, model.eulerAngles.z);
+                FlipPlayerModels(0f);
             }
-            else if (transform.eulerAngles.y == 0f & value.x < 0f)
+            else if (y == 0f & value.x < 0f)
             {
-                model.eulerAngles = new Vector3(model.eulerAngles.x, 180f, model.eulerAngles.z);
+                FlipPlayerModels(180f);
+            }
+        }
+
+        private void FlipPlayerModels(float degrees)
+        {
+            for (int i = 0; i < models.Count; i++)
+            {
+                models[i].eulerAngles = new Vector3(
+                    models[i].eulerAngles.x, 
+                    degrees, 
+                    models[i].eulerAngles.z
+                    );
             }
         }
 
@@ -87,7 +112,7 @@ namespace FictionalOctoDoodle.Core
 
         public void Attack(InputAction.CallbackContext ctx)
         {
-            weapon.SetActive(true);
+           // weapon.SetActive(true);
         }
 
         public bool IsGrounded()

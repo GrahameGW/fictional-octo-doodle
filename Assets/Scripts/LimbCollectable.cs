@@ -9,11 +9,11 @@ namespace FictionalOctoDoodle.Core
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            var player = collision.gameObject.GetComponentInParent<Player>();
+            var player = collision.gameObject.GetComponentInParent<LimbAssembly>();
             if (player != null)
             {
                 Debug.Log($"Player collected {name}!");
-                player.AddLimb(limbData);
+               // player.AddLimb(limbData);
                 Destroy(gameObject);
             }
         }
