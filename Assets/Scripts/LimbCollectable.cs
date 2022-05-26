@@ -13,8 +13,10 @@ namespace FictionalOctoDoodle.Core
             if (player != null)
             {
                 Debug.Log($"Player collected {name}!");
-                player.AddLimb(limbData);
-                Destroy(gameObject);
+                if (player.TryAddLimb(limbData))
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }

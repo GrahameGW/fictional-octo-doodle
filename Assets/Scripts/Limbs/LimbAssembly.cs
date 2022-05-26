@@ -7,6 +7,8 @@ namespace FictionalOctoDoodle.Core
 {
     public class LimbAssembly : MonoBehaviour
     {
+        [SerializeField] RuntimeAnimatorController defaultAnimController;
+        
         [Serializable]
         public class LimbConnector
         {
@@ -26,42 +28,66 @@ namespace FictionalOctoDoodle.Core
         public Action OnLimbConfigChanged;
 
         private Animator animator;
-        private List<Transform> characterModels;
 
 
         private void Awake()
         {
             animator = GetComponent<Animator>();
-            characterModels = new List<Transform>() { transform.GetChild(0) }; // get skull;
+            animator.runtimeAnimatorController = defaultAnimController;
         }
 
         public void FlipModels(float degrees)
         {
-            for (int i = 0; i < characterModels.Count; i++)
-            {
-                characterModels[i].eulerAngles = new Vector3(
-                    characterModels[i].eulerAngles.x,
+                transform.eulerAngles = new Vector3(
+                    transform.eulerAngles.x,
                     degrees,
-                    characterModels[i].eulerAngles.z
+                    transform.eulerAngles.z
                     );
-            }
         }
-        public void AddLimb(LimbData limb)
+        public bool TryAddLimb(LimbData limb)
         {
-            if (limb.Slots.Any(s => s == LimbSlot.Torso) && torso.limb == null)
+            if (torso.limb == null && !limb.Slots.Any(s => s == LimbSlot.Torso))
             {
-                torso.limb = limb;
-                var limbObjName = limb.Prefab.name;
-                var obj = Instantiate(limb.Prefab, transform);
-                obj.name = limbObjName;
-                obj.transform.localPosition = torso.position;
-                animator.runtimeAnimatorController = torso.controller;
-                OnLimbConfigChanged?.Invoke();
-                characterModels.Add(obj.transform);
+                return false;
             }
+
+            if (torso.limb != null)
+            {
+                switch (limb.Slots[0])
+                {
+                    case LimbSlot.RightArm:
+                        AssembleLimb(limb, rightArm);
+                        return true;
+                    case LimbSlot.Torso:
+                        return false;
+                    default: 
+                        return false;
+                }
+            }
+
+
+            if (limb.Slots.Any(s => s == LimbSlot.Torso))
+            {
+                AssembleLimb(limb, torso);
+                return true;
+            }
+
+            return false;
         }
 
-        private void OnDrawGizmosSelected()
+        private void AssembleLimb(LimbData limb, LimbConnector slot)
+        {
+            slot.limb = limb;
+            var limbObjName = limb.Prefab.name;
+            var obj = Instantiate(limb.Prefab, transform);
+            obj.name = limbObjName;
+            obj.transform.localPosition = slot.position;
+            animator.runtimeAnimatorController = slot.controller;
+            OnLimbConfigChanged?.Invoke();
+            //characterModels.Add(obj.transform);
+        }
+
+        private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
 

@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4575533150774044027}
-  m_Father: {fileID: 3481518874446041371}
+  m_Father: {fileID: 5439220283369462837}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4049131741698490320
@@ -135,8 +135,6 @@ GameObject:
   - component: {fileID: 3481518874446041371}
   - component: {fileID: 7303970720925777073}
   - component: {fileID: 5701133981869174361}
-  - component: {fileID: 7169762481403268081}
-  - component: {fileID: 9132962346955456113}
   - component: {fileID: 8347252708069158426}
   m_Layer: 0
   m_Name: Player
@@ -157,7 +155,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 100145481137045539}
+  - {fileID: 5439220283369462837}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -173,8 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ac57117dac8a9b4db72dd77f3f7e1e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 0
   data: {fileID: 11400000, guid: 9a0b721c40d1ee845b4155bcf2cb7cb8, type: 2}
+  HP: 0
 --- !u!114 &5701133981869174361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,70 +185,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930739ee4460ee945b251298d5273090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  climbingSpeed: 0
-  swimSpeed: 0
-  jumpHeight: 0
+  moveSpeed: 4
+  climbingSpeed: 3
+  swimSpeed: 2
+  jumpHeight: 6
   weapon: {fileID: 0}
-  models:
-  - {fileID: 100145481137045539}
---- !u!114 &7169762481403268081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644053907746860079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7059230336057834e8bffb1cee089499, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  torso:
-    slotId: 0
-    position: {x: 0, y: -4}
-    orderInLayer: 0
-    limb: {fileID: 0}
-  rightArm:
-    slotId: 0
-    position: {x: 0, y: 0}
-    orderInLayer: 0
-    limb: {fileID: 0}
-  leftArm:
-    slotId: 0
-    position: {x: 0, y: 0}
-    orderInLayer: 0
-    limb: {fileID: 0}
-  rightLeg:
-    slotId: 0
-    position: {x: 0, y: 0}
-    orderInLayer: 0
-    limb: {fileID: 0}
-  leftLeg:
-    slotId: 0
-    position: {x: 0, y: 0}
-    orderInLayer: 0
-    limb: {fileID: 0}
---- !u!95 &9132962346955456113
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644053907746860079}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9f9556446e2d0ad4881dee9893d335bd, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &8347252708069158426
 Rigidbody2D:
   serializedVersion: 4
@@ -272,6 +211,103 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!1 &2779332847174060377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5439220283369462837}
+  - component: {fileID: 7601654688620746731}
+  - component: {fileID: 2486267134551240077}
+  m_Layer: 0
+  m_Name: LimbAssembly
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5439220283369462837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2779332847174060377}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 100145481137045539}
+  m_Father: {fileID: 3481518874446041371}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7601654688620746731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2779332847174060377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7059230336057834e8bffb1cee089499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultAnimController: {fileID: 9100000, guid: 9f9556446e2d0ad4881dee9893d335bd, type: 2}
+  torso:
+    slotId: 0
+    position: {x: 0, y: -4}
+    orderInLayer: 0
+    limb: {fileID: 0}
+    controller: {fileID: 0}
+  rightArm:
+    slotId: 0
+    position: {x: -0.98, y: -1.98}
+    orderInLayer: 10
+    limb: {fileID: 0}
+    controller: {fileID: 9100000, guid: a57e7116e20237d4e9ae4a2199cf8b97, type: 2}
+  leftArm:
+    slotId: 0
+    position: {x: 0, y: 0}
+    orderInLayer: 0
+    limb: {fileID: 0}
+    controller: {fileID: 0}
+  rightLeg:
+    slotId: 0
+    position: {x: 0, y: 0}
+    orderInLayer: 0
+    limb: {fileID: 0}
+    controller: {fileID: 0}
+  leftLeg:
+    slotId: 0
+    position: {x: 0, y: 0}
+    orderInLayer: 0
+    limb: {fileID: 0}
+    controller: {fileID: 0}
+--- !u!95 &2486267134551240077
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2779332847174060377}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9f9556446e2d0ad4881dee9893d335bd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7331146183555494679
 GameObject:
   m_ObjectHideFlags: 0

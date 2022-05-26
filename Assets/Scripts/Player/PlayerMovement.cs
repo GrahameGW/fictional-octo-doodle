@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 
 namespace FictionalOctoDoodle.Core
 {
@@ -16,7 +16,6 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] float jumpHeight;
 
         [SerializeField] GameObject weapon;
-        [SerializeField] List<Transform> models;
 
         private Rigidbody2D rb;
         private Animator animator;
@@ -29,16 +28,10 @@ namespace FictionalOctoDoodle.Core
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
-            animator = GetComponent<Animator>();
-            limbAssembly = GetComponent<LimbAssembly>();
+            animator = GetComponentInChildren<Animator>();
+            limbAssembly = GetComponentInChildren<LimbAssembly>();
             //distanceToGround = GetComponentInChildren<Collider2D>().bounds.extents.y;
             distanceToGround = 100f;
-
-            if (models == null)
-            {
-                models = new List<Transform>();
-                models.Add(transform.GetChild(0));
-            }
         }
 
         private void OnEnable()
@@ -91,14 +84,9 @@ namespace FictionalOctoDoodle.Core
             var vec = InWater ? value * swimSpeed * Vector2.one : value * new Vector2(moveSpeed, climbingSpeed);
             transform.Translate(vec * Time.fixedDeltaTime);
 
-            var y = Mathf.Abs(models[0].eulerAngles.y);
-            if (y == 180f && value.x > 0f)
+            if (value.x != 0f)
             {
-                limbAssembly.FlipModels(0f);
-            }
-            else if (y == 0f & value.x < 0f)
-            {
-                limbAssembly.FlipModels(180f);
+                limbAssembly.FlipModels(value.x > 0f ? 0f : 180f);
             }
         }
 
