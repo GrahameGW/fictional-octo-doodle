@@ -2,11 +2,11 @@
 {
     public enum LimbSlot
     {
-        RightArm,
-        LeftArm,
+        FrontArm,
+        BackArm,
         Torso,
-        RightLeg,
-        LeftLeg
+        FrontLeg,
+        BackLeg
     }
 }
 

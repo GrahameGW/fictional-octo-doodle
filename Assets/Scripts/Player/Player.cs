@@ -13,7 +13,7 @@ namespace FictionalOctoDoodle.Core
 
         private void Awake()
         {
-            animator = GetComponent<Animator>();
+            animator = GetComponentInChildren<Animator>();
             data.HP = data.MaxHP;
             Debug.Log($"Loaded combat module. Player HP set to Max HP ({data})");
 #if UNITY_EDITOR

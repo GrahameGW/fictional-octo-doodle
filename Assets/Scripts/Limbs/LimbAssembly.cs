@@ -1,31 +1,23 @@
 using UnityEngine;
 using System;
 using System.Linq;
-using System.Collections.Generic;
+
 
 namespace FictionalOctoDoodle.Core
 {
     public class LimbAssembly : MonoBehaviour
     {
-        [SerializeField] RuntimeAnimatorController defaultAnimController;
-        
-        [Serializable]
-        public class LimbConnector
-        {
-            public LimbSlot slotId;
-            public Vector2 position;
-            public int orderInLayer;
-            public LimbData limb;
-            public RuntimeAnimatorController controller;
-        }
+        public Action OnLimbConfigChanged;
 
         [SerializeField] LimbConnector torso;
-        [SerializeField] LimbConnector rightArm;
-        [SerializeField] LimbConnector leftArm;
-        [SerializeField] LimbConnector rightLeg;
-        [SerializeField] LimbConnector leftLeg;
+        [SerializeField] LimbConnector neckArm;
+        [SerializeField] LimbConnector neckLeg;
+        [SerializeField] LimbConnector frontArm;
+        [SerializeField] LimbConnector backArm;
+        [SerializeField] LimbConnector frontLeg;
+        [SerializeField] LimbConnector backLeg;
 
-        public Action OnLimbConfigChanged;
+        [SerializeField] LimbAnimationControllers controllers;
 
         private Animator animator;
 
@@ -33,7 +25,7 @@ namespace FictionalOctoDoodle.Core
         private void Awake()
         {
             animator = GetComponent<Animator>();
-            animator.runtimeAnimatorController = defaultAnimController;
+            animator.runtimeAnimatorController = SetAnimationController();
         }
 
         public void FlipModels(float degrees)
@@ -46,29 +38,43 @@ namespace FictionalOctoDoodle.Core
         }
         public bool TryAddLimb(LimbData limb)
         {
-            if (torso.limb == null && !limb.Slots.Any(s => s == LimbSlot.Torso))
+           
+            if (limb.Slots.Contains(LimbSlot.Torso))
             {
-                return false;
-            }
+                if (torso.limbData) return false;
 
-            if (torso.limb != null)
-            {
-                switch (limb.Slots[0])
-                {
-                    case LimbSlot.RightArm:
-                        AssembleLimb(limb, rightArm);
-                        return true;
-                    case LimbSlot.Torso:
-                        return false;
-                    default: 
-                        return false;
-                }
-            }
-
-
-            if (limb.Slots.Any(s => s == LimbSlot.Torso))
-            {
+                torso.ClearLoadedLimb();
                 AssembleLimb(limb, torso);
+                return true;
+            }
+
+            if (torso.limbData == null)
+            {
+                // do neck slot
+                return true;
+            }
+
+            if (frontLeg.limbData == null && limb.Slots.Contains(LimbSlot.FrontLeg))
+            {
+                AssembleLimb(limb, frontLeg);
+                return true;
+            }
+                
+            if (backLeg.limbData == null && limb.Slots.Contains(LimbSlot.BackLeg))
+            {
+                AssembleLimb(limb, backLeg);
+                return true;
+            }
+
+            if (frontArm.limbData == null && limb.Slots.Contains(LimbSlot.FrontArm))
+            {
+                AssembleLimb(limb, frontArm);
+                return true;
+            }
+
+            if (backArm.limbData == null && limb.Slots.Contains(LimbSlot.BackArm))
+            {
+                AssembleLimb(limb, backArm);
                 return true;
             }
 
@@ -77,25 +83,125 @@ namespace FictionalOctoDoodle.Core
 
         private void AssembleLimb(LimbData limb, LimbConnector slot)
         {
-            slot.limb = limb;
+            slot.limbData = limb;
             var limbObjName = limb.Prefab.name;
             var obj = Instantiate(limb.Prefab, transform);
             obj.name = limbObjName;
             obj.transform.localPosition = slot.position;
-            animator.runtimeAnimatorController = slot.controller;
+            obj.GetComponent<SpriteRenderer>().sortingOrder = slot.orderInLayer;
+
+            if (slot.slotId == LimbSlot.BackArm || slot.slotId == LimbSlot.BackLeg)
+            {
+                obj.name += "Back";
+                LabelBackLimbs(obj.transform);
+            }
+
+            slot.limbObj = obj;
+            animator.runtimeAnimatorController = SetAnimationController();
             OnLimbConfigChanged?.Invoke();
-            //characterModels.Add(obj.transform);
         }
 
-        private void OnDrawGizmos()
+        private RuntimeAnimatorController SetAnimationController()
+        {
+            if (torso.limbData == null)
+            {
+                if (neckArm.limbData == null && neckLeg.limbData == null)
+                {
+                    return controllers.skullOnly;
+                }
+
+                return neckArm.limbData != null ?
+                    controllers.skullNeckArm :
+                    controllers.skullNeckLeg;
+            }
+
+            if (backArm.limbData != null)
+            {
+                if (backLeg.limbData != null)
+                {
+                    return controllers.fullBody;
+                }
+
+                return frontLeg.limbData != null ?
+                    controllers.oneLegTwoArm :
+                    controllers.torsoTwoArm;
+            }
+
+            if (frontArm.limbData != null)
+            {
+                if (backLeg.limbData != null)
+                {
+                    return controllers.twoLegOneArm;
+                }
+
+                return frontLeg.limbData != null ?
+                    controllers.oneLegOneArm :
+                    controllers.torsoOneArm;
+            }
+
+            if (backLeg.limbData != null)
+            {
+                return controllers.torsoTwoLeg;
+            }
+
+            return frontLeg.limbData != null ?
+                controllers.torsoOneLeg :
+                controllers.skullTorso;
+        }
+
+        private void LabelBackLimbs(Transform limb)
+        {
+            if (limb.childCount == 0) return;
+            foreach (Transform child in limb)
+            {
+                child.name += "Back"; // so the animator works later 
+                LabelBackLimbs(child); // recursion muthafucka
+            }
+        }
+
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
 
-            Gizmos.DrawSphere(torso.position, 0.25f);
-            Gizmos.DrawSphere(rightArm.position, 0.25f);
-            Gizmos.DrawSphere(leftArm.position, 0.25f);
-            Gizmos.DrawSphere(rightLeg.position, 0.25f);
-            Gizmos.DrawSphere(leftLeg.position, 0.25f);
+            Gizmos.DrawSphere((Vector2)transform.position + torso.position, 0.25f);
+            Gizmos.DrawSphere((Vector2)transform.position + frontArm.position, 0.25f);
+            Gizmos.DrawSphere((Vector2)transform.position + backArm.position, 0.25f);
+            Gizmos.DrawSphere((Vector2)transform.position + frontLeg.position, 0.25f);
+            Gizmos.DrawSphere((Vector2)transform.position + backLeg.position, 0.25f);
+        }
+
+        [Serializable]
+        public class LimbConnector
+        {
+            public LimbSlot slotId;
+            public Vector2 position;
+            public int orderInLayer;
+            public LimbData limbData;
+            public GameObject limbObj;
+
+            public void ClearLoadedLimb()
+            {
+                limbData = null;
+                Destroy(limbObj);
+                limbObj = null;
+            }
+        }
+
+        [Serializable]
+        public class LimbAnimationControllers
+        {
+            public RuntimeAnimatorController skullOnly;
+            public RuntimeAnimatorController skullTorso;
+            public RuntimeAnimatorController skullNeckArm;
+            public RuntimeAnimatorController skullNeckLeg;
+            public RuntimeAnimatorController torsoOneArm;
+            public RuntimeAnimatorController torsoTwoArm;
+            public RuntimeAnimatorController torsoOneLeg;
+            public RuntimeAnimatorController torsoTwoLeg;
+            public RuntimeAnimatorController oneLegOneArm;
+            public RuntimeAnimatorController oneLegTwoArm;
+            public RuntimeAnimatorController twoLegOneArm;
+            public RuntimeAnimatorController fullBody;
         }
     }
 
