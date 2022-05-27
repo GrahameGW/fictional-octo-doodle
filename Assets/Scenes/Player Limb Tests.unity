@@ -888,22 +888,6 @@ PrefabInstance:
       propertyPath: rightArm.orderInLayer
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
-      propertyPath: backArm.orderInLayer
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
-      propertyPath: backLeg.orderInLayer
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
-      propertyPath: controllers.fullBody
-      value: 
-      objectReference: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
-    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
-      propertyPath: controllers.twoLegOneArm
-      value: 
-      objectReference: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
     - target: {fileID: 8347252708069158426, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
       propertyPath: m_BodyType
       value: 1

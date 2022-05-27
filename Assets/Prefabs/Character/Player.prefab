@@ -343,7 +343,7 @@ MonoBehaviour:
   backArm:
     slotId: 1
     position: {x: 0.58, y: -1.98}
-    orderInLayer: -5
+    orderInLayer: -10
     limbData: {fileID: 0}
     limbObj: {fileID: 0}
   frontLeg:
@@ -353,9 +353,9 @@ MonoBehaviour:
     limbData: {fileID: 0}
     limbObj: {fileID: 0}
   backLeg:
-    slotId: 0
-    position: {x: 0, y: 0}
-    orderInLayer: 0
+    slotId: 4
+    position: {x: 0.8, y: -3.5}
+    orderInLayer: -5
     limbData: {fileID: 0}
     limbObj: {fileID: 0}
   controllers:
@@ -366,11 +366,11 @@ MonoBehaviour:
     torsoOneArm: {fileID: 9100000, guid: a57e7116e20237d4e9ae4a2199cf8b97, type: 2}
     torsoTwoArm: {fileID: 9100000, guid: 109ca6a5ccb485c4494234444fdb7893, type: 2}
     torsoOneLeg: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
-    torsoTwoLeg: {fileID: 0}
+    torsoTwoLeg: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
     oneLegOneArm: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
     oneLegTwoArm: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
-    twoLegOneArm: {fileID: 0}
-    fullBody: {fileID: 0}
+    twoLegOneArm: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
+    fullBody: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
   legCollider: {fileID: 7013678308142364703}
 --- !u!95 &2486267134551240077
 Animator:

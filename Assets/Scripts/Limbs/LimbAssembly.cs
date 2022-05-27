@@ -89,6 +89,7 @@ namespace FictionalOctoDoodle.Core
             var limbObjName = limb.Prefab.name;
             var obj = Instantiate(limb.Prefab, transform);
             obj.name = limbObjName;
+            obj.transform.localPosition = slot.position;
             obj.GetComponent<SpriteRenderer>().sortingOrder = slot.orderInLayer;
 
             if (slot.slotId == LimbSlot.BackArm || slot.slotId == LimbSlot.BackLeg)
@@ -162,10 +163,22 @@ namespace FictionalOctoDoodle.Core
             }
         }
 
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+
+            Gizmos.DrawSphere((Vector2)transform.position + torso.position, 0.25f);
+            Gizmos.DrawSphere((Vector2)transform.position + frontArm.position, 0.25f);
+            Gizmos.DrawSphere((Vector2)transform.position + backArm.position, 0.25f);
+            Gizmos.DrawSphere((Vector2)transform.position + frontLeg.position, 0.25f);
+            Gizmos.DrawSphere((Vector2)transform.position + backLeg.position, 0.25f);
+        }
+
         [Serializable]
         public class LimbConnector
         {
             public LimbSlot slotId;
+            public Vector2 position;
             public int orderInLayer;
             public LimbData limbData;
             public GameObject limbObj;
