@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 namespace FictionalOctoDoodle.Core
 {
     public class PlayerMovement : MonoBehaviour
@@ -15,19 +16,30 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] float jumpHeight;
 
         [SerializeField] GameObject weapon;
-        [SerializeField] Transform model;
-        [SerializeField] Animator animator;
 
         private Rigidbody2D rb;
+        private Animator animator;
         private PlayerState activeState; // states enable & disable actions, and handle updating actions (may want to return that to the player)
+        private LimbAssembly limbAssembly;
         private float distanceToGround;
 
+
+
+        private void Awake()
+        {
+            rb = GetComponent<Rigidbody2D>();
+            animator = GetComponentInChildren<Animator>();
+            limbAssembly = GetComponentInChildren<LimbAssembly>();
+            //distanceToGround = GetComponentInChildren<Collider2D>().bounds.extents.y;
+            distanceToGround = 100f;
+        }
 
         private void OnEnable()
         {
             Input = new PlayerInputMap();
             Input.Player.Jump.performed += Jump;
             Input.Player.Fire.performed += Attack;
+            limbAssembly.OnLimbConfigChanged += ReloadState;
 
             Input.Player.Move.Enable(); // enabling all actions at startup; states will disable where necessary
             Input.Player.Jump.Enable();
@@ -35,16 +47,13 @@ namespace FictionalOctoDoodle.Core
 
             SetNewState(new IdleState());
 
-            rb = GetComponent<Rigidbody2D>();
-
-            distanceToGround = GetComponentInChildren<Collider2D>().bounds.extents.y;
-
-            weapon.SetActive(false);
+            //weapon.SetActive(false);
         }
         private void OnDisable()
         {
             Input.Player.Jump.performed -= Jump;
             Input.Player.Fire.performed -= Attack;
+            limbAssembly.OnLimbConfigChanged -= ReloadState;
 
             Input.Player.Move.Disable(); 
             Input.Player.Jump.Disable();
@@ -64,20 +73,24 @@ namespace FictionalOctoDoodle.Core
             ChangeAnimation(newState);
         }
 
+        private void ReloadState()
+        {
+            var state = activeState;
+            SetNewState(state);
+        }
+
         public void Move(Vector2 value)
         {
             var vec = InWater ? value * swimSpeed * Vector2.one : value * new Vector2(moveSpeed, climbingSpeed);
             transform.Translate(vec * Time.fixedDeltaTime);
 
-            if (model.eulerAngles.y == 180f && value.x > 0f)
+            if (value.x != 0f)
             {
-                model.eulerAngles = new Vector3(model.eulerAngles.x, 0f, model.eulerAngles.z);
-            }
-            else if (transform.eulerAngles.y == 0f & value.x < 0f)
-            {
-                model.eulerAngles = new Vector3(model.eulerAngles.x, 180f, model.eulerAngles.z);
+                limbAssembly.FlipModels(value.x > 0f ? 0f : 180f);
             }
         }
+
+
 
         public void Jump(InputAction.CallbackContext ctx)
         {
@@ -87,7 +100,7 @@ namespace FictionalOctoDoodle.Core
 
         public void Attack(InputAction.CallbackContext ctx)
         {
-            weapon.SetActive(true);
+           // weapon.SetActive(true);
         }
 
         public bool IsGrounded()

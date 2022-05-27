@@ -312,6 +312,12 @@ MonoBehaviour:
   HP: 10
   data: {fileID: 11400000, guid: 9a0b721c40d1ee845b4155bcf2cb7cb8, type: 2}
   animator: {fileID: 4226271864193814449}
+  limbs:
+    torso: {fileID: 0}
+    rightArm: {fileID: 0}
+    leftArm: {fileID: 0}
+    rightLeg: {fileID: 0}
+    leftLeg: {fileID: 0}
 --- !u!114 &4226271864211382391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,6 +335,7 @@ MonoBehaviour:
   swimSpeed: 2
   jumpHeight: 10
   weapon: {fileID: 4226271864081886128}
+  model: {fileID: 4226271864193814450}
   animator: {fileID: 4226271864193814449}
 --- !u!50 &4226271864211382390
 Rigidbody2D:
