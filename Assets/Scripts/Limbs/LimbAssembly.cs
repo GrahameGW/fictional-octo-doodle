@@ -86,19 +86,17 @@ namespace FictionalOctoDoodle.Core
         private void AssembleLimb(LimbData limb, LimbConnector slot)
         {
             slot.limbData = limb;
-            var limbObjName = limb.Prefab.name;
-            var obj = Instantiate(limb.Prefab, transform);
-            obj.name = limbObjName;
-            obj.transform.localPosition = slot.position;
-            obj.GetComponent<SpriteRenderer>().sortingOrder = slot.orderInLayer;
 
+            var obj = Instantiate(limb.Prefab, transform);
+            obj.name = SetLimbName(slot.slotId);
             if (slot.slotId == LimbSlot.BackArm || slot.slotId == LimbSlot.BackLeg)
             {
-                obj.name += "Back";
                 LabelBackLimbs(obj.transform);
             }
-
+            obj.transform.localPosition = slot.position;
+            obj.GetComponent<SpriteRenderer>().sortingOrder = slot.orderInLayer;
             slot.limbObj = obj;
+
             var newController = SetAnimationController();
             animator.runtimeAnimatorController = null;
             animator.runtimeAnimatorController = newController;
@@ -163,6 +161,19 @@ namespace FictionalOctoDoodle.Core
                 child.name += "Back"; // so the animator works later 
                 LabelBackLimbs(child); // recursion muthafucka
             }
+        }
+
+        private string SetLimbName(LimbSlot slot)
+        {
+            return slot switch
+            {
+                LimbSlot.Torso => "SkeletonTorso",
+                LimbSlot.FrontLeg => "SkeletonLeg",
+                LimbSlot.BackLeg => "SkeletonLegBack",
+                LimbSlot.BackArm => "SkeletonArmBack",
+                LimbSlot.FrontArm => "SkeletonArm",
+                _ => "No Slot Found",
+            };
         }
 
         private void OnDrawGizmosSelected()

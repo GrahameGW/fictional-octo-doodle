@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   torso:
-    slotId: 0
+    slotId: 2
     position: {x: 0, y: -4}
     orderInLayer: 0
     limbData: {fileID: 0}
@@ -336,13 +336,13 @@ MonoBehaviour:
     limbObj: {fileID: 0}
   frontArm:
     slotId: 0
-    position: {x: -0.98, y: -1.98}
+    position: {x: -0.53, y: -1.98}
     orderInLayer: 10
     limbData: {fileID: 0}
     limbObj: {fileID: 0}
   backArm:
     slotId: 1
-    position: {x: 0.58, y: -1.98}
+    position: {x: 0.87, y: -1.98}
     orderInLayer: -10
     limbData: {fileID: 0}
     limbObj: {fileID: 0}
