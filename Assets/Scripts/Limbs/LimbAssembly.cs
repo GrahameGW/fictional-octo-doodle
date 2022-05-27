@@ -99,7 +99,9 @@ namespace FictionalOctoDoodle.Core
             }
 
             slot.limbObj = obj;
-            animator.runtimeAnimatorController = SetAnimationController();
+            var newController = SetAnimationController();
+            animator.runtimeAnimatorController = null;
+            animator.runtimeAnimatorController = newController;
             OnLimbConfigChanged?.Invoke();
 
             legCollider.enabled = frontLeg.limbData != null;
