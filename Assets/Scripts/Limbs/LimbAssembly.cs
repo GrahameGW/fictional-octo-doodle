@@ -18,6 +18,7 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] LimbConnector backLeg;
 
         [SerializeField] LimbAnimationControllers controllers;
+        [SerializeField] Collider2D legCollider;
 
         private Animator animator;
 
@@ -26,6 +27,7 @@ namespace FictionalOctoDoodle.Core
         {
             animator = GetComponent<Animator>();
             animator.runtimeAnimatorController = SetAnimationController();
+            legCollider.enabled = false;
         }
 
         public void FlipModels(float degrees)
@@ -87,7 +89,6 @@ namespace FictionalOctoDoodle.Core
             var limbObjName = limb.Prefab.name;
             var obj = Instantiate(limb.Prefab, transform);
             obj.name = limbObjName;
-            obj.transform.localPosition = slot.position;
             obj.GetComponent<SpriteRenderer>().sortingOrder = slot.orderInLayer;
 
             if (slot.slotId == LimbSlot.BackArm || slot.slotId == LimbSlot.BackLeg)
@@ -99,6 +100,8 @@ namespace FictionalOctoDoodle.Core
             slot.limbObj = obj;
             animator.runtimeAnimatorController = SetAnimationController();
             OnLimbConfigChanged?.Invoke();
+
+            legCollider.enabled = frontLeg.limbData != null;
         }
 
         private RuntimeAnimatorController SetAnimationController()
@@ -159,22 +162,10 @@ namespace FictionalOctoDoodle.Core
             }
         }
 
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.yellow;
-
-            Gizmos.DrawSphere((Vector2)transform.position + torso.position, 0.25f);
-            Gizmos.DrawSphere((Vector2)transform.position + frontArm.position, 0.25f);
-            Gizmos.DrawSphere((Vector2)transform.position + backArm.position, 0.25f);
-            Gizmos.DrawSphere((Vector2)transform.position + frontLeg.position, 0.25f);
-            Gizmos.DrawSphere((Vector2)transform.position + backLeg.position, 0.25f);
-        }
-
         [Serializable]
         public class LimbConnector
         {
             public LimbSlot slotId;
-            public Vector2 position;
             public int orderInLayer;
             public LimbData limbData;
             public GameObject limbObj;
