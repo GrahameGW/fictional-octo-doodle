@@ -759,7 +759,7 @@ TextureImporter:
       - name: bone_3
         guid: 3cb33ed9b88e2fa40a695ff428ba3173
         position: {x: 127.5305, y: -0.000018592702, z: 0}
-        rotation: {x: 0, y: 0, z: -0.116016634, w: 0.9932473}
+        rotation: {x: 0, y: 0, z: -0.11601664, w: 0.99324733}
         length: 57.150146
         parentId: 1
         color:
@@ -1604,28 +1604,28 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones:
-      - name: bone_1
+      - name: Femur
         guid: 2aa65e0933680c6468e0ddbc9693aa33
         position: {x: 42.711853, y: 294.29993, z: 0}
-        rotation: {x: 0, y: 0, z: -0.67356396, w: 0.739129}
-        length: 141.0323
+        rotation: {x: 0, y: 0, z: -0.673564, w: 0.7391289}
+        length: 141.03232
         parentId: -1
         color:
           serializedVersion: 2
           rgba: 4278190335
-      - name: bone_2
+      - name: Calf
         guid: 7407c05188d29814fa6ac8009b785473
-        position: {x: 141.0323, y: 0.0000076086744, z: 0}
+        position: {x: 141.03232, y: 0.000024926523, z: 0}
         rotation: {x: 0, y: 0, z: -0.11465867, w: 0.993405}
-        length: 95.60263
+        length: 95.60264
         parentId: 0
         color:
           serializedVersion: 2
           rgba: 4278255615
-      - name: bone_3
+      - name: Foot
         guid: 52e5930267617df48aeaf993addbb26f
-        position: {x: 95.60264, y: -0.00000029479645, z: 0}
-        rotation: {x: 0, y: 0, z: 0.49983636, w: 0.86611986}
+        position: {x: 95.60264, y: 0.00001104236, z: 0}
+        rotation: {x: 0, y: 0, z: 0.49983647, w: 0.86611986}
         length: 74.469955
         parentId: 1
         color:
@@ -1745,12 +1745,12 @@ TextureImporter:
         boneIndex[1]: 0
         boneIndex[2]: 0
         boneIndex[3]: 0
-      - weight[0]: 1
-        weight[1]: 0
+      - weight[0]: 0.83
+        weight[1]: 0.17
         weight[2]: 0
         weight[3]: 0
-        boneIndex[0]: 2
-        boneIndex[1]: 0
+        boneIndex[0]: 1
+        boneIndex[1]: 2
         boneIndex[2]: 0
         boneIndex[3]: 0
       - weight[0]: 1
