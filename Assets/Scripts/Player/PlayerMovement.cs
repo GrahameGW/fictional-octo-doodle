@@ -10,11 +10,7 @@ namespace FictionalOctoDoodle.Core
         public bool InWater { get; private set; }
         public bool CanClimb { get; private set; }
 
-        [SerializeField] float moveSpeed;
-        [SerializeField] float climbingSpeed;
-        [SerializeField] float swimSpeed;
-        [SerializeField] float jumpHeight;
-
+        [SerializeField] PlayerMoveStats stats;
         [SerializeField] GameObject weapon;
 
         private Rigidbody2D rb;
@@ -39,7 +35,7 @@ namespace FictionalOctoDoodle.Core
             Input = new PlayerInputMap();
             Input.Player.Jump.performed += Jump;
             Input.Player.Fire.performed += Attack;
-            limbAssembly.OnLimbConfigChanged += ReloadState;
+            limbAssembly.OnAnimatorChanged += ReloadState;
 
             Input.Player.Move.Enable(); // enabling all actions at startup; states will disable where necessary
             Input.Player.Jump.Enable();
@@ -53,7 +49,7 @@ namespace FictionalOctoDoodle.Core
         {
             Input.Player.Jump.performed -= Jump;
             Input.Player.Fire.performed -= Attack;
-            limbAssembly.OnLimbConfigChanged -= ReloadState;
+            limbAssembly.OnAnimatorChanged -= ReloadState;
 
             Input.Player.Move.Disable(); 
             Input.Player.Jump.Disable();
@@ -81,7 +77,7 @@ namespace FictionalOctoDoodle.Core
 
         public void Move(Vector2 value)
         {
-            var vec = InWater ? value * swimSpeed * Vector2.one : value * new Vector2(moveSpeed, climbingSpeed);
+            var vec = InWater ? value * stats.swimSpeed * Vector2.one : value * new Vector2(stats.moveSpeed, stats.climbSpeed);
             transform.Translate(vec * Time.fixedDeltaTime);
 
             if (value.x != 0f)
@@ -90,12 +86,11 @@ namespace FictionalOctoDoodle.Core
             }
         }
 
-
-
         public void Jump(InputAction.CallbackContext ctx)
         {
-            rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * stats.jumpForce, ForceMode2D.Impulse);
             animator.SetTrigger("jump");
+            Debug.Log("jump");
         }
 
         public void Attack(InputAction.CallbackContext ctx)

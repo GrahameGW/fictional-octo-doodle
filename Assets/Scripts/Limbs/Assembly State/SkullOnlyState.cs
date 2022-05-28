@@ -11,6 +11,7 @@ namespace FictionalOctoDoodle.Core
             {
                 context.AssembleLimb(limb, LimbSlot.Torso);
                 context.ChangeState(new SkullAndTorsoState());
+                context.SetAnimationController(context.controllers.skullTorso);
                 return true;
             }
 

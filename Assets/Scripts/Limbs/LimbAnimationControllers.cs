@@ -23,5 +23,22 @@ namespace FictionalOctoDoodle.Core
             public RuntimeAnimatorController fullBody;
         }
 
+        [Serializable]
+        public class BaseAssemblyMoveStats
+        {            
+            public PlayerMoveStats skullOnly;
+            public PlayerMoveStats skullTorso;
+            public PlayerMoveStats skullNeckArm;
+            public PlayerMoveStats skullNeckLeg;
+            public PlayerMoveStats torsoOneArm;
+            public PlayerMoveStats torsoTwoArm;
+            public PlayerMoveStats torsoOneLeg;
+            public PlayerMoveStats torsoTwoLeg;
+            public PlayerMoveStats oneLegOneArm;
+            public PlayerMoveStats oneLegTwoArm;
+            public PlayerMoveStats twoLegOneArm;
+            public PlayerMoveStats fullBody;
+        }
+
     }
 }

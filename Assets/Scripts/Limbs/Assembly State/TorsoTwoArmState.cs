@@ -10,6 +10,7 @@ namespace FictionalOctoDoodle.Core
 
             context.AssembleLimb(limb, LimbSlot.FrontLeg);
             context.ChangeState(new TwoArmOneLegState());
+            context.SetAnimationController(context.controllers.oneLegTwoArm);
             return true;
         }
 
@@ -20,6 +21,7 @@ namespace FictionalOctoDoodle.Core
 
             context.RemoveLimb(limb);
             context.ChangeState(new TorsoOneArmState());
+            context.SetAnimationController(context.controllers.torsoOneArm);
             return true;
         }
     }

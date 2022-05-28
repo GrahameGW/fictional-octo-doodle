@@ -243,10 +243,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930739ee4460ee945b251298d5273090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  climbingSpeed: 3
-  swimSpeed: 2
-  jumpHeight: 6
+  stats:
+    moveSpeed: 5
+    climbSpeed: 2
+    jumpForce: 3
+    swimSpeed: 2
   weapon: {fileID: 0}
 --- !u!50 &8347252708069158426
 Rigidbody2D:

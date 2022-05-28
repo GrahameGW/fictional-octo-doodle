@@ -11,6 +11,8 @@ namespace FictionalOctoDoodle.Core
         public LimbSlot[] Slots { get; private set; }
         [field: SerializeField]
         public Sprite HudSprite { get; private set; }
+        [field: SerializeField]
+        public PlayerMoveStats stats { get; private set; }
     }
 }
 

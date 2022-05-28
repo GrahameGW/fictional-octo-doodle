@@ -7,7 +7,12 @@ namespace FictionalOctoDoodle.Core
 {
     public partial class LimbAssembly : MonoBehaviour
     {
-        public Action OnLimbConfigChanged;
+        public Action OnAnimatorChanged;
+
+        public BaseAssemblyMoveStats moveStats;
+        public LimbAnimationControllers controllers;
+
+        [SerializeField] Collider2D legCollider;
 
         [SerializeField] LimbConnector torso;
         [SerializeField] LimbConnector neckArm;
@@ -17,16 +22,14 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] LimbConnector frontLeg;
         [SerializeField] LimbConnector backLeg;
 
-        [SerializeField] LimbAnimationControllers controllers;
-        [SerializeField] Collider2D legCollider;
-
         private Animator animator;
         private LimbAssemblyState state;
+
 
         private void Awake()
         {
             animator = GetComponent<Animator>();
-            animator.runtimeAnimatorController = SetAnimationController();
+            animator.runtimeAnimatorController = controllers.skullOnly;
             legCollider.enabled = false;
             ChangeState(new SkullOnlyState());
         }
@@ -66,11 +69,6 @@ namespace FictionalOctoDoodle.Core
             obj.GetComponent<SpriteRenderer>().sortingOrder = slot.orderInLayer;
             slot.limbObj = obj;
 
-            var newController = SetAnimationController();
-            animator.runtimeAnimatorController = null;
-            animator.runtimeAnimatorController = newController;
-            OnLimbConfigChanged?.Invoke();
-
             legCollider.enabled = frontLeg.limbData != null;
         }
 
@@ -80,52 +78,11 @@ namespace FictionalOctoDoodle.Core
             state = newState;
             state.EnterState(this);
         }
-        private RuntimeAnimatorController SetAnimationController()
+        public void SetAnimationController(RuntimeAnimatorController controller)
         {
-            if (torso.limbData == null)
-            {
-                if (neckArm.limbData == null && neckLeg.limbData == null)
-                {
-                    return controllers.skullOnly;
-                }
-
-                return neckArm.limbData != null ?
-                    controllers.skullNeckArm :
-                    controllers.skullNeckLeg;
-            }
-
-            if (backArm.limbData != null)
-            {
-                if (backLeg.limbData != null)
-                {
-                    return controllers.fullBody;
-                }
-
-                return frontLeg.limbData != null ?
-                    controllers.oneLegTwoArm :
-                    controllers.torsoTwoArm;
-            }
-
-            if (frontArm.limbData != null)
-            {
-                if (backLeg.limbData != null)
-                {
-                    return controllers.twoLegOneArm;
-                }
-
-                return frontLeg.limbData != null ?
-                    controllers.oneLegOneArm :
-                    controllers.torsoOneArm;
-            }
-
-            if (backLeg.limbData != null)
-            {
-                return controllers.torsoTwoLeg;
-            }
-
-            return frontLeg.limbData != null ?
-                controllers.torsoOneLeg :
-                controllers.skullTorso;
+            animator.runtimeAnimatorController = null;
+            animator.runtimeAnimatorController = controller;
+            OnAnimatorChanged?.Invoke();
         }
 
         private void LabelBackLimbs(Transform limb)
@@ -174,21 +131,6 @@ namespace FictionalOctoDoodle.Core
             Gizmos.DrawSphere((Vector2)transform.position + frontLeg.position, 0.25f);
             Gizmos.DrawSphere((Vector2)transform.position + backLeg.position, 0.25f);
         }
-    }
-
-
-    public abstract class LimbAssemblyState
-    {
-        protected LimbAssembly context;
-        
-        public abstract bool AddLimb(LimbData limb);
-        public abstract bool RemoveLimb(LimbSlot limb);
-
-        public virtual void EnterState(LimbAssembly context) 
-        {
-            this.context = context;
-        }
-        public virtual void ExitState() { }
     }
 
 

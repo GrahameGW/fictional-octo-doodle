@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using UnityEngine;
 
 namespace FictionalOctoDoodle.Core
 {
@@ -10,6 +11,7 @@ namespace FictionalOctoDoodle.Core
 
             context.AssembleLimb(limb, LimbSlot.BackLeg);
             context.ChangeState(new FullyAssembledState());
+            context.SetAnimationController(context.controllers.fullBody);
             return true;
         }
 
@@ -17,10 +19,24 @@ namespace FictionalOctoDoodle.Core
         {
             if (limb == LimbSlot.Torso || limb == LimbSlot.BackLeg) return false;
 
+
+            LimbAssemblyState state;
+            RuntimeAnimatorController ctrl;
+
+            if (limb == LimbSlot.FrontLeg)
+            {
+                state = new TorsoTwoArmState();
+                ctrl = context.controllers.torsoTwoArm;
+            }
+            else
+            {
+                state = new OneArmOneLegState();
+                ctrl = context.controllers.oneLegOneArm;
+            }
+
             context.RemoveLimb(limb);
-            LimbAssemblyState state = limb == LimbSlot.FrontLeg ?
-                new TorsoTwoArmState() : new OneArmOneLegState();
             context.ChangeState(state);
+            context.SetAnimationController(ctrl);
             return true;
         }
     }
