@@ -1,7 +1,9 @@
-﻿namespace FictionalOctoDoodle.Core
+﻿using UnityEngine;
+
+namespace FictionalOctoDoodle.Core
 {
-    [System.Serializable]
-    public class PlayerMoveStats
+    [CreateAssetMenu(menuName = "Data/Move Stats")]
+    public class PlayerMoveStats : ScriptableObject
     {
         public float moveSpeed;
         public float climbSpeed;

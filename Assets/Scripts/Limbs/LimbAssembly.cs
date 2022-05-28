@@ -7,8 +7,6 @@ namespace FictionalOctoDoodle.Core
 {
     public partial class LimbAssembly : MonoBehaviour
     {
-        public Action OnAnimatorChanged;
-
         public BaseAssemblyMoveStats moveStats;
         public LimbAnimationControllers controllers;
 
@@ -24,24 +22,18 @@ namespace FictionalOctoDoodle.Core
 
         private Animator animator;
         private LimbAssemblyState state;
+        private PlayerMovement playerMovement;
 
 
         private void Awake()
         {
+            playerMovement = GetComponentInParent<PlayerMovement>();
             animator = GetComponent<Animator>();
             animator.runtimeAnimatorController = controllers.skullOnly;
             legCollider.enabled = false;
             ChangeState(new SkullOnlyState());
         }
 
-        public void FlipModels(float degrees)
-        {
-                transform.eulerAngles = new Vector3(
-                    transform.eulerAngles.x,
-                    degrees,
-                    transform.eulerAngles.z
-                    );
-        }
         public bool TryAddLimb(LimbData limb)
         {
             return state.AddLimb(limb);
@@ -82,7 +74,7 @@ namespace FictionalOctoDoodle.Core
         {
             animator.runtimeAnimatorController = null;
             animator.runtimeAnimatorController = controller;
-            OnAnimatorChanged?.Invoke();
+            playerMovement.ReloadState();
         }
 
         private void LabelBackLimbs(Transform limb)
@@ -132,6 +124,4 @@ namespace FictionalOctoDoodle.Core
             Gizmos.DrawSphere((Vector2)transform.position + backLeg.position, 0.25f);
         }
     }
-
-
 }
