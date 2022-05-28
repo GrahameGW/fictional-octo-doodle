@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace FictionalOctoDoodle.Core
 {
-    public class LimbAssembly : MonoBehaviour
+    public partial class LimbAssembly : MonoBehaviour
     {
         public Action OnLimbConfigChanged;
 
@@ -21,13 +21,14 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] Collider2D legCollider;
 
         private Animator animator;
-
+        private LimbAssemblyState state;
 
         private void Awake()
         {
             animator = GetComponent<Animator>();
             animator.runtimeAnimatorController = SetAnimationController();
             legCollider.enabled = false;
+            ChangeState(new SkullOnlyState());
         }
 
         public void FlipModels(float degrees)
@@ -40,51 +41,19 @@ namespace FictionalOctoDoodle.Core
         }
         public bool TryAddLimb(LimbData limb)
         {
-           
-            if (limb.Slots.Contains(LimbSlot.Torso))
-            {
-                if (torso.limbData) return false;
-
-                torso.ClearLoadedLimb();
-                AssembleLimb(limb, torso);
-                return true;
-            }
-
-            if (torso.limbData == null)
-            {
-                // do neck slot
-                return true;
-            }
-
-            if (frontLeg.limbData == null && limb.Slots.Contains(LimbSlot.FrontLeg))
-            {
-                AssembleLimb(limb, frontLeg);
-                return true;
-            }
-                
-            if (backLeg.limbData == null && limb.Slots.Contains(LimbSlot.BackLeg))
-            {
-                AssembleLimb(limb, backLeg);
-                return true;
-            }
-
-            if (frontArm.limbData == null && limb.Slots.Contains(LimbSlot.FrontArm))
-            {
-                AssembleLimb(limb, frontArm);
-                return true;
-            }
-
-            if (backArm.limbData == null && limb.Slots.Contains(LimbSlot.BackArm))
-            {
-                AssembleLimb(limb, backArm);
-                return true;
-            }
-
-            return false;
+            return state.AddLimb(limb);
         }
 
-        private void AssembleLimb(LimbData limb, LimbConnector slot)
+        public void RemoveLimb(LimbSlot limb)
         {
+            GetSlotById(limb).ClearLoadedLimb();
+        }
+
+        public void AssembleLimb(LimbData limb, LimbSlot slotId)
+        {
+            var slot = GetSlotById(slotId);
+            
+            slot.ClearLoadedLimb();
             slot.limbData = limb;
 
             var obj = Instantiate(limb.Prefab, transform);
@@ -105,6 +74,12 @@ namespace FictionalOctoDoodle.Core
             legCollider.enabled = frontLeg.limbData != null;
         }
 
+        public void ChangeState(LimbAssemblyState newState)
+        {
+            state?.ExitState();
+            state = newState;
+            state.EnterState(this);
+        }
         private RuntimeAnimatorController SetAnimationController()
         {
             if (torso.limbData == null)
@@ -176,6 +151,19 @@ namespace FictionalOctoDoodle.Core
             };
         }
 
+        private LimbConnector GetSlotById(LimbSlot slotId)
+        {
+            return slotId switch
+            {
+                LimbSlot.Torso => torso,
+                LimbSlot.FrontLeg => frontLeg,
+                LimbSlot.BackLeg => backLeg,
+                LimbSlot.BackArm => backArm,
+                LimbSlot.FrontArm => frontArm,
+                _ => null
+            };
+        }
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
@@ -186,40 +174,21 @@ namespace FictionalOctoDoodle.Core
             Gizmos.DrawSphere((Vector2)transform.position + frontLeg.position, 0.25f);
             Gizmos.DrawSphere((Vector2)transform.position + backLeg.position, 0.25f);
         }
+    }
 
-        [Serializable]
-        public class LimbConnector
+
+    public abstract class LimbAssemblyState
+    {
+        protected LimbAssembly context;
+        
+        public abstract bool AddLimb(LimbData limb);
+        public abstract bool RemoveLimb(LimbSlot limb);
+
+        public virtual void EnterState(LimbAssembly context) 
         {
-            public LimbSlot slotId;
-            public Vector2 position;
-            public int orderInLayer;
-            public LimbData limbData;
-            public GameObject limbObj;
-
-            public void ClearLoadedLimb()
-            {
-                limbData = null;
-                Destroy(limbObj);
-                limbObj = null;
-            }
+            this.context = context;
         }
-
-        [Serializable]
-        public class LimbAnimationControllers
-        {
-            public RuntimeAnimatorController skullOnly;
-            public RuntimeAnimatorController skullTorso;
-            public RuntimeAnimatorController skullNeckArm;
-            public RuntimeAnimatorController skullNeckLeg;
-            public RuntimeAnimatorController torsoOneArm;
-            public RuntimeAnimatorController torsoTwoArm;
-            public RuntimeAnimatorController torsoOneLeg;
-            public RuntimeAnimatorController torsoTwoLeg;
-            public RuntimeAnimatorController oneLegOneArm;
-            public RuntimeAnimatorController oneLegTwoArm;
-            public RuntimeAnimatorController twoLegOneArm;
-            public RuntimeAnimatorController fullBody;
-        }
+        public virtual void ExitState() { }
     }
 
 
