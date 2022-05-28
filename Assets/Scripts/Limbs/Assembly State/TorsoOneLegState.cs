@@ -27,6 +27,7 @@ namespace FictionalOctoDoodle.Core
                 stats = context.moveStats.oneLegOneArm;
             }
 
+            context.AssembleLimb(limb, slot);
             RefreshAssembly(ctrl, stats, state);
             return true;
         }

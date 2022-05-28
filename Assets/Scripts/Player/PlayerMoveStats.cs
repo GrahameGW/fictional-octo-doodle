@@ -9,6 +9,14 @@ namespace FictionalOctoDoodle.Core
         public float climbSpeed;
         public float jumpForce;
         public float swimSpeed;
+
+        public void Copy(PlayerMoveStats other)
+        {
+            moveSpeed = other.moveSpeed;
+            climbSpeed = other.climbSpeed;
+            jumpForce = other.jumpForce;
+            swimSpeed = other.swimSpeed;
+        }
     }
 }
 

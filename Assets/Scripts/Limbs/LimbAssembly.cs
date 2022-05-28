@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Linq;
-
+using System.Collections.Generic;
 
 namespace FictionalOctoDoodle.Core
 {
@@ -80,7 +80,17 @@ namespace FictionalOctoDoodle.Core
 
         public void RecalculateMoveStats(PlayerMoveStats stats)
         {
-            playerMovement.baseStats = stats;
+            var calculated = ScriptableObject.CreateInstance<PlayerMoveStats>();
+            calculated.Copy(stats);
+            var limbs = GetConnectedLimbs();
+            for (int i = 0; i < limbs.Count; i++)
+            {
+                calculated.moveSpeed += limbs[i].moveSpeedModifier;
+                calculated.climbSpeed += limbs[i].climbSpeedModifier;
+                calculated.jumpForce += limbs[i].jumpForceModifier;
+                calculated.swimSpeed += limbs[i].swimSpeedModifier;
+            }
+            playerMovement.baseStats = calculated;
         }
 
         private void LabelBackLimbs(Transform limb)
@@ -117,6 +127,19 @@ namespace FictionalOctoDoodle.Core
                 LimbSlot.FrontArm => frontArm,
                 _ => null
             };
+        }
+
+        private List<LimbData> GetConnectedLimbs()
+        {
+            var list = new List<LimbData>();
+
+            if (torso.limbData) list.Add(torso.limbData);
+            if (frontArm.limbData) list.Add(frontArm.limbData);
+            if (backArm.limbData) list.Add(backArm.limbData);
+            if (frontLeg.limbData) list.Add(frontLeg.limbData);
+            if (backLeg.limbData) list.Add(backLeg.limbData);
+
+            return list;
         }
 
         private void OnDrawGizmosSelected()
