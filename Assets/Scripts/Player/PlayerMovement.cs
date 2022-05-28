@@ -10,26 +10,22 @@ namespace FictionalOctoDoodle.Core
         public bool InWater { get; private set; }
         public bool CanClimb { get; private set; }
 
-        [SerializeField] float moveSpeed;
-        [SerializeField] float climbingSpeed;
-        [SerializeField] float swimSpeed;
-        [SerializeField] float jumpHeight;
+        [field: SerializeField]
+        public PlayerMoveStats baseStats;
 
         [SerializeField] GameObject weapon;
+        [SerializeField] Transform modelRoot;
 
         private Rigidbody2D rb;
         private Animator animator;
         private PlayerState activeState; // states enable & disable actions, and handle updating actions (may want to return that to the player)
-        private LimbAssembly limbAssembly;
         private float distanceToGround;
-
 
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
             animator = GetComponentInChildren<Animator>();
-            limbAssembly = GetComponentInChildren<LimbAssembly>();
             //distanceToGround = GetComponentInChildren<Collider2D>().bounds.extents.y;
             distanceToGround = 100f;
         }
@@ -39,7 +35,6 @@ namespace FictionalOctoDoodle.Core
             Input = new PlayerInputMap();
             Input.Player.Jump.performed += Jump;
             Input.Player.Fire.performed += Attack;
-            limbAssembly.OnLimbConfigChanged += ReloadState;
 
             Input.Player.Move.Enable(); // enabling all actions at startup; states will disable where necessary
             Input.Player.Jump.Enable();
@@ -53,7 +48,6 @@ namespace FictionalOctoDoodle.Core
         {
             Input.Player.Jump.performed -= Jump;
             Input.Player.Fire.performed -= Attack;
-            limbAssembly.OnLimbConfigChanged -= ReloadState;
 
             Input.Player.Move.Disable(); 
             Input.Player.Jump.Disable();
@@ -73,7 +67,7 @@ namespace FictionalOctoDoodle.Core
             ChangeAnimation(newState);
         }
 
-        private void ReloadState()
+        public void ReloadState()
         {
             var state = activeState;
             SetNewState(state);
@@ -81,21 +75,20 @@ namespace FictionalOctoDoodle.Core
 
         public void Move(Vector2 value)
         {
-            var vec = InWater ? value * swimSpeed * Vector2.one : value * new Vector2(moveSpeed, climbingSpeed);
+            var vec = InWater ? value * baseStats.swimSpeed * Vector2.one : value * new Vector2(baseStats.moveSpeed, baseStats.climbSpeed);
             transform.Translate(vec * Time.fixedDeltaTime);
 
             if (value.x != 0f)
             {
-                limbAssembly.FlipModels(value.x > 0f ? 0f : 180f);
+               FlipModels(value.x > 0f ? 0f : 180f);
             }
         }
 
-
-
         public void Jump(InputAction.CallbackContext ctx)
         {
-            rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * baseStats.jumpForce, ForceMode2D.Impulse);
             animator.SetTrigger("jump");
+            Debug.Log("jump");
         }
 
         public void Attack(InputAction.CallbackContext ctx)
@@ -132,6 +125,15 @@ namespace FictionalOctoDoodle.Core
                     animator.SetBool("airborne", true);
                     return;
             }
+        }
+
+        private void FlipModels(float degrees)
+        {
+            modelRoot.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                degrees,
+                transform.eulerAngles.z
+                );
         }
 
         private void OnTriggerStay2D(Collider2D other)

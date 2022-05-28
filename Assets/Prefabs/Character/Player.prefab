@@ -243,11 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930739ee4460ee945b251298d5273090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  climbingSpeed: 3
-  swimSpeed: 2
-  jumpHeight: 6
+  baseStats: {fileID: 11400000, guid: 0ead1d1ae3b4d264c94343879ce08beb, type: 2}
   weapon: {fileID: 0}
+  modelRoot: {fileID: 5439220283369462837}
 --- !u!50 &8347252708069158426
 Rigidbody2D:
   serializedVersion: 4
@@ -316,8 +314,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7059230336057834e8bffb1cee089499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveStats:
+    skullOnly: {fileID: 0}
+    skullTorso: {fileID: 0}
+    skullNeckArm: {fileID: 0}
+    skullNeckLeg: {fileID: 0}
+    torsoOneArm: {fileID: 0}
+    torsoTwoArm: {fileID: 0}
+    torsoOneLeg: {fileID: 0}
+    torsoTwoLeg: {fileID: 0}
+    oneLegOneArm: {fileID: 0}
+    oneLegTwoArm: {fileID: 0}
+    twoLegOneArm: {fileID: 0}
+    fullBody: {fileID: 0}
+  controllers:
+    skullOnly: {fileID: 9100000, guid: 9f9556446e2d0ad4881dee9893d335bd, type: 2}
+    skullTorso: {fileID: 9100000, guid: 3d625015a14d90b4889a8d44ff429720, type: 2}
+    skullNeckArm: {fileID: 0}
+    skullNeckLeg: {fileID: 0}
+    torsoOneArm: {fileID: 9100000, guid: a57e7116e20237d4e9ae4a2199cf8b97, type: 2}
+    torsoTwoArm: {fileID: 9100000, guid: 109ca6a5ccb485c4494234444fdb7893, type: 2}
+    torsoOneLeg: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
+    torsoTwoLeg: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
+    oneLegOneArm: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
+    oneLegTwoArm: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
+    twoLegOneArm: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
+    fullBody: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
+  legCollider: {fileID: 7013678308142364703}
   torso:
-    slotId: 0
+    slotId: 2
     position: {x: 0, y: -4}
     orderInLayer: 0
     limbData: {fileID: 0}
@@ -336,13 +361,13 @@ MonoBehaviour:
     limbObj: {fileID: 0}
   frontArm:
     slotId: 0
-    position: {x: -0.98, y: -1.98}
+    position: {x: -0.53, y: -1.98}
     orderInLayer: 10
     limbData: {fileID: 0}
     limbObj: {fileID: 0}
   backArm:
     slotId: 1
-    position: {x: 0.58, y: -1.98}
+    position: {x: 0.87, y: -1.98}
     orderInLayer: -10
     limbData: {fileID: 0}
     limbObj: {fileID: 0}
@@ -358,20 +383,6 @@ MonoBehaviour:
     orderInLayer: -5
     limbData: {fileID: 0}
     limbObj: {fileID: 0}
-  controllers:
-    skullOnly: {fileID: 9100000, guid: 9f9556446e2d0ad4881dee9893d335bd, type: 2}
-    skullTorso: {fileID: 9100000, guid: 3d625015a14d90b4889a8d44ff429720, type: 2}
-    skullNeckArm: {fileID: 0}
-    skullNeckLeg: {fileID: 0}
-    torsoOneArm: {fileID: 9100000, guid: a57e7116e20237d4e9ae4a2199cf8b97, type: 2}
-    torsoTwoArm: {fileID: 9100000, guid: 109ca6a5ccb485c4494234444fdb7893, type: 2}
-    torsoOneLeg: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
-    torsoTwoLeg: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
-    oneLegOneArm: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
-    oneLegTwoArm: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
-    twoLegOneArm: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
-    fullBody: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
-  legCollider: {fileID: 7013678308142364703}
 --- !u!95 &2486267134551240077
 Animator:
   serializedVersion: 4
