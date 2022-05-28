@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8369662862923334973}
-  - component: {fileID: 8369662862923334914}
+  - component: {fileID: 4071276743364897063}
+  - component: {fileID: 8159891906400250755}
   - component: {fileID: 2127099920197404727}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8369662862923334914
+--- !u!114 &4071276743364897063
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,18 +44,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 8369662862923334915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fb8b5a5147f9e469e0f0796be544f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 75d359cb0e47a844485b98921fe08318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolPath:
-  - {x: 2.42, y: -2.76, z: 0}
-  - {x: 11.03, y: -2.68, z: 0}
-  patrolSpeed: 1
-  chaseSpeed: 0
-  aggroRadius: 3
-  damage: 1
+  damage: 0
   idleTimeOnHit: 0
-  sprite: {fileID: 8369662863538798617}
+  goopBulletPrefab: {fileID: 1470574513733435283, guid: bd8d49e71e3f50f43b60b051fb8833dc, type: 3}
+  goopMinForce: 8
+  goopMaxForce: 12
+  minFireTime: 1
+  maxFireTime: 3
+  minFireAngle: 20
+  maxFireAngle: 160
+--- !u!114 &8159891906400250755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8369662862923334915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c512adf502d9f8e42a76f8c8ead46bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Path>k__BackingField:
+  - {x: -4.654677, y: -1.9456415, z: 0}
+  <Speed>k__BackingField: 0
+  <Randomize>k__BackingField: 0
 --- !u!50 &2127099920197404727
 Rigidbody2D:
   serializedVersion: 4
@@ -63,7 +80,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8369662862923334915}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -75,7 +92,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &8369662863538798622
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +104,7 @@ GameObject:
   - component: {fileID: 8369662863538798619}
   - component: {fileID: 8369662863538798617}
   - component: {fileID: 8369662863538798616}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

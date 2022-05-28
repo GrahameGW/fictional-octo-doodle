@@ -1,31 +1,43 @@
 ﻿using UnityEngine;
 
-public class AIPatrol : IAIBehavior
+namespace FictionalOctoDoodle.Core
 {
-    public float patrolSpeed;
-    public Vector3[] waypoints;
-
-    private Transform transform;
-    private int index = 0;
-
-    public void Initialize(Transform transform)
+    public class AIPatrol : IAIBehavior
     {
-        this.transform = transform;
-    }
+        private Transform transform;
+        private EnemyPatrol patrol;
+        private int index = 0;
 
-    public void Update()
-    {
-        if (waypoints.Length <= 0) return;
-
-        var dir = waypoints[index] - transform.position;
-        dir.Normalize();
-        var speed = patrolSpeed * Time.deltaTime;
-        transform.Translate(speed * dir);
-
-        if (Vector3.Distance(transform.position, waypoints[index]) <= speed)
+        public void Initialize(Transform transform)
         {
-            index = index == waypoints.Length - 1 ? 0 : index + 1;
+            this.transform = transform;
+            patrol = transform.GetComponent<EnemyPatrol>();
+        }
+
+        public void Update()
+        {
+            if (patrol.Path.Length <= 0) return;
+
+            var dest = patrol.Path[index];
+            var dir = dest - transform.position;
+            dir.Normalize();
+
+            var speed = patrol.Speed * Time.deltaTime;
+            transform.Translate(speed * dir);
+
+            if (Vector3.Distance(transform.position, dest) <= speed + 0.05f)
+            {
+                if (patrol.Randomize)
+                {
+                    index = Random.Range(0, patrol.Path.Length - 1);
+                }
+                else
+                {
+                    index = index == patrol.Path.Length - 1 ? 0 : index + 1;
+                }
+            }
         }
     }
 }
+
 
