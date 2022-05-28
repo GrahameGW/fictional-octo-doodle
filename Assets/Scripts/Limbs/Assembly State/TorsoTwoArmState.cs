@@ -9,8 +9,7 @@ namespace FictionalOctoDoodle.Core
             if (!limb.Slots.Contains(LimbSlot.FrontLeg)) return false;
 
             context.AssembleLimb(limb, LimbSlot.FrontLeg);
-            context.ChangeState(new TwoArmOneLegState());
-            context.SetAnimationController(context.controllers.oneLegTwoArm);
+            RefreshAssembly(context.controllers.oneLegTwoArm, context.moveStats.oneLegTwoArm, new TwoArmOneLegState());
             return true;
         }
 
@@ -20,8 +19,7 @@ namespace FictionalOctoDoodle.Core
                 return false;
 
             context.RemoveLimb(limb);
-            context.ChangeState(new TorsoOneArmState());
-            context.SetAnimationController(context.controllers.torsoOneArm);
+            RefreshAssembly(context.controllers.torsoOneArm, context.moveStats.torsoOneArm, new TorsoOneArmState());
             return true;
         }
     }

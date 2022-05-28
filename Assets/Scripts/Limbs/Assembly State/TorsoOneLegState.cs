@@ -12,21 +12,22 @@ namespace FictionalOctoDoodle.Core
 
             LimbAssemblyState state;
             RuntimeAnimatorController ctrl;
+            PlayerMoveStats stats;
 
             if (slot == LimbSlot.BackLeg)
             {
                 state = new TorsoTwoLegState();
                 ctrl = context.controllers.torsoTwoLeg;
+                stats = context.moveStats.torsoTwoLeg;
             }
             else
             {
                 state = new OneArmOneLegState();
                 ctrl = context.controllers.oneLegOneArm;
+                stats = context.moveStats.oneLegOneArm;
             }
 
-            context.AssembleLimb(limb, slot);
-            context.ChangeState(state);
-            context.SetAnimationController(ctrl);
+            RefreshAssembly(ctrl, stats, state);
             return true;
         }
 
@@ -35,8 +36,7 @@ namespace FictionalOctoDoodle.Core
             if (limb != LimbSlot.FrontLeg) return false;
 
             context.RemoveLimb(limb);
-            context.ChangeState(new SkullAndTorsoState());
-            context.SetAnimationController(context.controllers.skullTorso);
+            RefreshAssembly(context.controllers.skullTorso, context.moveStats.skullTorso, new SkullAndTorsoState());
             return true;
         }
     }

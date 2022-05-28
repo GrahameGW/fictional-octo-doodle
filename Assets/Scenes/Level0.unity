@@ -1707,6 +1707,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
+      propertyPath: moveStats.fullBody
+      value: 
+      objectReference: {fileID: 11400000, guid: d3d1847666939504a9cb4ce6f1b897d2, type: 2}
+    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
+      propertyPath: moveStats.skullOnly
+      value: 
+      objectReference: {fileID: 11400000, guid: 0ead1d1ae3b4d264c94343879ce08beb, type: 2}
+    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
+      propertyPath: moveStats.skullTorso
+      value: 
+      objectReference: {fileID: 11400000, guid: 7a098cd817844754c9a36c6a8d478e4d, type: 2}
+    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
+      propertyPath: moveStats.torsoOneArm
+      value: 
+      objectReference: {fileID: 11400000, guid: 3fa507925197bd84c9fc069e700a3479, type: 2}
+    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
+      propertyPath: moveStats.torsoOneLeg
+      value: 
+      objectReference: {fileID: 11400000, guid: 2024984ceb2a3194bac2ecf12c3ca983, type: 2}
+    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
+      propertyPath: moveStats.torsoTwoArm
+      value: 
+      objectReference: {fileID: 11400000, guid: 4406b646884eddb4296a314e0b3b951e, type: 2}
+    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
+      propertyPath: moveStats.torsoTwoLeg
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e01a6fed48de1543b0023dd3b487a08, type: 2}
+    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
+      propertyPath: moveStats.oneLegOneArm
+      value: 
+      objectReference: {fileID: 11400000, guid: 54b20f8b0970768429a73860609f4898, type: 2}
+    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
+      propertyPath: moveStats.oneLegTwoArm
+      value: 
+      objectReference: {fileID: 11400000, guid: 54d643954ea4a594aa7905c5b8359932, type: 2}
+    - target: {fileID: 7601654688620746731, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
+      propertyPath: moveStats.twoLegOneArm
+      value: 
+      objectReference: {fileID: 11400000, guid: 14723be00fc73cb4199502fa4d793123, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
 --- !u!1 &1703703041

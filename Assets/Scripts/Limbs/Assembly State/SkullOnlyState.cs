@@ -10,8 +10,7 @@ namespace FictionalOctoDoodle.Core
             if (limb.Slots.Contains(LimbSlot.Torso))
             {
                 context.AssembleLimb(limb, LimbSlot.Torso);
-                context.ChangeState(new SkullAndTorsoState());
-                context.SetAnimationController(context.controllers.skullTorso);
+                RefreshAssembly(context.controllers.skullTorso, context.moveStats.skullTorso, new SkullAndTorsoState());
                 return true;
             }
 

@@ -1,4 +1,6 @@
-﻿namespace FictionalOctoDoodle.Core
+﻿using UnityEngine;
+
+namespace FictionalOctoDoodle.Core
 {
     public abstract class LimbAssemblyState
     {
@@ -12,6 +14,13 @@
             this.context = context;
         }
         public virtual void ExitState() { }
+
+        protected void RefreshAssembly(RuntimeAnimatorController ctrl, PlayerMoveStats stats, LimbAssemblyState state)
+        {
+            context.SetAnimationController(ctrl);
+            context.RecalculateMoveStats(stats);
+            context.ChangeState(state);
+        }
     }
 
 

@@ -10,8 +10,6 @@ namespace FictionalOctoDoodle.Core
         public BaseAssemblyMoveStats moveStats;
         public LimbAnimationControllers controllers;
 
-        [SerializeField] Collider2D legCollider;
-
         [SerializeField] LimbConnector torso;
         [SerializeField] LimbConnector neckArm;
         [SerializeField] LimbConnector neckLeg;
@@ -19,6 +17,8 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] LimbConnector backArm;
         [SerializeField] LimbConnector frontLeg;
         [SerializeField] LimbConnector backLeg;
+
+        [SerializeField] Collider2D legCollider;
 
         private Animator animator;
         private LimbAssemblyState state;
@@ -70,11 +70,17 @@ namespace FictionalOctoDoodle.Core
             state = newState;
             state.EnterState(this);
         }
+
         public void SetAnimationController(RuntimeAnimatorController controller)
         {
             animator.runtimeAnimatorController = null;
             animator.runtimeAnimatorController = controller;
             playerMovement.ReloadState();
+        }
+
+        public void RecalculateMoveStats(PlayerMoveStats stats)
+        {
+            playerMovement.baseStats = stats;
         }
 
         private void LabelBackLimbs(Transform limb)
