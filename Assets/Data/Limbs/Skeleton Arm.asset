@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 2718219048854149445, guid: aedf199a81d57e141b93f33b494d8c00, type: 3}
   <Slots>k__BackingField: 0000000001000000
-  <HudSprite>k__BackingField: {fileID: 0}
+  <Token>k__BackingField: {fileID: 4916448085009607055, guid: 89e30d186f216d548b3cb8712c329f37, type: 3}
+  moveSpeedModifier: 0
+  climbSpeedModifier: 0
+  swimSpeedModifier: 0
+  jumpForceModifier: 0

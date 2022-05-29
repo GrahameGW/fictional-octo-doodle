@@ -38,9 +38,14 @@ namespace FictionalOctoDoodle.Core
             return state.AddLimb(limb);
         }
 
-        public void RemoveLimb(LimbSlot limb)
+        public void RemoveLimb(LimbSlot limb, bool spawnCollectable)
         {
-            GetSlotById(limb).ClearLoadedLimb();
+            var slot = GetSlotById(limb);
+            if (spawnCollectable)
+            {
+                Instantiate(slot.limbData.Token, transform.position, Quaternion.identity);
+            }
+            slot.ClearLoadedLimb();
         }
 
         public void AssembleLimb(LimbData limb, LimbSlot slotId)
@@ -78,6 +83,7 @@ namespace FictionalOctoDoodle.Core
         {
             animator.runtimeAnimatorController = null;
             animator.runtimeAnimatorController = controller;
+
             playerMovement.ReloadState();
         }
 

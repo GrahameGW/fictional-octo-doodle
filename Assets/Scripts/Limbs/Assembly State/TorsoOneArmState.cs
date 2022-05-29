@@ -7,8 +7,19 @@ namespace FictionalOctoDoodle.Core
     {
         public override bool AddLimb(LimbData limb)
         {
-            if (!limb.Slots.Any(s => s != LimbSlot.Torso || s != LimbSlot.FrontArm)) return false;
-            var slot = limb.Slots.First(s => s == LimbSlot.FrontLeg || s == LimbSlot.BackArm);
+            LimbSlot slot;
+
+            if (!limb.Slots.Any(s => s != LimbSlot.Torso && s != LimbSlot.FrontArm))
+            {
+                slot = limb.Slots[Random.Range(0, limb.Slots.Length)];
+
+                context.RemoveLimb(slot, true);
+                context.AssembleLimb(limb, slot);
+                RefreshAssembly(context.controllers.torsoOneArm, context.moveStats.torsoOneArm, this);
+                return true;
+            }
+
+            slot = limb.Slots.First(s => s == LimbSlot.FrontLeg || s == LimbSlot.BackArm);
 
             LimbAssemblyState state;
             RuntimeAnimatorController ctrl;
@@ -34,7 +45,7 @@ namespace FictionalOctoDoodle.Core
         {
             if (limb != LimbSlot.FrontArm) return false;
 
-            context.RemoveLimb(limb);
+            context.RemoveLimb(limb, true);
             context.ChangeState(new SkullAndTorsoState());
             context.SetAnimationController(context.controllers.skullTorso);
             return true;

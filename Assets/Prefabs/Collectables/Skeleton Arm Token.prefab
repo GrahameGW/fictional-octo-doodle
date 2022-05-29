@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2879565286639799925}
   - component: {fileID: 1640483413562604262}
   - component: {fileID: 876246842908340200}
+  - component: {fileID: 6572050086886470122}
   m_Layer: 0
   m_Name: Skeleton Arm Token
   m_TagString: Untagged
@@ -49,6 +50,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   limbData: {fileID: 11400000, guid: 4efd742c4de552747a6e3d5ab47669df, type: 2}
   sounds: {fileID: 11400000, guid: be75dd9e425580a4594b3901088ab9fa, type: 2}
+  minFireForce: 5
+  maxFireForce: 10
+  minFireAngle: 39
+  maxFireAngle: 150
+  hoverHeight: 2.25
 --- !u!212 &2879565286639799925
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -213,3 +219,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &6572050086886470122
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916448085009607055}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

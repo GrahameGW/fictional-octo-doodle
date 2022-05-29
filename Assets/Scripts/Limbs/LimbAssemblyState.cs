@@ -22,6 +22,4 @@ namespace FictionalOctoDoodle.Core
             context.ChangeState(state);
         }
     }
-
-
 }

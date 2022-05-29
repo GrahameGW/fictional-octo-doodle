@@ -7,7 +7,15 @@ namespace FictionalOctoDoodle.Core
     {
         public override bool AddLimb(LimbData limb)
         {
-            if (!limb.Slots.Any(s => s != LimbSlot.Torso)) return false;
+            if (!limb.Slots.Any(s => s != LimbSlot.Torso))
+            {
+                context.RemoveLimb(LimbSlot.Torso, true);
+                context.AssembleLimb(limb, LimbSlot.Torso);
+                RefreshAssembly(context.controllers.skullTorso, context.moveStats.skullTorso, this);
+                return true;
+
+            }
+
             var slot = limb.Slots.First(s => s != LimbSlot.Torso);
 
             LimbAssemblyState state;
@@ -36,7 +44,7 @@ namespace FictionalOctoDoodle.Core
         {
             if (limb != LimbSlot.Torso) return false;
 
-            context.RemoveLimb(limb);
+            context.RemoveLimb(limb, true);
             RefreshAssembly(context.controllers.skullOnly, context.moveStats.skullOnly, new SkullOnlyState());
             return true;
         }
