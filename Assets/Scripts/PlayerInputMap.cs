@@ -298,6 +298,28 @@ namespace FictionalOctoDoodle.Core
                 },
                 {
                     ""name"": """",
+                    ""id"": ""fc8ac420-3aaa-462d-83ea-a265dcc7dd41"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a1bfed7-97e7-473d-8cb8-ce82d7658a7d"",
+                    ""path"": ""<XInputController>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""ca5a3e3e-227b-42f3-87e3-684650574c03"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -309,8 +331,41 @@ namespace FictionalOctoDoodle.Core
                 },
                 {
                     ""name"": """",
+                    ""id"": ""fd0ef532-2c33-4a4b-9a06-5c56acf6925d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61018be3-8982-41f9-9fd8-4b3a84de7a87"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""56613d3a-22ce-4591-8cde-d6ee8f24a3f0"",
                     ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3093260-6f09-4ad3-ba5d-4fe4b1b5344f"",
+                    ""path"": ""<XInputController>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -410,6 +465,15 @@ namespace FictionalOctoDoodle.Core
                     ""type"": ""PassThrough"",
                     ""id"": ""2e1df11f-0a84-4545-a46b-583d0c1b78da"",
                     ""expectedControlType"": ""Quaternion"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LoadMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""85cf88e5-2d9f-482e-95c1-b1b6d60408ee"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -833,6 +897,39 @@ namespace FictionalOctoDoodle.Core
                     ""action"": ""TrackedDeviceOrientation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69adf16c-bead-4014-b305-6cb0fa882c1e"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LoadMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f873465-24ad-4b5c-8036-6ab51aabc36b"",
+                    ""path"": ""<XInputController>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LoadMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eeaba74e-7dbe-4163-a82a-bd7936fa19ec"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LoadMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -919,6 +1016,7 @@ namespace FictionalOctoDoodle.Core
             m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
             m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
             m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+            m_UI_LoadMenu = m_UI.FindAction("LoadMenu", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -1053,6 +1151,7 @@ namespace FictionalOctoDoodle.Core
         private readonly InputAction m_UI_RightClick;
         private readonly InputAction m_UI_TrackedDevicePosition;
         private readonly InputAction m_UI_TrackedDeviceOrientation;
+        private readonly InputAction m_UI_LoadMenu;
         public struct UIActions
         {
             private @PlayerInputMap m_Wrapper;
@@ -1067,6 +1166,7 @@ namespace FictionalOctoDoodle.Core
             public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
             public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
             public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+            public InputAction @LoadMenu => m_Wrapper.m_UI_LoadMenu;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1106,6 +1206,9 @@ namespace FictionalOctoDoodle.Core
                     @TrackedDeviceOrientation.started -= m_Wrapper.m_UIActionsCallbackInterface.OnTrackedDeviceOrientation;
                     @TrackedDeviceOrientation.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnTrackedDeviceOrientation;
                     @TrackedDeviceOrientation.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnTrackedDeviceOrientation;
+                    @LoadMenu.started -= m_Wrapper.m_UIActionsCallbackInterface.OnLoadMenu;
+                    @LoadMenu.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnLoadMenu;
+                    @LoadMenu.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnLoadMenu;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
@@ -1140,6 +1243,9 @@ namespace FictionalOctoDoodle.Core
                     @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
                     @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
                     @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
+                    @LoadMenu.started += instance.OnLoadMenu;
+                    @LoadMenu.performed += instance.OnLoadMenu;
+                    @LoadMenu.canceled += instance.OnLoadMenu;
                 }
             }
         }
@@ -1209,6 +1315,7 @@ namespace FictionalOctoDoodle.Core
             void OnRightClick(InputAction.CallbackContext context);
             void OnTrackedDevicePosition(InputAction.CallbackContext context);
             void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+            void OnLoadMenu(InputAction.CallbackContext context);
         }
     }
 }

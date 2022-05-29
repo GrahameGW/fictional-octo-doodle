@@ -14,14 +14,14 @@ namespace FictionalOctoDoodle.Core
         private void OnEnable()
         {
             input = new PlayerInputMap();
-            input.UI.Cancel.performed += TogglePause;
-            input.UI.Cancel.Enable();
+            input.UI.LoadMenu.performed += TogglePause;
+            input.UI.LoadMenu.Enable();
         }
 
         private void OnDisable()
         {
-            input.UI.Cancel.performed -= TogglePause;
-            input.UI.Cancel.Disable();
+            input.UI.LoadMenu.performed -= TogglePause;
+            input.UI.LoadMenu.Disable();
         }
 
 

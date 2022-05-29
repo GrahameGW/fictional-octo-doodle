@@ -453,6 +453,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 8369662862923334915, guid: 3f47b4002bc3ead48a6f39d8c7ed4a16, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8369662862923334973, guid: 3f47b4002bc3ead48a6f39d8c7ed4a16, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -558,6 +562,10 @@ PrefabInstance:
     - target: {fileID: 6370055256943242567, guid: c7a9f74e206141f42b23cf21ee383db7, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7051846004665495834, guid: c7a9f74e206141f42b23cf21ee383db7, type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7052365584556606484, guid: c7a9f74e206141f42b23cf21ee383db7, type: 3}
       propertyPath: m_Name
@@ -674,6 +682,10 @@ PrefabInstance:
     - target: {fileID: 4100580702844323940, guid: 99a2bcf2953001549b2b2de56f996fbf, type: 3}
       propertyPath: m_Name
       value: EvilEye
+      objectReference: {fileID: 0}
+    - target: {fileID: 4100580702844323940, guid: 99a2bcf2953001549b2b2de56f996fbf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4100580702844323946, guid: 99a2bcf2953001549b2b2de56f996fbf, type: 3}
       propertyPath: m_RootOrder
