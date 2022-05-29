@@ -49,7 +49,11 @@ namespace FictionalOctoDoodle.Core
 
         public void Damage(int dmg)
         {
-            Debug.Log($"Killed {name}!");
+            GetComponent<Rigidbody2D>().simulated = false;
+            foreach (Collider2D c in GetComponentsInChildren<Collider2D>())
+            {
+                c.enabled = false;
+            }
             Destroy(gameObject);
         }
 

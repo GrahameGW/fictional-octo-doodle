@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,16 +10,15 @@ namespace FictionalOctoDoodle.Core
         public PlayerInputMap Input { get; private set; }
         public bool InWater { get; private set; }
         public bool CanClimb { get; private set; }
+        public PlayerState ActiveState { get; private set; } // states enable & disable actions, and handle updating actions (may want to return that to the player)
 
-        [field: SerializeField]
         public PlayerMoveStats baseStats;
-
-        [SerializeField] GameObject weapon;
+        public Action OnStateChanged;
+          
         [SerializeField] Transform modelRoot;
 
         private Rigidbody2D rb;
         private Animator animator;
-        private PlayerState activeState; // states enable & disable actions, and handle updating actions (may want to return that to the player)
         private float distanceToGround;
 
 
@@ -56,20 +56,21 @@ namespace FictionalOctoDoodle.Core
 
         private void FixedUpdate()
         {
-            activeState.Update();
+            ActiveState.Update();
         }
 
         public void SetNewState(PlayerState newState)
         {
-            activeState?.ExitState();
-            activeState = newState;
+            ActiveState?.ExitState();
+            ActiveState = newState;
             newState.EnterState(this);
             ChangeAnimation(newState);
+            OnStateChanged?.Invoke();
         }
 
         public void ReloadState()
         {
-            var state = activeState;
+            var state = ActiveState;
             SetNewState(state);
         }
 
@@ -93,7 +94,7 @@ namespace FictionalOctoDoodle.Core
 
         public void Attack(InputAction.CallbackContext ctx)
         {
-           // weapon.SetActive(true);
+            SetNewState(new AttackingState());
         }
 
         public bool IsGrounded()
@@ -124,6 +125,9 @@ namespace FictionalOctoDoodle.Core
                 case PlayerStateID.Airborne:
                     animator.SetBool("airborne", true);
                     return;
+                case PlayerStateID.Attacking:
+                    animator.SetTrigger("attack");
+                    return;
             }
         }
 
@@ -136,6 +140,15 @@ namespace FictionalOctoDoodle.Core
                 );
         }
 
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.layer != LayerMask.NameToLayer("Enemy")) return;
+            if (!(ActiveState is AttackingState)) return;
+
+            var damageable = collision.gameObject.GetComponentInParent<IDamageable>();
+            damageable.Damage(100); // currently all enemies are one-hit kill
+
+        }
         private void OnTriggerStay2D(Collider2D other)
         {
             if (!CanClimb)
