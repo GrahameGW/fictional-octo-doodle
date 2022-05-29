@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace FictionalOctoDoodle.Core
 {
@@ -43,7 +44,7 @@ namespace FictionalOctoDoodle.Core
             var slot = GetSlotById(limb);
             if (spawnCollectable)
             {
-                Instantiate(slot.limbData.Token, transform.position, Quaternion.identity);
+                Instantiate(slot.limbData.Token, transform.position + new Vector3(0f, 3f, 0f), Quaternion.identity);
             }
             slot.ClearLoadedLimb();
         }
@@ -81,9 +82,17 @@ namespace FictionalOctoDoodle.Core
 
         public void SetAnimationController(RuntimeAnimatorController controller)
         {
+            var acParams = animator.parameters;
             animator.runtimeAnimatorController = null;
             animator.runtimeAnimatorController = controller;
 
+            StartCoroutine(RebindAnimator(acParams));
+        }
+
+        private IEnumerator RebindAnimator(AnimatorControllerParameter[] acParams)
+        {
+            yield return null;
+            animator.Rebind();
             playerMovement.ReloadState();
         }
 

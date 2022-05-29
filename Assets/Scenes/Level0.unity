@@ -3306,6 +3306,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 100229756907067330, guid: 3ee91d9a7091c5f409eeeacf9be78291, type: 3}
+      propertyPath: maxFireForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 100229756907067330, guid: 3ee91d9a7091c5f409eeeacf9be78291, type: 3}
+      propertyPath: minFireAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 100229756907067330, guid: 3ee91d9a7091c5f409eeeacf9be78291, type: 3}
+      propertyPath: minFireForce
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 100229756907067331, guid: 3ee91d9a7091c5f409eeeacf9be78291, type: 3}
       propertyPath: m_RootOrder
       value: 14
