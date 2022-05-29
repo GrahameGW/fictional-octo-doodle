@@ -16,14 +16,17 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] float minFireAngle, maxFireAngle;
 
         [SerializeField] Transform modelRoot;
+        [SerializeField] SoundRandomizer sounds;
 
         private IAIBehavior activeBehavior;
         private Animator animator;
+        private AudioSource audioSource;
 
 
         void Start()
         {
             animator = GetComponent<Animator>();
+            audioSource = GetComponent<AudioSource>();
             StartCoroutine(FireGoopRoutine());
             ResumePatrol();
         }
@@ -39,6 +42,7 @@ namespace FictionalOctoDoodle.Core
         {
             animator.SetTrigger("die");
             GetComponent<Rigidbody2D>().simulated = false;
+            activeBehavior = new AIIdle(float.PositiveInfinity, null);
             foreach (Collider2D c in GetComponentsInChildren<Collider2D>())
             {
                 c.enabled = false;
@@ -68,6 +72,7 @@ namespace FictionalOctoDoodle.Core
                     FireGoop();
                     elapsed = 0f;
                     timeToNextShot = Random.Range(minFireTime, maxFireTime);
+                    audioSource.PlayOneShot(sounds.GetClip());
                 }
                 else
                 {

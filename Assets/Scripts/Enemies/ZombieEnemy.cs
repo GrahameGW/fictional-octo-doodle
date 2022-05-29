@@ -99,6 +99,7 @@ namespace FictionalOctoDoodle.Core
         {
             animator.SetTrigger("die");
             GetComponent<Rigidbody2D>().simulated = false;
+            activeBehavior = new AIIdle(float.PositiveInfinity, null);
             foreach (Collider2D c in GetComponentsInChildren<Collider2D>())
             {
                 c.enabled = false;
