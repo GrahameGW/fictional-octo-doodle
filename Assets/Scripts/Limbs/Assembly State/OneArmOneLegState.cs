@@ -43,7 +43,7 @@ namespace FictionalOctoDoodle.Core
             return true;
         }
 
-        public override bool RemoveLimb(LimbSlot limb)
+        public override bool RemoveLimb(LimbSlot limb, bool spawnCollectable)
         {
             if (limb == LimbSlot.Torso) return false;
 
@@ -63,7 +63,7 @@ namespace FictionalOctoDoodle.Core
                 ctrl = context.controllers.torsoOneArm;
                 stats = context.moveStats.torsoOneArm;
             }
-            context.RemoveLimb(limb, true);
+            context.RemoveLimb(limb, spawnCollectable);
             RefreshAssembly(ctrl, stats, state);
             return true;
         }

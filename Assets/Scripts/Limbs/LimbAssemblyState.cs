@@ -7,7 +7,7 @@ namespace FictionalOctoDoodle.Core
         protected LimbAssembly context;
         
         public abstract bool AddLimb(LimbData limb);
-        public abstract bool RemoveLimb(LimbSlot limb);
+        public abstract bool RemoveLimb(LimbSlot limb, bool spawnCollectable = true);
 
         public virtual void EnterState(LimbAssembly context) 
         {
@@ -15,7 +15,7 @@ namespace FictionalOctoDoodle.Core
         }
         public virtual void ExitState() { }
 
-        protected void RefreshAssembly(RuntimeAnimatorController ctrl, PlayerMoveStats stats, LimbAssemblyState state)
+        public void RefreshAssembly(RuntimeAnimatorController ctrl, PlayerMoveStats stats, LimbAssemblyState state)
         {
             context.SetAnimationController(ctrl);
             context.RecalculateMoveStats(stats);

@@ -48,11 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0fc055353c3064485a749b3c56f706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Persists>k__BackingField: 1
   limbData: {fileID: 11400000, guid: 5e7184ef75869774ab32bbb7d5b5cf15, type: 2}
   sounds: {fileID: 11400000, guid: be75dd9e425580a4594b3901088ab9fa, type: 2}
-  minFireForce: 5
-  maxFireForce: 10
-  minFireAngle: 30
+  minFireForce: 10
+  maxFireForce: 20
+  minFireAngle: 45
   maxFireAngle: 150
   hoverHeight: 2.5
 --- !u!212 &7109187433212489791

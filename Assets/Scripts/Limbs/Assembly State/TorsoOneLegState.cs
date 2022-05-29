@@ -43,11 +43,11 @@ namespace FictionalOctoDoodle.Core
             return true;
         }
 
-        public override bool RemoveLimb(LimbSlot limb)
+        public override bool RemoveLimb(LimbSlot limb, bool spawnCollectable)
         {
             if (limb != LimbSlot.FrontLeg) return false;
 
-            context.RemoveLimb(limb, true);
+            context.RemoveLimb(limb, spawnCollectable);
             RefreshAssembly(context.controllers.skullTorso, context.moveStats.skullTorso, new SkullAndTorsoState());
             return true;
         }

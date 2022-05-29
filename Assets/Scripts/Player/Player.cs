@@ -9,11 +9,15 @@ namespace FictionalOctoDoodle.Core
         public Action OnPlayerDeath;
         [SerializeField] PlayerData data;
         [SerializeField] SoundRandomizer sounds;
-        
+        [SerializeField] float invincibleOnHitTime;
+
         private Animator animator;
         private AudioSource audioSource;
         private PlayerMovement movement;
         private LimbAssembly assembly;
+
+        private bool invincible = false;
+        private float invincibleTimeElapsed;
 
 
         private void Awake()
@@ -24,9 +28,6 @@ namespace FictionalOctoDoodle.Core
             movement = GetComponent<PlayerMovement>();
             data.HP = data.MaxHP;
             Debug.Log($"Loaded combat module. Player HP set to Max HP ({data})");
-#if UNITY_EDITOR
-            HP = data.HP;
-#endif
 
             if (data.activePlayerObject != null)
             {
@@ -35,6 +36,15 @@ namespace FictionalOctoDoodle.Core
 
             data.activePlayerObject = this;
             Debug.Log("New player spawned at " + transform.position.ToString());
+        }
+
+        private void Update()
+        {
+            if (invincible)
+            {
+                invincibleTimeElapsed += Time.deltaTime;
+                invincible = invincibleTimeElapsed < invincibleOnHitTime;
+            }
         }
 
         private void OnEnable()
@@ -48,20 +58,18 @@ namespace FictionalOctoDoodle.Core
 
         public void Damage(int damage)
         {
-            if (movement.ActiveState is AttackingState) return;
-
-            data.HP -= damage;
+            if (invincible || movement.ActiveState is AttackingState) return;
+            assembly.LoseRandomLimb(out bool wasSkull);
             animator.SetTrigger("damaged");
-            if (data.HP <= 0)
+            invincible = true;
+            invincibleTimeElapsed = 0f;
+
+            if (wasSkull)
             {
-                data.HP = 0;
-                Debug.Log("Died!");
-                OnPlayerDeath?.Invoke();
-                Destroy(gameObject);
+                invincibleOnHitTime = int.MaxValue;
+                Destroy(movement);
+                StartCoroutine(DeathRoutine());
             }
-#if UNITY_EDITOR
-            HP = data.HP;
-#endif
         }
 
         private void MoveStateChangedHandler()
@@ -85,12 +93,12 @@ namespace FictionalOctoDoodle.Core
             audioSource.PlayOneShot(sounds.GetClip());
         }
 
-
-#if UNITY_EDITOR
-        // just to make debug easier
-        [DisplayOnly]
-        [SerializeField] int HP;
-#endif
+        private IEnumerator DeathRoutine()
+        {
+            yield return null;
+            Debug.Log("You died!");
+            Destroy(gameObject);
+        }
 
     }
 }

@@ -36,7 +36,7 @@ namespace FictionalOctoDoodle.Core
             var pos = transform.position;
             activeBehavior.Update();
 
-            if (playerData == null || activeBehavior is AIIdle || attacking)
+            if (playerData.activePlayerObject == null || activeBehavior is AIIdle || attacking)
             {
                 return;
             }

@@ -18,7 +18,7 @@ namespace FictionalOctoDoodle.Core
             return false;
         }
 
-        public override bool RemoveLimb(LimbSlot limb)
+        public override bool RemoveLimb(LimbSlot limb, bool spawnCollectable)
         {
             Debug.Log("Skull is base state, can't remove any limbs!");
             return false;

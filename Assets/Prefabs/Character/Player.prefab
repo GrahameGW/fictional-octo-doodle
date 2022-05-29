@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 7303970720925777073}
   - component: {fileID: 5701133981869174361}
   - component: {fileID: 8347252708069158426}
+  - component: {fileID: 1669569334}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -230,7 +231,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 9a0b721c40d1ee845b4155bcf2cb7cb8, type: 2}
-  HP: 0
+  sounds: {fileID: 11400000, guid: 7eb9ce86e11b63247864fdff2ae3d290, type: 2}
+  invincibleOnHitTime: 0.5
 --- !u!114 &5701133981869174361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +246,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats: {fileID: 11400000, guid: 0ead1d1ae3b4d264c94343879ce08beb, type: 2}
-  weapon: {fileID: 0}
   modelRoot: {fileID: 5439220283369462837}
 --- !u!50 &8347252708069158426
 Rigidbody2D:
@@ -267,6 +268,102 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!82 &1669569334
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644053907746860079}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2779332847174060377
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,18 +412,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveStats:
-    skullOnly: {fileID: 0}
-    skullTorso: {fileID: 0}
+    skullOnly: {fileID: 11400000, guid: 0ead1d1ae3b4d264c94343879ce08beb, type: 2}
+    skullTorso: {fileID: 11400000, guid: 7a098cd817844754c9a36c6a8d478e4d, type: 2}
     skullNeckArm: {fileID: 0}
     skullNeckLeg: {fileID: 0}
-    torsoOneArm: {fileID: 0}
-    torsoTwoArm: {fileID: 0}
-    torsoOneLeg: {fileID: 0}
-    torsoTwoLeg: {fileID: 0}
-    oneLegOneArm: {fileID: 0}
-    oneLegTwoArm: {fileID: 0}
-    twoLegOneArm: {fileID: 0}
-    fullBody: {fileID: 0}
+    torsoOneArm: {fileID: 11400000, guid: 3fa507925197bd84c9fc069e700a3479, type: 2}
+    torsoTwoArm: {fileID: 11400000, guid: 4406b646884eddb4296a314e0b3b951e, type: 2}
+    torsoOneLeg: {fileID: 11400000, guid: 2024984ceb2a3194bac2ecf12c3ca983, type: 2}
+    torsoTwoLeg: {fileID: 11400000, guid: 3e01a6fed48de1543b0023dd3b487a08, type: 2}
+    oneLegOneArm: {fileID: 11400000, guid: 54b20f8b0970768429a73860609f4898, type: 2}
+    oneLegTwoArm: {fileID: 11400000, guid: 54d643954ea4a594aa7905c5b8359932, type: 2}
+    twoLegOneArm: {fileID: 11400000, guid: 14723be00fc73cb4199502fa4d793123, type: 2}
+    fullBody: {fileID: 11400000, guid: d3d1847666939504a9cb4ce6f1b897d2, type: 2}
   controllers:
     skullOnly: {fileID: 9100000, guid: 9f9556446e2d0ad4881dee9893d335bd, type: 2}
     skullTorso: {fileID: 9100000, guid: 3d625015a14d90b4889a8d44ff429720, type: 2}
@@ -340,7 +437,6 @@ MonoBehaviour:
     oneLegTwoArm: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
     twoLegOneArm: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
     fullBody: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
-  legCollider: {fileID: 7013678308142364703}
   torso:
     slotId: 2
     position: {x: 0, y: -4}
@@ -383,6 +479,7 @@ MonoBehaviour:
     orderInLayer: -5
     limbData: {fileID: 0}
     limbObj: {fileID: 0}
+  legCollider: {fileID: 7013678308142364703}
 --- !u!95 &2486267134551240077
 Animator:
   serializedVersion: 4
@@ -393,7 +490,7 @@ Animator:
   m_GameObject: {fileID: 2779332847174060377}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9f9556446e2d0ad4881dee9893d335bd, type: 2}
+  m_Controller: {fileID: 9100000, guid: a57e7116e20237d4e9ae4a2199cf8b97, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

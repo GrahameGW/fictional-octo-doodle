@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 namespace FictionalOctoDoodle.Core
 {
@@ -42,11 +43,15 @@ namespace FictionalOctoDoodle.Core
         public void RemoveLimb(LimbSlot limb, bool spawnCollectable)
         {
             var slot = GetSlotById(limb);
-            if (spawnCollectable)
-            {
-                Instantiate(slot.limbData.Token, transform.position + new Vector3(0f, 3f, 0f), Quaternion.identity);
-            }
+            var removed = Instantiate(slot.limbData.Token, transform.position + new Vector3(0f, 3f, 0f), Quaternion.identity)
+                .GetComponent<LimbCollectable>();
+            removed.Persists = spawnCollectable;
             slot.ClearLoadedLimb();
+
+            if (limb == LimbSlot.FrontLeg)
+            {
+                legCollider.enabled = false;
+            }
         }
 
         public void AssembleLimb(LimbData limb, LimbSlot slotId)
@@ -71,6 +76,11 @@ namespace FictionalOctoDoodle.Core
             ArmCount = 0;
             ArmCount += frontArm.limbData != null ? 1 : 0;
             ArmCount += backArm.limbData != null ? 1 : 0;
+
+            if (slot.slotId == LimbSlot.Torso || slot.slotId == LimbSlot.FrontLeg)
+            {
+                transform.parent.Translate(Vector2.up);
+            }
         }
 
         public void ChangeState(LimbAssemblyState newState)
@@ -89,6 +99,28 @@ namespace FictionalOctoDoodle.Core
             StartCoroutine(RebindAnimator(acParams));
         }
 
+        public void LoseRandomLimb(out bool limbWasSkull)
+        {
+            var limbs = GetFilledLimbSlots();
+
+            limbWasSkull = limbs.Count == 0;
+            if (limbWasSkull) return;
+
+            if (limbs.Count == 1)
+            {
+                state.RemoveLimb(LimbSlot.Torso, false);
+            }
+
+            var back = limbs.FirstOrDefault(l => l == LimbSlot.BackArm || l == LimbSlot.BackLeg);
+            if (back != default) // default limbslot is FrontArm
+            {
+                state.RemoveLimb(back, false);
+            }
+            else
+            {
+                state.RemoveLimb(limbs.First(l => l == LimbSlot.FrontArm || l == LimbSlot.FrontLeg), false);
+            }
+        }
         private IEnumerator RebindAnimator(AnimatorControllerParameter[] acParams)
         {
             yield return null;
@@ -161,6 +193,19 @@ namespace FictionalOctoDoodle.Core
             if (backArm.limbData) list.Add(backArm.limbData);
             if (frontLeg.limbData) list.Add(frontLeg.limbData);
             if (backLeg.limbData) list.Add(backLeg.limbData);
+
+            return list;
+        }
+
+        private List<LimbSlot> GetFilledLimbSlots()
+        {
+            var list = new List<LimbSlot>();
+
+            if (torso.limbData) list.Add(LimbSlot.Torso);
+            if (frontArm.limbData) list.Add(LimbSlot.FrontArm);
+            if (backArm.limbData) list.Add(LimbSlot.BackArm);
+            if (frontLeg.limbData) list.Add(LimbSlot.FrontLeg);
+            if (backLeg.limbData) list.Add(LimbSlot.BackLeg);
 
             return list;
         }

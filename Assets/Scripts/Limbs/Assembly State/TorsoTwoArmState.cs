@@ -24,12 +24,12 @@ namespace FictionalOctoDoodle.Core
             return true;
         }
 
-        public override bool RemoveLimb(LimbSlot limb)
+        public override bool RemoveLimb(LimbSlot limb, bool spawnCollectable)
         {
             if (limb != LimbSlot.FrontArm && limb != LimbSlot.BackArm)
                 return false;
 
-            context.RemoveLimb(limb, true);
+            context.RemoveLimb(limb, spawnCollectable);
             RefreshAssembly(context.controllers.torsoOneArm, context.moveStats.torsoOneArm, new TorsoOneArmState());
             return true;
         }

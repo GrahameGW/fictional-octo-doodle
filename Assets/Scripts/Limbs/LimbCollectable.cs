@@ -6,6 +6,9 @@ namespace FictionalOctoDoodle.Core
 {
     public class LimbCollectable : MonoBehaviour
     {
+        [field: SerializeField]
+        public bool Persists { get; set; }
+        
         [SerializeField] LimbData limbData;
         [SerializeField] SoundRandomizer sounds;
         [Min(0f)]
@@ -54,6 +57,12 @@ namespace FictionalOctoDoodle.Core
             
             if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
+                if (!Persists)
+                {
+                    Destroy(gameObject);
+                    return;
+                }
+                
                 canCollect = true;
                 Destroy(GetComponent<Rigidbody2D>());
                 transform.position = transform.position + Vector3.up * hoverHeight;

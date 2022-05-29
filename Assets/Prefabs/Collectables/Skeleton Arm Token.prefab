@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0fc055353c3064485a749b3c56f706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Persists>k__BackingField: 1
   limbData: {fileID: 11400000, guid: 4efd742c4de552747a6e3d5ab47669df, type: 2}
   sounds: {fileID: 11400000, guid: be75dd9e425580a4594b3901088ab9fa, type: 2}
   minFireForce: 5
