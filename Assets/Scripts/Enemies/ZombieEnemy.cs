@@ -32,12 +32,13 @@ namespace FictionalOctoDoodle.Core
         {
             var pos = transform.position;
             activeBehavior.Update();
-            FlipModels(pos.x > transform.position.x ? 0f : 180f);
 
-            if (playerData == null || activeBehavior is AIIdle)
+            if (playerData == null || activeBehavior is AIIdle || attacking)
             {
                 return;
             }
+            
+            FlipModels(pos.x > transform.position.x ? 0f : 180f);
 
             float dist = Vector3.Distance(transform.position, playerData.activePlayerObject.transform.position);
             if (attackRadius >= dist)
@@ -75,9 +76,10 @@ namespace FictionalOctoDoodle.Core
         }
         private void AttackPlayer()
         {
-            activeBehavior = new AIIdle(attackTimer, ResumePatrol);
+            activeBehavior = new AIIdle(attackTimer, chasing ? ChasePlayer : ResumePatrol);
+            FlipModels(playerData.activePlayerObject.transform.position.x < transform.position.x ? 0f : 180f);
             animator.SetTrigger("attack");
-            attacking = false;
+            attacking = true;
         }
 
         private void ResumePatrol()
@@ -85,7 +87,8 @@ namespace FictionalOctoDoodle.Core
             activeBehavior = new AIPatrol();
             activeBehavior.Initialize(transform);
             chasing = false;
-            attacking = true;
+            attacking = false;
+            animator.ResetTrigger("attack");
         }
 
         public void Damage(int dmg)
