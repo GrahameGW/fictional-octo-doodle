@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace FictionalOctoDoodle.Core
@@ -9,10 +8,6 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] string gameSceneName;
         [SerializeField] string menuSceneName;
         
-        private void OnDisable()
-        {
-            EventSystem.current?.SetSelectedGameObject(null); // because unity is buggy and doesn't deselect the button...
-        }
 
         public void GoToMainMenu()
         {

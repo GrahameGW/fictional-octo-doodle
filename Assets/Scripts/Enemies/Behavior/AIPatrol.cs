@@ -27,7 +27,7 @@ namespace FictionalOctoDoodle.Core
             var speed = patrol.Speed * Time.deltaTime;
             transform.Translate(speed * dir);
 
-            if (Vector3.Distance(transform.position, dest) <= speed + 0.05f)
+            if (Mathf.Abs(transform.position.y - dest.y) <= speed + 0.05f)
             {
                 if (patrol.Randomize)
                 {

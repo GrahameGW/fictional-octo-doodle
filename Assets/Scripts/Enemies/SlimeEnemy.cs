@@ -15,14 +15,18 @@ namespace FictionalOctoDoodle.Core
         [Range(0f, 180f)]
         [SerializeField] float minFireAngle, maxFireAngle;
 
+        [SerializeField] Transform modelRoot;
+        [SerializeField] SoundRandomizer sounds;
 
         private IAIBehavior activeBehavior;
-        private SpriteRenderer sprite;
+        private Animator animator;
+        private AudioSource audioSource;
 
 
         void Start()
         {
-            sprite = GetComponentInChildren<SpriteRenderer>();
+            animator = GetComponent<Animator>();
+            audioSource = GetComponent<AudioSource>();
             StartCoroutine(FireGoopRoutine());
             ResumePatrol();
         }
@@ -31,12 +35,22 @@ namespace FictionalOctoDoodle.Core
         {
             var pos = transform.position;
             activeBehavior.Update();
-            sprite.flipX = pos.x < transform.position.x;
+            FlipModels(pos.x > transform.position.x ? 0f : 180f);
         }
 
         public void Damage(int dmg)
         {
-            Debug.Log($"Killed {name}!");
+            animator.SetTrigger("die");
+            GetComponent<Rigidbody2D>().simulated = false;
+            activeBehavior = new AIIdle(float.PositiveInfinity, null);
+            foreach (Collider2D c in GetComponentsInChildren<Collider2D>())
+            {
+                c.enabled = false;
+            }
+        }
+
+        public void OnDeathAnimComplete()
+        {
             Destroy(gameObject);
         }
 
@@ -53,9 +67,12 @@ namespace FictionalOctoDoodle.Core
 
                 if (elapsed >= timeToNextShot)
                 {
+                    animator.SetTrigger("attack");
+                    yield return new WaitForSeconds(0.03f); // delay to map anim
                     FireGoop();
                     elapsed = 0f;
                     timeToNextShot = Random.Range(minFireTime, maxFireTime);
+                    audioSource.PlayOneShot(sounds.GetClip());
                 }
                 else
                 {
@@ -79,6 +96,15 @@ namespace FictionalOctoDoodle.Core
         {
             activeBehavior = new AIPatrol();
             activeBehavior.Initialize(transform);
+        }
+
+        private void FlipModels(float degrees)
+        {
+            modelRoot.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                degrees,
+                transform.eulerAngles.z
+                );
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
