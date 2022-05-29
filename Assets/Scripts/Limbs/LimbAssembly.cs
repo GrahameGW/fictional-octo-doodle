@@ -91,6 +91,11 @@ namespace FictionalOctoDoodle.Core
             playerMovement.baseStats = calculated;
         }
 
+        public void OnAttackAnimFinished()
+        {
+            playerMovement.SetNewState(new IdleState());
+        }
+
         private void LabelBackLimbs(Transform limb)
         {
             if (limb.childCount == 0) return;

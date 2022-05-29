@@ -9,11 +9,13 @@ namespace FictionalOctoDoodle.Core
         [SerializeField] PlayerData data;
         
         private Animator animator;
+        private PlayerMovement movement;
 
 
         private void Awake()
         {
             animator = GetComponentInChildren<Animator>();
+            movement = GetComponent<PlayerMovement>();
             data.HP = data.MaxHP;
             Debug.Log($"Loaded combat module. Player HP set to Max HP ({data})");
 #if UNITY_EDITOR
@@ -31,6 +33,8 @@ namespace FictionalOctoDoodle.Core
 
         public void Damage(int damage)
         {
+            if (movement.ActiveState is AttackingState) return;
+
             data.HP -= damage;
             animator.SetTrigger("damaged");
             if (data.HP <= 0)

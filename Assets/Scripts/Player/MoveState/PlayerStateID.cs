@@ -6,7 +6,8 @@
         Running,
         Airborne,
         Climbing,
-        Swimming
+        Swimming,
+        Attacking
     }
 }
 

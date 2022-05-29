@@ -745,22 +745,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7261123082319122536, guid: 1e1105ff7eae466458f92adda13a7326, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8176624451550649206, guid: 1e1105ff7eae466458f92adda13a7326, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8176624451550649206, guid: 1e1105ff7eae466458f92adda13a7326, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8176624451550649206, guid: 1e1105ff7eae466458f92adda13a7326, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e1105ff7eae466458f92adda13a7326, type: 3}
 --- !u!1 &702773572
@@ -1446,49 +1430,6 @@ MonoBehaviour:
   startPanY: 0.097
   stopPanX: 0.396
   stopPanY: 0.15
---- !u!1 &985875392 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 952376751800390288, guid: 1e1105ff7eae466458f92adda13a7326, type: 3}
-  m_PrefabInstance: {fileID: 666524214}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &985875396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985875392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fb8b5a5147f9e469e0f0796be544f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chaseSpeed: 5
-  aggroRadius: 15
-  attackRadius: 8.07
-  touchDamage: 0
-  attackDamage: 0
-  attackTimer: 1
-  idleTimeOnHit: 2
-  modelRoot: {fileID: 1157852184}
-  playerData: {fileID: 11400000, guid: 9a0b721c40d1ee845b4155bcf2cb7cb8, type: 2}
---- !u!114 &985875397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985875392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c512adf502d9f8e42a76f8c8ead46bbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Path>k__BackingField:
-  - {x: 0, y: 0, z: 0}
-  - {x: 17.31, y: 0, z: 0}
-  <Speed>k__BackingField: 3
-  <Randomize>k__BackingField: 0
 --- !u!1001 &1144575812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1546,11 +1487,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89e30d186f216d548b3cb8712c329f37, type: 3}
---- !u!4 &1157852184 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8176624451550649206, guid: 1e1105ff7eae466458f92adda13a7326, type: 3}
-  m_PrefabInstance: {fileID: 666524214}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1219094133
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,6 +1719,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2486267134551240077, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
     - target: {fileID: 3481518874446041371, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
       propertyPath: m_RootOrder
       value: 2
