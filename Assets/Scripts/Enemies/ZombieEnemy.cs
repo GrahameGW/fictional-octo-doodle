@@ -83,5 +83,6 @@ namespace FictionalOctoDoodle.Core
             Gizmos.DrawWireSphere(transform.position, aggroRadius);
         }
     }
+
 }
 

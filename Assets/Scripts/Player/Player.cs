@@ -19,6 +19,14 @@ namespace FictionalOctoDoodle.Core
 #if UNITY_EDITOR
             HP = data.HP;
 #endif
+
+            if (data.activePlayerObject != null)
+            {
+                Destroy(data.activePlayerObject);
+            }
+
+            data.activePlayerObject = this;
+            Debug.Log("New player spawned at " + transform.position.ToString());
         }
 
         public void Damage(int damage)
