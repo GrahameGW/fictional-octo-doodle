@@ -15,14 +15,15 @@ namespace FictionalOctoDoodle.Core
         [Range(0f, 180f)]
         [SerializeField] float minFireAngle, maxFireAngle;
 
+        [SerializeField] Transform modelRoot;
 
         private IAIBehavior activeBehavior;
-        private SpriteRenderer sprite;
+        private Animator animator;
 
 
         void Start()
         {
-            sprite = GetComponentInChildren<SpriteRenderer>();
+            animator = GetComponent<Animator>();
             StartCoroutine(FireGoopRoutine());
             ResumePatrol();
         }
@@ -31,12 +32,17 @@ namespace FictionalOctoDoodle.Core
         {
             var pos = transform.position;
             activeBehavior.Update();
-            sprite.flipX = pos.x < transform.position.x;
+            FlipModels(pos.x > transform.position.x ? 0f : 180f);
         }
 
         public void Damage(int dmg)
         {
-            Debug.Log($"Killed {name}!");
+            animator.SetTrigger("die");
+            Destroy(GetComponent<Rigidbody2D>());
+        }
+
+        public void OnDeathAnimComplete()
+        {
             Destroy(gameObject);
         }
 
@@ -53,6 +59,8 @@ namespace FictionalOctoDoodle.Core
 
                 if (elapsed >= timeToNextShot)
                 {
+                    animator.SetTrigger("attack");
+                    yield return new WaitForSeconds(0.03f); // delay to map anim
                     FireGoop();
                     elapsed = 0f;
                     timeToNextShot = Random.Range(minFireTime, maxFireTime);
@@ -79,6 +87,15 @@ namespace FictionalOctoDoodle.Core
         {
             activeBehavior = new AIPatrol();
             activeBehavior.Initialize(transform);
+        }
+
+        private void FlipModels(float degrees)
+        {
+            modelRoot.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                degrees,
+                transform.eulerAngles.z
+                );
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
