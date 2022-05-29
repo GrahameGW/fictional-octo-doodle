@@ -2,10 +2,8 @@ using UnityEngine;
 
 namespace FictionalOctoDoodle.Core
 {
-    public class Enemy : MonoBehaviour, IDamageable
+    public class ZombieEnemy : MonoBehaviour, IDamageable
     {
-        [SerializeField] Vector3[] patrolPath = default;
-        [SerializeField] float patrolSpeed;
         [SerializeField] float chaseSpeed;
         [SerializeField] float aggroRadius;
         [SerializeField] int damage;
@@ -16,15 +14,11 @@ namespace FictionalOctoDoodle.Core
         private IAIBehavior activeBehavior;
         private float elapsed = 0f;
 
+
         void Start()
         {
-            var patrol = new AIPatrol();
-            patrol.waypoints = patrolPath;
-            patrol.patrolSpeed = patrolSpeed;
-            patrol.Initialize(transform);
-            activeBehavior = patrol;
-
-            //player = FindObjectOfType<Player>().transform;
+            activeBehavior = new AIPatrol();
+            activeBehavior.Initialize(transform);
         }
 
         void Update()
@@ -65,7 +59,7 @@ namespace FictionalOctoDoodle.Core
         private void Idle()
         {
             elapsed = 0f;
-            activeBehavior = new AIIdle();
+            //activeBehavior = new AIIdle();
         }
 
         public void Damage(int dmg)
@@ -85,17 +79,9 @@ namespace FictionalOctoDoodle.Core
 
         private void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.yellow;
-            for (int i = 0; i < patrolPath.Length; i++)
-            {
-                Gizmos.DrawCube(patrolPath[i], Vector3.one * 0.2f);
-            }
-
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, aggroRadius);
         }
-
-
     }
 }
 
