@@ -160,7 +160,7 @@ Transform:
   - {fileID: 886743018}
   - {fileID: 1725759250}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &214068270
 GameObject:
@@ -327,7 +327,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.5660378, g: 0, b: 0, a: 1}
     m_HighlightedColor: {r: 0.7647059, g: 0.17254902, b: 0.023529412, a: 1}
     m_PressedColor: {r: 0.49056602, g: 0, b: 0.025000913, a: 1}
-    m_SelectedColor: {r: 0.5647059, g: 0, b: 0, a: 1}
+    m_SelectedColor: {r: 0.76470596, g: 0.17254902, b: 0.023529414, a: 1}
     m_DisabledColor: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -697,6 +697,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 985875396, guid: 1e1105ff7eae466458f92adda13a7326, type: 3}
+      propertyPath: attackRadius
+      value: 7.5
+      objectReference: {fileID: 0}
     - target: {fileID: 952376751800390288, guid: 1e1105ff7eae466458f92adda13a7326, type: 3}
       propertyPath: m_Name
       value: Zombie_Enemy
@@ -1536,7 +1540,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4916448085009607049, guid: 89e30d186f216d548b3cb8712c329f37, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4916448085009607049, guid: 89e30d186f216d548b3cb8712c329f37, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1642,7 +1646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1864376115}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1219094136
@@ -1658,7 +1662,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1238276250 stripped
 Transform:
@@ -1819,7 +1823,7 @@ PrefabInstance:
     - target: {fileID: 2486267134551240077, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
+      objectReference: {fileID: 9100000, guid: 109ca6a5ccb485c4494234444fdb7893, type: 2}
     - target: {fileID: 3481518874446041371, guid: 53b904dc38f821c4c87b2c795d6fab86, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2081,7 +2085,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.5660378, g: 0, b: 0, a: 1}
     m_HighlightedColor: {r: 0.7647059, g: 0.17254902, b: 0.023529412, a: 1}
     m_PressedColor: {r: 0.49056602, g: 0, b: 0.025000913, a: 1}
-    m_SelectedColor: {r: 0.5647059, g: 0, b: 0, a: 1}
+    m_SelectedColor: {r: 0.76470596, g: 0.17254902, b: 0.023529414, a: 1}
     m_DisabledColor: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -2540,8 +2544,13 @@ Transform:
   - {fileID: 1868234724}
   - {fileID: 1953141003}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1864376115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4899755535914493378, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
+  m_PrefabInstance: {fileID: 4899755535288187308}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1868234722
 GameObject:
   m_ObjectHideFlags: 0
@@ -3033,11 +3042,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100229756907067331, guid: 3ee91d9a7091c5f409eeeacf9be78291, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.7
+      value: -7.56
       objectReference: {fileID: 0}
     - target: {fileID: 100229756907067331, guid: 3ee91d9a7091c5f409eeeacf9be78291, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.29
+      value: -1.24
       objectReference: {fileID: 0}
     - target: {fileID: 100229756907067331, guid: 3ee91d9a7091c5f409eeeacf9be78291, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3238,6 +3247,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4899755535914493404, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.023529414
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899755535914493404, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.17254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899755535914493404, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.76470596
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899755535914493404, guid: 3c9e47e5a5bd8fc4a9e8d459ccaaa079, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -3278,10 +3299,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton Leg Token
       objectReference: {fileID: 0}
-    - target: {fileID: 8868528998694511686, guid: ca04ab31decb8b148aa6e2e396c124f8, type: 3}
-      propertyPath: limbData
-      value: 
-      objectReference: {fileID: 11400000, guid: fcc1f0b5859425a4799f7ec118938065, type: 2}
     - target: {fileID: 8868528998694511687, guid: ca04ab31decb8b148aa6e2e396c124f8, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -3337,7 +3354,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4916448085009607049, guid: 89e30d186f216d548b3cb8712c329f37, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4916448085009607049, guid: 89e30d186f216d548b3cb8712c329f37, type: 3}
       propertyPath: m_LocalPosition.x

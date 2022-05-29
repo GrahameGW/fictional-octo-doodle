@@ -5,6 +5,7 @@ namespace FictionalOctoDoodle.Core
 {
     public partial class LimbAssembly : MonoBehaviour
     {
+        public int ArmCount { get; private set; }
         public BaseAssemblyMoveStats moveStats;
         public LimbAnimationControllers controllers;
 
@@ -60,6 +61,10 @@ namespace FictionalOctoDoodle.Core
             slot.limbObj = obj;
 
             legCollider.enabled = frontLeg.limbData != null;
+
+            ArmCount = 0;
+            ArmCount += frontArm.limbData != null ? 1 : 0;
+            ArmCount += backArm.limbData != null ? 1 : 0;
         }
 
         public void ChangeState(LimbAssemblyState newState)

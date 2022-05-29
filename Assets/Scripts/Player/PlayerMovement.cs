@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,9 +13,9 @@ namespace FictionalOctoDoodle.Core
         public PlayerState ActiveState { get; private set; } // states enable & disable actions, and handle updating actions (may want to return that to the player)
 
         public PlayerMoveStats baseStats;
+        public Action OnStateChanged;
           
         [SerializeField] Transform modelRoot;
-        [SerializeField] int attackFrames;
 
         private Rigidbody2D rb;
         private Animator animator;
@@ -64,6 +65,7 @@ namespace FictionalOctoDoodle.Core
             ActiveState = newState;
             newState.EnterState(this);
             ChangeAnimation(newState);
+            OnStateChanged?.Invoke();
         }
 
         public void ReloadState()

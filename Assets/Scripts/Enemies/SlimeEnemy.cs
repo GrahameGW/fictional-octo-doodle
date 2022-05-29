@@ -38,7 +38,11 @@ namespace FictionalOctoDoodle.Core
         public void Damage(int dmg)
         {
             animator.SetTrigger("die");
-            Destroy(GetComponent<Rigidbody2D>());
+            GetComponent<Rigidbody2D>().simulated = false;
+            foreach (Collider2D c in GetComponentsInChildren<Collider2D>())
+            {
+                c.enabled = false;
+            }
         }
 
         public void OnDeathAnimComplete()

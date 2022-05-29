@@ -14,9 +14,11 @@ namespace FictionalOctoDoodle.Core
 
         [SerializeField] Transform modelRoot;
         [SerializeField] PlayerData playerData;
+        [SerializeField] SoundRandomizer sounds;
 
         private IAIBehavior activeBehavior;
         private Animator animator;
+        private AudioSource audioSource;
         private bool chasing;
         private bool attacking;
 
@@ -26,6 +28,7 @@ namespace FictionalOctoDoodle.Core
             activeBehavior = new AIPatrol();
             activeBehavior.Initialize(transform);
             animator = GetComponent<Animator>();
+            audioSource = GetComponent<AudioSource>();
         }
 
         void Update()
@@ -79,6 +82,7 @@ namespace FictionalOctoDoodle.Core
             activeBehavior = new AIIdle(attackTimer, chasing ? ChasePlayer : ResumePatrol);
             FlipModels(playerData.activePlayerObject.transform.position.x < transform.position.x ? 0f : 180f);
             animator.SetTrigger("attack");
+            audioSource.PlayOneShot(sounds.GetClip());
             attacking = true;
         }
 
@@ -94,7 +98,11 @@ namespace FictionalOctoDoodle.Core
         public void Damage(int dmg)
         {
             animator.SetTrigger("die");
-            Destroy(GetComponent<Rigidbody2D>());
+            GetComponent<Rigidbody2D>().simulated = false;
+            foreach (Collider2D c in GetComponentsInChildren<Collider2D>())
+            {
+                c.enabled = false;
+            }
         }
 
         public void OnDeathAnimComplete()
