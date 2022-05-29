@@ -6,19 +6,21 @@ namespace FictionalOctoDoodle.Core
     {
         private Transform transform;
         private EnemyPatrol patrol;
-        private int index = 0;
+        
+        public int Index { get; set; }
 
         public void Initialize(Transform transform)
         {
             this.transform = transform;
             patrol = transform.GetComponent<EnemyPatrol>();
+            Index = 0;
         }
 
         public void Update()
         {
             if (patrol.Path.Length <= 0) return;
 
-            var dest = patrol.Path[index];
+            var dest = patrol.Path[Index];
             var dir = dest - transform.position;
             dir.Normalize();
 
@@ -29,11 +31,11 @@ namespace FictionalOctoDoodle.Core
             {
                 if (patrol.Randomize)
                 {
-                    index = Random.Range(0, patrol.Path.Length - 1);
+                    Index = Random.Range(0, patrol.Path.Length - 1);
                 }
                 else
                 {
-                    index = index == patrol.Path.Length - 1 ? 0 : index + 1;
+                    Index = Index == patrol.Path.Length - 1 ? 0 : Index + 1;
                 }
             }
         }

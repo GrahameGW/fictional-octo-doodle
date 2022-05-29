@@ -110,8 +110,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4100580702844323946}
-  - component: {fileID: 4100580702844323947}
   - component: {fileID: 4100580702844323945}
+  - component: {fileID: 3709261059060604448}
+  - component: {fileID: 3709261059060604451}
   m_Layer: 0
   m_Name: EvilEye
   m_TagString: Untagged
@@ -135,28 +136,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4100580702844323947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4100580702844323940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fb8b5a5147f9e469e0f0796be544f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolPath:
-  - {x: -6.42, y: 3.74, z: 0}
-  - {x: 8.35, y: 3.74, z: 0}
-  - {x: 8.35, y: -1.13, z: 0}
-  patrolSpeed: 2
-  chaseSpeed: 4
-  aggroRadius: 4.55
-  damage: 4
-  idleTimeOnHit: 1
-  sprite: {fileID: 4100580701349975770}
 --- !u!50 &4100580702844323945
 Rigidbody2D:
   serializedVersion: 4
@@ -178,3 +157,34 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &3709261059060604448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100580702844323940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e177a08827d13c742b957c125ecf1028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aggroRadius: 0
+  target: {fileID: 0}
+--- !u!114 &3709261059060604451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4100580702844323940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c512adf502d9f8e42a76f8c8ead46bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Path>k__BackingField:
+  - {x: 6.55, y: 4, z: 0}
+  - {x: -7, y: 4, z: 0}
+  <Speed>k__BackingField: 3
+  <Randomize>k__BackingField: 0

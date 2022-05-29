@@ -22,10 +22,9 @@ namespace FictionalOctoDoodle.Core
 
         void Start()
         {
-            activeBehavior = new AIPatrol();
-            activeBehavior.Initialize(transform);
             sprite = GetComponentInChildren<SpriteRenderer>();
             StartCoroutine(FireGoopRoutine());
+            ResumePatrol();
         }
 
         void Update()
@@ -76,12 +75,18 @@ namespace FictionalOctoDoodle.Core
             goop.AddForce(vec, ForceMode2D.Impulse);
         }
 
+        private void ResumePatrol()
+        {
+            activeBehavior = new AIPatrol();
+            activeBehavior.Initialize(transform);
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.TryGetComponent(out Player player))
             {
                 player.Damage(damage);
-                activeBehavior = new AIIdle(idleTimeOnHit);
+                activeBehavior = new AIIdle(idleTimeOnHit, ResumePatrol);
             }
         }
     }
