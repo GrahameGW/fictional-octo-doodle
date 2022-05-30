@@ -65,6 +65,8 @@ namespace FictionalOctoDoodle.Core
 
                 if (activeBehavior is AIIdle) continue;
 
+                elapsed += Time.deltaTime;
+
                 if (elapsed >= timeToNextShot)
                 {
                     animator.SetTrigger("attack");
@@ -74,17 +76,13 @@ namespace FictionalOctoDoodle.Core
                     timeToNextShot = Random.Range(minFireTime, maxFireTime);
                     audioSource.PlayOneShot(sounds.GetClip());
                 }
-                else
-                {
-                    elapsed += Time.deltaTime;
-                }
             }
         }
 
         private void FireGoop()
         {
             var goop = Instantiate(goopBulletPrefab);
-            goop.transform.position = transform.position;
+            goop.transform.position = transform.position + Vector3.up * 2.5f; // modified b/c bueno animated this guy above his transform center
             var angle = Random.Range(minFireAngle, maxFireAngle);
             var force = Random.Range(goopMinForce, goopMaxForce);
 

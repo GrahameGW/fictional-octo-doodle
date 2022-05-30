@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7609933811426486377}
   - component: {fileID: 4747895977100257260}
   - component: {fileID: 6953188428724204129}
+  - component: {fileID: 4632841755993350089}
   m_Layer: 0
   m_Name: Chest Token
   m_TagString: Untagged
@@ -47,8 +48,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0fc055353c3064485a749b3c56f706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Persists>k__BackingField: 1
   limbData: {fileID: 11400000, guid: 3f5902d2e3066b24094000f45388e22c, type: 2}
   sounds: {fileID: 11400000, guid: be75dd9e425580a4594b3901088ab9fa, type: 2}
+  minFireForce: 5
+  maxFireForce: 10
+  minFireAngle: 30
+  maxFireAngle: 150
+  hoverHeight: 2.25
 --- !u!212 &7609933811426486377
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -213,3 +220,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &4632841755993350089
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377393096943547525}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

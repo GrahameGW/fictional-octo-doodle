@@ -10,7 +10,7 @@ namespace FictionalOctoDoodle.Core
         [field: SerializeField]
         public LimbSlot[] Slots { get; private set; }
         [field: SerializeField]
-        public Sprite HudSprite { get; private set; }
+        public GameObject Token { get; private set; }
 
         public float moveSpeedModifier;
         public float climbSpeedModifier;

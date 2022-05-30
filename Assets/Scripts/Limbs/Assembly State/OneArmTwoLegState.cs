@@ -7,14 +7,22 @@ namespace FictionalOctoDoodle.Core
     {
         public override bool AddLimb(LimbData limb)
         {
-            if (!limb.Slots.Contains(LimbSlot.BackArm)) return false;
+            if (!limb.Slots.Contains(LimbSlot.BackArm))
+            {
+                var slot = limb.Slots[Random.Range(0, limb.Slots.Length)];
+
+                context.RemoveLimb(slot, true);
+                context.AssembleLimb(limb, slot);
+                RefreshAssembly(context.controllers.twoLegOneArm, context.moveStats.twoLegOneArm, this);
+                return true;
+            }
 
             context.AssembleLimb(limb, LimbSlot.BackArm);
             RefreshAssembly(context.controllers.fullBody, context.moveStats.fullBody, new FullyAssembledState());
             return true;
         }
 
-        public override bool RemoveLimb(LimbSlot limb)
+        public override bool RemoveLimb(LimbSlot limb, bool spawnCollectable)
         {
             if (limb == LimbSlot.Torso || limb == LimbSlot.BackArm) return false;
 
@@ -35,7 +43,7 @@ namespace FictionalOctoDoodle.Core
                 stats = context.moveStats.oneLegOneArm;
             }
 
-            context.RemoveLimb(limb);
+            context.RemoveLimb(limb, spawnCollectable);
             RefreshAssembly(ctrl, stats, state);
             return true;
         }

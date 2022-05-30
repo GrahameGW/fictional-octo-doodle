@@ -10,7 +10,7 @@ namespace FictionalOctoDoodle.Core
 
         public AudioClip GetClip()
         {
-            var i = Random.Range(0, clips.Length);
+            int i = Random.Range(0, clips.Length);
             return clips[i];
         }
     }
