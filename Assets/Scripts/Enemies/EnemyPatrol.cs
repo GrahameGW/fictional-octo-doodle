@@ -19,7 +19,7 @@ namespace FictionalOctoDoodle.Core
                 Path = new Vector3[] { transform.position };
             }
         }
-        private void OnDrawGizmosSelected()
+        private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
             if (Path?.Length == 0) return;

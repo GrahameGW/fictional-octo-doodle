@@ -17,6 +17,7 @@ namespace FictionalOctoDoodle.Core
 
         [SerializeField] Transform modelRoot;
         [SerializeField] SoundRandomizer sounds;
+        [SerializeField] SoundRandomizer hitBySounds;
 
         private IAIBehavior activeBehavior;
         private Animator animator;
@@ -41,6 +42,7 @@ namespace FictionalOctoDoodle.Core
         public void Damage(int dmg)
         {
             animator.SetTrigger("die");
+            audioSource.PlayOneShot(hitBySounds.GetClip());
             GetComponent<Rigidbody2D>().simulated = false;
             activeBehavior = new AIIdle(float.PositiveInfinity, null);
             foreach (Collider2D c in GetComponentsInChildren<Collider2D>())

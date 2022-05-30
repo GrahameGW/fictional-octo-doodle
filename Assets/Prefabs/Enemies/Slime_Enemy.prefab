@@ -603,6 +603,7 @@ MonoBehaviour:
   maxFireAngle: 135
   modelRoot: {fileID: 3673894365221878993}
   sounds: {fileID: 11400000, guid: 49d8bfe3635f7ed41b457028ae83670f, type: 2}
+  hitBySounds: {fileID: 11400000, guid: eac4e9ebc86f4e64cb8a64b6a6e65760, type: 2}
 --- !u!82 &5544509820797423123
 AudioSource:
   m_ObjectHideFlags: 0

@@ -99,6 +99,15 @@ namespace FictionalOctoDoodle.Core
             StartCoroutine(RebindAnimator(acParams));
         }
 
+        public void LoseAllLimbs()
+        {
+            if (backLeg.limbData != null) state.RemoveLimb(LimbSlot.BackLeg, false);
+            if (backArm.limbData != null) state.RemoveLimb(LimbSlot.BackArm, false);
+            if (frontLeg.limbData != null) state.RemoveLimb(LimbSlot.FrontLeg, false);
+            if (frontArm.limbData != null) state.RemoveLimb(LimbSlot.FrontArm, false);
+            if (torso.limbData != null) state.RemoveLimb(LimbSlot.Torso, false);
+        }
+
         public void LoseRandomLimb(out bool limbWasSkull)
         {
             var limbs = GetFilledLimbSlots();
@@ -109,6 +118,7 @@ namespace FictionalOctoDoodle.Core
             if (limbs.Count == 1)
             {
                 state.RemoveLimb(LimbSlot.Torso, false);
+                return;
             }
 
             var back = limbs.FirstOrDefault(l => l == LimbSlot.BackArm || l == LimbSlot.BackLeg);
