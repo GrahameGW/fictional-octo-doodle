@@ -455,68 +455,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 4843985084834002234, guid: dc2bdaecfd966194f86c47dba8e6cea4, type: 3}
---- !u!1 &4258178954171663969 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6522253981413022590, guid: dc2bdaecfd966194f86c47dba8e6cea4, type: 3}
-  m_PrefabInstance: {fileID: 7033395846988324127}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &5967750514270711721
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4258178954171663969}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.34314895, y: -3.7997727}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.35, y: 2.58}
-    newSize: {x: 4.35, y: 2.58}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.789362, y: 4.1478577}
-  m_EdgeRadius: 0
---- !u!1 &4518966890547119076 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -2365168035689242885, guid: dc2bdaecfd966194f86c47dba8e6cea4, type: 3}
-  m_PrefabInstance: {fileID: 7033395846988324127}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &1190746429323601515
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4518966890547119076}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -2.083562, y: -3.8193738}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.44, y: 3.49}
-    newSize: {x: 4.44, y: 3.49}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.465991, y: 4.908356}
-  m_EdgeRadius: 0
 --- !u!1 &7384895814976208034 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: dc2bdaecfd966194f86c47dba8e6cea4, type: 3}
@@ -537,7 +475,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -1.24, y: 0.15}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 2
 --- !u!4 &8553587251188573377 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: dc2bdaecfd966194f86c47dba8e6cea4, type: 3}
