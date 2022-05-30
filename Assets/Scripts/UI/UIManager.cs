@@ -29,7 +29,7 @@ namespace FictionalOctoDoodle.Core
         {
             isPaused = !isPaused;
             pauseMenu.SetActive(isPaused);
-            hud.SetActive(!isPaused);
+            //hud.SetActive(!isPaused);
             Time.timeScale = isPaused ? 0 : 1;
         }
 

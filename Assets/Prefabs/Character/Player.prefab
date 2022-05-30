@@ -434,8 +434,8 @@ MonoBehaviour:
     skullNeckLeg: {fileID: 0}
     torsoOneArm: {fileID: 9100000, guid: a57e7116e20237d4e9ae4a2199cf8b97, type: 2}
     torsoTwoArm: {fileID: 9100000, guid: 109ca6a5ccb485c4494234444fdb7893, type: 2}
-    torsoOneLeg: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
-    torsoTwoLeg: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
+    torsoOneLeg: {fileID: 9100000, guid: 86292b411fda73441ad411d0bed33821, type: 2}
+    torsoTwoLeg: {fileID: 9100000, guid: f2aeb3dae0db3b942a69b08a61491a97, type: 2}
     oneLegOneArm: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
     oneLegTwoArm: {fileID: 9100000, guid: 9e63727ad2df4b04780009281a4e02df, type: 2}
     twoLegOneArm: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
