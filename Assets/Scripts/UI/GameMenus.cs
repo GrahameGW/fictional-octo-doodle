@@ -13,6 +13,7 @@ namespace FictionalOctoDoodle.Core
         public void GoToMainMenu()
         {
             SceneManager.LoadScene(menuSceneName, LoadSceneMode.Single); // will want to change this to additive later
+            Time.timeScale = 1f;
         }
 
         public void StartGame()
