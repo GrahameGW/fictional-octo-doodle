@@ -7,47 +7,55 @@ namespace FictionalOctoDoodle.Core
     {
         public override PlayerStateID ID => PlayerStateID.Running;
 
-        private PlayerMovement player;
+        private PlayerMovement context;
+        private Player player;
         private InputAction movement;
 
 
-        public override void EnterState(PlayerMovement player)
+        public override void EnterState(PlayerMovement playerMove)
         {
             Debug.Log("Running");
-            this.player = player;
+            context = playerMove;
 
-            movement = player.Input.Player.Move;
+            movement = playerMove.Input.Player.Move;
+            player = context.GetComponent<Player>();
+            player.FootstepsPlayback = true;
         }
 
         public override void Update()
         {
             var value = movement.ReadValue<Vector2>();
-            player.Move(new Vector2(value.x, 0f));
+            context.Move(new Vector2(value.x, 0f));
 
 
-            if (value.y != 0 && player.CanClimb)
+            if (value.y != 0 && context.CanClimb)
             {
-                player.SetNewState(new ClimbingState());
+                context.SetNewState(new ClimbingState());
                 return;
             }
 
             if (value.x == 0)
             {
-                player.SetNewState(new IdleState());
+                context.SetNewState(new IdleState());
                 return;
             }
 
-            if (!player.IsGrounded())
+            if (!context.IsGrounded())
             {
-                player.SetNewState(new AirborneState());
+                context.SetNewState(new AirborneState());
                 return;
             }
 
-            if (player.InWater)
+            if (context.InWater)
             {
-                player.SetNewState(new SwimmingState());
+                context.SetNewState(new SwimmingState());
                 return;
             }
+        }
+
+        public override void ExitState()
+        {
+            player.FootstepsPlayback = false;
         }
     }
 }

@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/PersistentAudio.unity
+    guid: c456003aab2ebf0428a98d79669b622b
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: c2c0b47b59a93244c9c1d25b20633191

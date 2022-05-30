@@ -7,15 +7,29 @@ namespace FictionalOctoDoodle.Core
 {
     public class Player : MonoBehaviour, IDamageable
     {
+        public bool FootstepsPlayback { set
+            {
+                audioSource.clip = footstepsLoop;
+                audioSource.loop = value;
+
+                if (value) audioSource.Play();
+                else audioSource.Stop();
+            } 
+        }
         public Action OnPlayerDeath;
+
+
         [SerializeField] PlayerData data;
         [SerializeField] SoundRandomizer sounds;
+        [SerializeField] AudioClip footstepsLoop;
         [SerializeField] float invincibleOnHitTime;
+        [SerializeField] float knockback;
 
         private Animator animator;
         private AudioSource audioSource;
         private PlayerMovement movement;
         private LimbAssembly assembly;
+        private Rigidbody2D rb;
 
         private bool invincible = false;
         private float invincibleTimeElapsed;
@@ -27,6 +41,7 @@ namespace FictionalOctoDoodle.Core
             assembly = GetComponentInChildren<LimbAssembly>();
             audioSource = GetComponent<AudioSource>();
             movement = GetComponent<PlayerMovement>();
+            rb = GetComponent<Rigidbody2D>();
             data.HP = data.MaxHP;
             Debug.Log($"Loaded combat module. Player HP set to Max HP ({data})");
 
@@ -59,6 +74,8 @@ namespace FictionalOctoDoodle.Core
 
         public void Damage(int damage)
         {
+            var rightLeft = assembly.transform.eulerAngles.y == 0 ? 1f : -1f;
+            
             if (damage == int.MaxValue)
             {
                 animator.SetTrigger("damaged");
@@ -66,6 +83,7 @@ namespace FictionalOctoDoodle.Core
                 invincibleOnHitTime = int.MaxValue;
                 Destroy(movement);
                 StartCoroutine(DeathRoutine());
+                rb.AddForce(knockback * rightLeft * Vector2.right, ForceMode2D.Impulse);
                 return;
             }
             else if (invincible || movement.ActiveState is AttackingState)
@@ -85,6 +103,8 @@ namespace FictionalOctoDoodle.Core
                 Destroy(movement);
                 StartCoroutine(DeathRoutine());
             }
+
+            rb.AddForce(knockback * rightLeft * Vector2.right, ForceMode2D.Impulse);
         }
 
         private void MoveStateChangedHandler()
@@ -114,8 +134,9 @@ namespace FictionalOctoDoodle.Core
                 Random.Range(5f, 10f);
 
             GetComponent<Rigidbody2D>().AddForce(randVec);
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1f);
             Debug.Log("You died!");
+            OnPlayerDeath?.Invoke();
             Destroy(gameObject);
         }
 

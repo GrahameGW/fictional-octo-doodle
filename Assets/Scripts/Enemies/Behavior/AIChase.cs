@@ -15,7 +15,7 @@ public class AIChase : IAIBehavior
     {
         var dir = player.position - transform.position;
         dir.Normalize();
-        transform.Translate(chaseSpeed * Time.deltaTime * dir);
+        transform.Translate(new Vector3(chaseSpeed * Time.deltaTime * dir.x, 0f, 0f));
     }
 }
 

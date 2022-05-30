@@ -100,7 +100,7 @@ namespace FictionalOctoDoodle.Core
         public void Damage(int dmg)
         {
             animator.SetTrigger("die");
-            GetComponent<Rigidbody2D>().simulated = false;
+            //GetComponent<Rigidbody2D>().simulated = false;
             activeBehavior = new AIIdle(float.PositiveInfinity, null);
             audioSource.PlayOneShot(hitBySounds.GetClip());
             foreach (Collider2D c in GetComponentsInChildren<Collider2D>())

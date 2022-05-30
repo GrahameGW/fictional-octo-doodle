@@ -18,6 +18,7 @@ namespace FictionalOctoDoodle.Core
           
         [SerializeField] Transform modelRoot;
 
+
         private Rigidbody2D rb;
         private Animator animator;
 

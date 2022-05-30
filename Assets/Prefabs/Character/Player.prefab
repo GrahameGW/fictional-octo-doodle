@@ -232,7 +232,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 9a0b721c40d1ee845b4155bcf2cb7cb8, type: 2}
   sounds: {fileID: 11400000, guid: 7eb9ce86e11b63247864fdff2ae3d290, type: 2}
+  footstepsLoop: {fileID: 8300000, guid: 0997eca1f534de2469055fdf1ff83648, type: 3}
   invincibleOnHitTime: 0.5
+  knockback: 0
 --- !u!114 &5701133981869174361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats: {fileID: 11400000, guid: 0ead1d1ae3b4d264c94343879ce08beb, type: 2}
+  distanceToGround: 0
   modelRoot: {fileID: 5439220283369462837}
 --- !u!50 &8347252708069158426
 Rigidbody2D:
@@ -490,7 +493,7 @@ Animator:
   m_GameObject: {fileID: 2779332847174060377}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a57e7116e20237d4e9ae4a2199cf8b97, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6c10a39d1dbcc2447bda3a047af82c2c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
