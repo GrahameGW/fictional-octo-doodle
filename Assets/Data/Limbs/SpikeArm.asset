@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28370f0f20091bb45b3f64218dc193cc, type: 3}
+  m_Name: SpikeArm
+  m_EditorClassIdentifier: 
+  <Prefab>k__BackingField: {fileID: 5435617493208016688, guid: 24d55569a758e3446856f8eced521463, type: 3}
+  <Slots>k__BackingField: 0000000001000000
+  <Token>k__BackingField: {fileID: 1391201935355732296, guid: 13184e9d1e2e53a4faed0eb84b1a585f, type: 3}
+  moveSpeedModifier: 0
+  climbSpeedModifier: 0
+  swimSpeedModifier: 0
+  jumpForceModifier: 0
