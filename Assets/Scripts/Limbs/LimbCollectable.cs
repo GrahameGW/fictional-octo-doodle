@@ -47,10 +47,14 @@ namespace FictionalOctoDoodle.Core
                 var player = collision.gameObject.GetComponentInParent<LimbAssembly>();
                 if (player != null)
                 {
-                    Debug.Log($"Player collected {name}!");
+                    canCollect = false;
                     if (player.TryAddLimb(limbData))
                     {
                         StartCoroutine(CollectionRoutine());
+                    }
+                    else
+                    {
+                        StartCoroutine(ResetCanCollect());
                     }
                 }
             }
@@ -67,6 +71,12 @@ namespace FictionalOctoDoodle.Core
                 Destroy(GetComponent<Rigidbody2D>());
                 transform.position = transform.position + Vector3.up * hoverHeight;
             }
+        }
+
+        private IEnumerator ResetCanCollect()
+        {
+            yield return null;
+            canCollect = true;
         }
 
         private IEnumerator CollectionRoutine()

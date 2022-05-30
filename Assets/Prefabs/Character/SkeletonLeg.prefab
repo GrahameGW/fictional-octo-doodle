@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 125973357446870278}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9146001458182612352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 535097985818592347}
   - component: {fileID: 7440224594153152734}
   - component: {fileID: 8042111908464535074}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SkeletonLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1941971994656614930}
   - component: {fileID: 6837935894128635162}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Femur
   m_TagString: Untagged
   m_Icon: {fileID: 0}

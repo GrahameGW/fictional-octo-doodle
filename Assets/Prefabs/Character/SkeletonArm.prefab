@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6222699297697868677}
   - component: {fileID: 3318459811309527285}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 749184242225220069}
   - component: {fileID: 9124352463657508635}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 5656552917349686204}
   - component: {fileID: 8532494496041992688}
   - component: {fileID: 3613634943028893206}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SkeletonArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 164740303530873633}
   - component: {fileID: 6782214404145746703}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9057822011808625333}
   - component: {fileID: 9057822011808625332}
   - component: {fileID: 9057822011808625339}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9057822012991169923}
   - component: {fileID: 8176092511300482235}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9057822013006595854}
   - component: {fileID: 60477274352164385}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9057822013305124876}
   - component: {fileID: 636964616730940695}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
