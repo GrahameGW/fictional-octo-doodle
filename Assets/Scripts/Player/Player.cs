@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace FictionalOctoDoodle.Core
 {
@@ -58,8 +59,22 @@ namespace FictionalOctoDoodle.Core
 
         public void Damage(int damage)
         {
-            if (invincible || movement.ActiveState is AttackingState) return;
+            if (damage == int.MaxValue)
+            {
+                animator.SetTrigger("damaged");
+                assembly.LoseAllLimbs();
+                invincibleOnHitTime = int.MaxValue;
+                Destroy(movement);
+                StartCoroutine(DeathRoutine());
+                return;
+            }
+            else if (invincible || movement.ActiveState is AttackingState)
+            {
+                return;
+            }
+
             assembly.LoseRandomLimb(out bool wasSkull);
+            animator.SetBool("moving", false);
             animator.SetTrigger("damaged");
             invincible = true;
             invincibleTimeElapsed = 0f;
@@ -95,7 +110,11 @@ namespace FictionalOctoDoodle.Core
 
         private IEnumerator DeathRoutine()
         {
-            yield return null;
+            var randVec = Quaternion.Euler(0f, 0f, Random.Range(25f, 155f)) * Vector2.right *
+                Random.Range(5f, 10f);
+
+            GetComponent<Rigidbody2D>().AddForce(randVec);
+            yield return new WaitForSeconds(3f);
             Debug.Log("You died!");
             Destroy(gameObject);
         }

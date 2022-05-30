@@ -9,12 +9,13 @@ namespace FictionalOctoDoodle.Core
         private Vector3 nadir;
         private float speed;
 
+        private float twoPiFreq;
         private float cTwoPiFreq;
         private float amp;
         private float t = 0f;
         private float neg;
         private Vector3 start;
-        private Vector3 end;
+        private float endT;
 
         private readonly Action OnDiveComplete;
 
@@ -29,18 +30,14 @@ namespace FictionalOctoDoodle.Core
         public void Initialize(Transform transform)
         {
             this.transform = transform;
-            var len = 2f * Vector3.Distance(nadir, transform.position);
+            var length = 2f * Vector3.Distance(nadir, transform.position);
             // a single sinewave is close to a straight line and faster benefits us anyway
-            var f = speed / len;
+            var f = speed / length;
             cTwoPiFreq = 4f * Mathf.PI * f * (1f / Mathf.Abs(nadir.x - transform.position.x));
-            
+            endT = 2f * Mathf.PI / cTwoPiFreq;
             neg = Mathf.Sign(nadir.x - transform.position.x);
             amp = Mathf.Abs(transform.position.y - nadir.y) * 0.5f;
             start = transform.position;
-            end = new Vector3(
-                2f * (nadir.x - transform.position.x) + transform.position.x,
-                transform.position.y
-                );
         }
 
         public void Update()
@@ -50,7 +47,7 @@ namespace FictionalOctoDoodle.Core
             var y = amp * Mathf.Cos(cTwoPiFreq * x);
             transform.position = start + new Vector3(x, y - amp);
 
-            if (Vector3.Distance(end, transform.position) <= 0.05f)
+            if (Mathf.Abs(x) >= endT)
             {
                 OnDiveComplete();
             }

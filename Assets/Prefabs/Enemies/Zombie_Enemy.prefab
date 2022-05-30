@@ -92,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseSpeed: 5
   aggroRadius: 15
-  attackRadius: 5.32
+  attackRadius: 6.25
   touchDamage: 0
   attackDamage: 0
   attackTimer: 1
@@ -100,6 +100,7 @@ MonoBehaviour:
   modelRoot: {fileID: 8176624451550649206}
   playerData: {fileID: 11400000, guid: 9a0b721c40d1ee845b4155bcf2cb7cb8, type: 2}
   sounds: {fileID: 11400000, guid: c11c822af470a314da7b038c54353357, type: 2}
+  hitBySounds: {fileID: 11400000, guid: eac4e9ebc86f4e64cb8a64b6a6e65760, type: 2}
 --- !u!114 &985875397
 MonoBehaviour:
   m_ObjectHideFlags: 0

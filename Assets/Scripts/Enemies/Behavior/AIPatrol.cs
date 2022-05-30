@@ -27,11 +27,11 @@ namespace FictionalOctoDoodle.Core
             var speed = patrol.Speed * Time.deltaTime;
             transform.Translate(speed * dir);
 
-            if (Mathf.Abs(transform.position.y - dest.y) <= speed + 0.05f)
+            if (Mathf.Abs(transform.position.x - dest.x) <= speed + 0.05f)
             {
                 if (patrol.Randomize)
                 {
-                    Index = Random.Range(0, patrol.Path.Length - 1);
+                    Index = Random.Range(0, patrol.Path.Length);
                 }
                 else
                 {
