@@ -8,9 +8,9 @@ namespace FictionalOctoDoodle.Core
         [Range(0f, 1f)]
         [SerializeField] float startPanX;
         [Range(0f, 1f)]
-        [SerializeField] float startPanY;
-        [Range(0f, 1f)]
         [SerializeField] float stopPanX;
+        [Range(0f, 1f)]
+        [SerializeField] float startPanY;
         [Range(0f, 1f)]
         [SerializeField] float stopPanY;
 
