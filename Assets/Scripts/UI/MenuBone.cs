@@ -14,7 +14,7 @@ namespace FictionalOctoDoodle.Core
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
-            rb.gravityScale = Random.Range(0.1f, 0.5f);
+            rb.gravityScale = Random.Range(0.01f, 0.25f);
             rb.AddTorque(Random.Range(-spinSpeed, spinSpeed), ForceMode2D.Impulse);
         }
 

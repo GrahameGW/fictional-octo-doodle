@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   climbSpeed: 7
-  jumpForce: 10
+  jumpForce: 35
   swimSpeed: 7

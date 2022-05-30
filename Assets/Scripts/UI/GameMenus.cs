@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace FictionalOctoDoodle.Core
@@ -22,6 +23,11 @@ namespace FictionalOctoDoodle.Core
         public void QuitProgram()
         {
             Application.Quit();
+        }
+
+        private void OnDisable()
+        {
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
 }
