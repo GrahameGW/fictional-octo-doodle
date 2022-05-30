@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28370f0f20091bb45b3f64218dc193cc, type: 3}
   m_Name: Crutch Leg
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 8868528998694511681, guid: bff1e36176a42ee4fb02c5c43c3d9510, type: 3}
+  <Prefab>k__BackingField: {fileID: 7573451900267752953, guid: eb1c9ad27dda70b4fb5a74106722898c, type: 3}
   <Slots>k__BackingField: 0300000004000000
-  <Token>k__BackingField: {fileID: 7573451900267752953, guid: eb1c9ad27dda70b4fb5a74106722898c, type: 3}
+  <Token>k__BackingField: {fileID: 8868528998694511681, guid: bff1e36176a42ee4fb02c5c43c3d9510, type: 3}
   moveSpeedModifier: 0
   climbSpeedModifier: 0
   swimSpeedModifier: 0
