@@ -33,6 +33,7 @@ namespace FictionalOctoDoodle.Core
             animator.runtimeAnimatorController = controllers.skullOnly;
             legCollider.enabled = false;
             ChangeState(new SkullOnlyState());
+            playerMovement.distanceToGround = 2f;
         }
 
         public bool TryAddLimb(LimbData limb)
@@ -51,6 +52,11 @@ namespace FictionalOctoDoodle.Core
             if (limb == LimbSlot.FrontLeg)
             {
                 legCollider.enabled = false;
+            }
+
+            if (slot.slotId == LimbSlot.Torso || slot.slotId == LimbSlot.FrontLeg)
+            {
+                playerMovement.distanceToGround -= 3f;
             }
         }
 
@@ -79,7 +85,8 @@ namespace FictionalOctoDoodle.Core
 
             if (slot.slotId == LimbSlot.Torso || slot.slotId == LimbSlot.FrontLeg)
             {
-                transform.parent.Translate(Vector2.up);
+                transform.parent.Translate(Vector2.up * 2f);
+                playerMovement.distanceToGround += 3f;
             }
         }
 

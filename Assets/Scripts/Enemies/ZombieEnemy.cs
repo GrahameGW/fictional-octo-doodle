@@ -76,6 +76,7 @@ namespace FictionalOctoDoodle.Core
             chase.player = playerData.activePlayerObject.transform;
             chase.Initialize(transform);
             activeBehavior = chase;
+            chasing = true;
             Debug.Log("Chasing the player!");
         }
         private void AttackPlayer()
@@ -115,6 +116,8 @@ namespace FictionalOctoDoodle.Core
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            if (activeBehavior is AIIdle) return;
+            
             if (collision.gameObject.TryGetComponent(out Player player))
             {
                 player.Damage(attacking ? attackDamage : touchDamage);

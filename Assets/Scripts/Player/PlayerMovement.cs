@@ -14,20 +14,18 @@ namespace FictionalOctoDoodle.Core
 
         public PlayerMoveStats baseStats;
         public Action OnStateChanged;
+        public float distanceToGround;
           
         [SerializeField] Transform modelRoot;
 
         private Rigidbody2D rb;
         private Animator animator;
-        private float distanceToGround;
 
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
             animator = GetComponentInChildren<Animator>();
-            //distanceToGround = GetComponentInChildren<Collider2D>().bounds.extents.y;
-            distanceToGround = 100f;
         }
 
         private void OnEnable()
@@ -100,7 +98,7 @@ namespace FictionalOctoDoodle.Core
         public bool IsGrounded()
         {
             // 1 << 3 gets the "Ground" layer
-            return Physics2D.Raycast(transform.position, Vector2.down, distanceToGround + 0.1f, 1 << 3).collider != null;
+            return Physics2D.Raycast(transform.position, Vector2.down, distanceToGround, 1 << 3).collider != null;
         }
 
         public void ToggleGravity(float scale)

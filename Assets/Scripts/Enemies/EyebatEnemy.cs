@@ -2,7 +2,7 @@
 
 namespace FictionalOctoDoodle.Core
 {
-    public class EyebatEnemy : MonoBehaviour 
+    public class EyebatEnemy : MonoBehaviour, IDamageable
     {
         [SerializeField] float aggroRadius;
         [SerializeField] float diveBombSpeed;
@@ -36,7 +36,7 @@ namespace FictionalOctoDoodle.Core
             activeBehavior.Update();
             FlipModels(pos.x > transform.position.x ? 0f : 180f);
 
-            if (diving || playerData.activePlayerObject == null)
+            if (diving || playerData.activePlayerObject == null || activeBehavior is AIIdle)
             {
                 return;
             }
@@ -61,7 +61,8 @@ namespace FictionalOctoDoodle.Core
             {
                 c.enabled = false;
             }
-            Destroy(gameObject);
+            activeBehavior = new AIIdle(float.PositiveInfinity, null);
+            activeBehavior.Initialize(transform);
         }
 
         private void ResumePatrol()
