@@ -11,6 +11,7 @@ namespace FictionalOctoDoodle.Core
         
         [SerializeField] LimbData limbData;
         [SerializeField] SoundRandomizer sounds;
+        [SerializeField] Animator hoverAnimator;
         [Min(0f)]
         [SerializeField] float minFireForce, maxFireForce;
         [Range(0f, 180f)]
@@ -22,12 +23,29 @@ namespace FictionalOctoDoodle.Core
         private Collider2D col;
         private bool canCollect = false;
 
+        public bool CanCollect
+        {
+            private set
+            {
+                canCollect = value;
+
+                if (hoverAnimator != null)
+                {
+                    hoverAnimator.SetBool("canCollect", value);
+                }
+            }
+            get
+            {
+                return canCollect;
+            }
+        }
+
+
         private void Awake()
         {
             audioSource = GetComponent<AudioSource>();
-            sprite = GetComponent<SpriteRenderer>();
+            sprite = GetComponentInChildren<SpriteRenderer>();
             col = GetComponent<Collider2D>();
-
             Launch(GetComponent<Rigidbody2D>());
         }
 
@@ -42,12 +60,12 @@ namespace FictionalOctoDoodle.Core
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (canCollect)
+            if (CanCollect)
             {
                 var player = collision.gameObject.GetComponentInParent<LimbAssembly>();
                 if (player != null)
                 {
-                    canCollect = false;
+                    CanCollect = false;
                     if (player.TryAddLimb(limbData))
                     {
                         StartCoroutine(CollectionRoutine());
@@ -67,7 +85,7 @@ namespace FictionalOctoDoodle.Core
                     return;
                 }
                 
-                canCollect = true;
+                CanCollect = true;
                 Destroy(GetComponent<Rigidbody2D>());
                 transform.position = transform.position + Vector3.up * hoverHeight;
             }
@@ -76,7 +94,7 @@ namespace FictionalOctoDoodle.Core
         private IEnumerator ResetCanCollect()
         {
             yield return null;
-            canCollect = true;
+            CanCollect = true;
         }
 
         private IEnumerator CollectionRoutine()
